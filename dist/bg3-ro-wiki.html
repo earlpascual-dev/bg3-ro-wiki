@@ -1,0 +1,1486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Geffen Codex</title>
+  <style>
+/* ==========================================================================
+   Geffen Codex — BG3 build wiki
+   Ragnarok Online window aesthetic, built from scratch in pure CSS.
+   No game assets, no sprites, no external fonts, no CDN. Fully offline.
+   ========================================================================== */
+
+:root {
+  /* RO window chrome */
+  --ro-frame:        #b9c2ce;
+  --ro-frame-light:  #eef2f7;
+  --ro-frame-dark:   #6c7686;
+  --ro-frame-darker: #454d5a;
+
+  /* Title bars */
+  --ro-title-top:    #4a6da3;
+  --ro-title-bot:    #223c66;
+  --ro-title-text:   #ffffff;
+
+  /* Parchment content */
+  --ro-parch:        #ece0c4;
+  --ro-parch-alt:    #e2d3b0;
+  --ro-parch-border: #8a6a42;
+  --ro-ink:          #34291c;
+  --ro-ink-soft:     #6a5942;
+
+  /* Accents */
+  --ro-gold:         #f2c14e;
+  --ro-gold-deep:    #a97b1b;
+  --ro-red:          #a32b2b;
+  --ro-green:        #2f7d32;
+
+  /* Class colours */
+  --c-sniper:        #3f8f45;
+  --c-assassin:      #7c1f2b;
+  --c-priest:        #d9c98a;
+  --c-crusader:      #2f5f9e;
+
+  --app-bg:          #2b3140;
+  --font-stack:      "Lucida Console", "Courier New", Consolas, "DejaVu Sans Mono", monospace;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--app-bg);
+  background-image:
+    linear-gradient(rgba(255,255,255,.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.02) 1px, transparent 1px);
+  background-size: 4px 4px, 4px 4px;
+  color: var(--ro-ink);
+  font-family: var(--font-stack);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+img, canvas { image-rendering: pixelated; }
+
+a { color: #1d4f8f; }
+a:hover { color: var(--ro-red); }
+
+/* ---------- Generic RO window ---------- */
+.ro-window {
+  background: var(--ro-frame);
+  border: 2px outset var(--ro-frame-light);
+  border-right-color: var(--ro-frame-dark);
+  border-bottom-color: var(--ro-frame-dark);
+  box-shadow: 2px 2px 0 rgba(0,0,0,.45);
+  margin-bottom: 14px;
+}
+
+.ro-titlebar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(180deg, var(--ro-title-top), var(--ro-title-bot));
+  border-bottom: 2px solid var(--ro-frame-darker);
+  color: var(--ro-title-text);
+  padding: 4px 6px;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: .5px;
+  text-shadow: 1px 1px 0 rgba(0,0,0,.6);
+  text-transform: uppercase;
+}
+
+.ro-titlebar .ro-close {
+  width: 12px;
+  height: 12px;
+  flex: 0 0 12px;
+  background: var(--ro-frame);
+  border: 2px outset var(--ro-frame-light);
+  border-right-color: var(--ro-frame-dark);
+  border-bottom-color: var(--ro-frame-dark);
+}
+
+.ro-body { padding: 8px; }
+
+/* Parchment text block */
+.parch {
+  background: var(--ro-parch);
+  background-image: linear-gradient(180deg, rgba(255,255,255,.35), rgba(0,0,0,.04));
+  border: 1px solid var(--ro-parch-border);
+  padding: 8px 10px;
+  color: var(--ro-ink);
+}
+.parch + .parch { margin-top: 8px; }
+.parch.alt { background: var(--ro-parch-alt); }
+
+/* ---------- Layout ---------- */
+.app-shell {
+  display: grid;
+  grid-template-columns: 232px minmax(0, 1fr);
+  gap: 14px;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 14px;
+}
+
+.masthead {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 14px 14px 0;
+}
+.masthead h1 {
+  margin: 0;
+  font-size: 17px;
+  color: var(--ro-gold);
+  text-shadow: 2px 2px 0 #000;
+  letter-spacing: 1px;
+}
+.masthead p {
+  margin: 3px 0 0;
+  color: #b6c0d0;
+  font-size: 11px;
+}
+
+.sidebar { position: sticky; top: 14px; align-self: start; }
+
+/* ---------- Nav ---------- */
+.nav-list { list-style: none; margin: 0; padding: 0; }
+.nav-list li { margin-bottom: 3px; }
+
+.nav-list a {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 7px;
+  background: var(--ro-parch);
+  border: 1px solid var(--ro-parch-border);
+  color: var(--ro-ink);
+  text-decoration: none;
+  font-size: 12px;
+}
+.nav-list a:hover { background: #f7eed6; }
+.nav-list a.active {
+  background: linear-gradient(180deg, var(--ro-title-top), var(--ro-title-bot));
+  color: #fff;
+  border-color: var(--ro-frame-darker);
+  text-shadow: 1px 1px 0 rgba(0,0,0,.6);
+}
+.nav-section {
+  margin: 9px 0 4px;
+  color: var(--ro-frame-darker);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-bottom: 1px solid var(--ro-frame-dark);
+}
+
+/* ---------- Search ---------- */
+.search-box {
+  width: 100%;
+  padding: 5px 6px;
+  font-family: var(--font-stack);
+  font-size: 12px;
+  background: #fbf6e6;
+  border: 2px inset var(--ro-frame-dark);
+  color: var(--ro-ink);
+}
+.search-box:focus { outline: 1px solid var(--ro-gold); }
+
+.search-results { margin-top: 8px; }
+.search-hit {
+  background: var(--ro-parch);
+  border: 1px solid var(--ro-parch-border);
+  padding: 6px 8px;
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+.search-hit:hover { background: #f7eed6; }
+.search-hit .hit-kind {
+  color: var(--ro-gold-deep);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.search-hit .hit-title { font-weight: bold; }
+.search-hit .hit-snip { color: var(--ro-ink-soft); font-size: 11px; }
+
+mark { background: var(--ro-gold); color: #000; padding: 0 1px; }
+
+/* ---------- Badges ---------- */
+.badge {
+  display: inline-block;
+  padding: 1px 7px;
+  font-size: 10px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border: 1px solid rgba(0,0,0,.55);
+  color: #fff;
+  text-shadow: 1px 1px 0 rgba(0,0,0,.7);
+  vertical-align: middle;
+}
+.badge.sniper   { background: var(--c-sniper); }
+.badge.assassin { background: var(--c-assassin); }
+.badge.priest   { background: var(--c-priest); color: #3a2f10; text-shadow: none; border-color: var(--ro-gold-deep); }
+.badge.crusader { background: var(--c-crusader); }
+.badge.party    { background: #5a5f6e; }
+
+.warn-badge {
+  display: inline-block;
+  padding: 1px 6px;
+  font-size: 10px;
+  font-weight: bold;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+  background: repeating-linear-gradient(45deg, #c9a227, #c9a227 5px, #1c1c1c 5px, #1c1c1c 10px);
+  color: #fff;
+  border: 1px solid #000;
+  text-shadow: 1px 1px 0 #000;
+}
+.miss-badge {
+  display: inline-block;
+  padding: 1px 6px;
+  font-size: 10px;
+  font-weight: bold;
+  text-transform: uppercase;
+  background: var(--ro-red);
+  color: #fff;
+  border: 1px solid #000;
+}
+
+/* ---------- Headers ---------- */
+h2.ro-h {
+  margin: 0 0 8px;
+  font-size: 14px;
+  color: var(--ro-gold-deep);
+  border-bottom: 2px solid var(--ro-gold-deep);
+  padding-bottom: 3px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+h3.ro-h3 {
+  margin: 12px 0 6px;
+  font-size: 12px;
+  color: #24406b;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border-left: 4px solid var(--ro-gold);
+  padding-left: 6px;
+}
+
+/* ---------- Stat block ---------- */
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(112px, 1fr));
+  gap: 6px;
+}
+.stat-cell {
+  background: var(--ro-parch);
+  border: 1px solid var(--ro-parch-border);
+  border-top-color: #fff8e2;
+  border-left-color: #fff8e2;
+  padding: 5px 7px;
+  text-align: center;
+}
+.stat-cell .s-name {
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--ro-ink-soft);
+  text-transform: uppercase;
+}
+.stat-cell .s-val {
+  font-size: 21px;
+  font-weight: bold;
+  color: var(--ro-gold-deep);
+  text-shadow: 1px 1px 0 #fff8e2;
+  line-height: 1.1;
+}
+.stat-cell .s-mod { font-size: 10px; color: var(--ro-ink-soft); }
+.stat-note {
+  font-size: 11px;
+  color: var(--ro-ink-soft);
+  margin-top: 3px;
+  text-align: left;
+  line-height: 1.4;
+}
+
+/* ---------- Skill tree (level rows) ---------- */
+.skilltree { position: relative; padding-left: 22px; margin-top: 6px; }
+.skilltree::before {
+  content: "";
+  position: absolute;
+  left: 8px; top: 10px; bottom: 10px;
+  width: 2px;
+  background: var(--ro-frame-dark);
+}
+
+.skillnode { position: relative; margin-bottom: 8px; }
+.skillnode::before {
+  content: "";
+  position: absolute;
+  left: -14px; top: 14px;
+  width: 12px; height: 2px;
+  background: var(--ro-frame-dark);
+}
+.skillnode::after {
+  content: "";
+  position: absolute;
+  left: -18px; top: 11px;
+  width: 8px; height: 8px;
+  background: var(--ro-gold);
+  border: 1px solid #000;
+}
+
+.skillbox {
+  background: var(--ro-frame);
+  border: 2px outset var(--ro-frame-light);
+  border-right-color: var(--ro-frame-dark);
+  border-bottom-color: var(--ro-frame-dark);
+  padding: 0;
+}
+.skillbox.locked { border-left: 4px solid var(--ro-red); }
+
+.skillbox-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  background: linear-gradient(180deg, #cfd7e2, #aeb8c6);
+  border-bottom: 1px solid var(--ro-frame-dark);
+  padding: 3px 6px;
+}
+.lvl-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 34px;
+  padding: 1px 5px;
+  background: linear-gradient(180deg, var(--ro-title-top), var(--ro-title-bot));
+  color: #fff;
+  border: 1px solid #0e1c33;
+  font-size: 11px;
+  font-weight: bold;
+  text-shadow: 1px 1px 0 rgba(0,0,0,.6);
+}
+.menu-label { font-size: 11px; color: #2a3242; }
+
+.skillbox-body { padding: 7px 8px; }
+.pick-line {
+  background: #1f2a1f;
+  color: #b7f0a8;
+  border: 1px solid #0d140d;
+  padding: 4px 7px;
+  font-weight: bold;
+  font-size: 12px;
+  margin-bottom: 6px;
+}
+.reason { margin: 0 0 6px; }
+
+.alts {
+  background: var(--ro-parch-alt);
+  border: 1px dashed var(--ro-parch-border);
+  padding: 5px 8px;
+  font-size: 11px;
+  color: var(--ro-ink-soft);
+}
+.alts strong { color: var(--ro-ink); }
+.alts ul { margin: 3px 0 0; padding-left: 16px; }
+
+.details-list { margin: 6px 0 0; padding-left: 16px; font-size: 11.5px; }
+.details-list li { margin-bottom: 4px; }
+
+/* ---------- Inventory slot grid (gear) ---------- */
+.slot-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(228px, 1fr));
+  gap: 8px;
+}
+
+.slot-tile {
+  background: var(--ro-frame);
+  border: 2px outset var(--ro-frame-light);
+  border-right-color: var(--ro-frame-dark);
+  border-bottom-color: var(--ro-frame-dark);
+  display: flex;
+  flex-direction: column;
+}
+.slot-tile .tile-top {
+  display: flex;
+  gap: 7px;
+  padding: 6px;
+  border-bottom: 1px solid var(--ro-frame-dark);
+  background: linear-gradient(180deg, #cfd7e2, #b4bdca);
+}
+/* RO-style inventory slot: dark inset well, icon tinted by its wearer */
+.tile-icon {
+  width: 34px; height: 34px;
+  flex: 0 0 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(160deg, #2d3444, #171c26);
+  border: 2px inset #6c7686;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.08);
+  color: #cfd7e2;
+}
+.tile-icon svg {
+  width: 24px; height: 24px;
+  display: block;
+  fill: currentColor;
+  filter: drop-shadow(0 1px 0 rgba(0,0,0,.7));
+}
+.tile-icon.w-main        { color: #6fd07a; }
+.tile-icon.w-astarion    { color: #e8737f; }
+.tile-icon.w-shadowheart { color: #f2d98a; }
+.tile-icon.w-paladin     { color: #7fb2ee; }
+
+.tile-name { font-weight: bold; font-size: 12px; color: #1c2433; line-height: 1.3; }
+.tile-slot { font-size: 10px; color: #465061; text-transform: uppercase; letter-spacing: 1px; }
+
+.slot-tile .tile-body { padding: 7px; background: var(--ro-parch); flex: 1; }
+.tile-row { font-size: 11.5px; margin-bottom: 4px; }
+.tile-row .k {
+  display: inline-block;
+  min-width: 62px;
+  color: var(--ro-gold-deep);
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 10px;
+  letter-spacing: .5px;
+}
+.tile-note {
+  margin-top: 6px;
+  padding-top: 5px;
+  border-top: 1px dashed var(--ro-parch-border);
+  font-size: 11px;
+  color: var(--ro-ink-soft);
+}
+
+/* ---------- Filters ---------- */
+.filterbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.filterbar .flabel {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--ro-frame-darker);
+  margin-right: 2px;
+}
+.fbtn {
+  font-family: var(--font-stack);
+  font-size: 11px;
+  padding: 3px 9px;
+  cursor: pointer;
+  background: var(--ro-frame);
+  border: 2px outset var(--ro-frame-light);
+  border-right-color: var(--ro-frame-dark);
+  border-bottom-color: var(--ro-frame-dark);
+  color: #1c2433;
+}
+.fbtn:hover { background: #cbd3de; }
+.fbtn.on {
+  border-style: inset;
+  background: linear-gradient(180deg, var(--ro-title-top), var(--ro-title-bot));
+  color: #fff;
+  text-shadow: 1px 1px 0 rgba(0,0,0,.6);
+}
+
+/* ---------- Rotations ---------- */
+.rot-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 8px;
+}
+.rot-col { background: var(--ro-parch); border: 1px solid var(--ro-parch-border); }
+.rot-col h4 {
+  margin: 0;
+  padding: 4px 7px;
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #fff;
+  text-shadow: 1px 1px 0 rgba(0,0,0,.6);
+}
+.rot-col.pre    h4 { background: #4a5a6d; }
+.rot-col.opener h4 { background: var(--ro-green); }
+.rot-col.sustain h4 { background: #2f5f9e; }
+.rot-col.panic  h4 { background: var(--ro-red); }
+.rot-col ol, .rot-col ul { margin: 0; padding: 7px 7px 7px 24px; font-size: 11.5px; }
+.rot-col li { margin-bottom: 5px; }
+
+/* ---------- Checklist ---------- */
+.progress-wrap {
+  background: #22262f;
+  border: 2px inset var(--ro-frame-dark);
+  height: 17px;
+  position: relative;
+  margin-bottom: 4px;
+}
+.progress-bar {
+  height: 100%;
+  background: repeating-linear-gradient(90deg, #ffe27a 0 6px, #e8b62c 6px 12px);
+  transition: width .18s linear;
+}
+.progress-text {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10.5px;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 1px 1px 0 #000;
+  letter-spacing: 1px;
+}
+
+.task {
+  display: flex;
+  gap: 8px;
+  background: var(--ro-parch);
+  border: 1px solid var(--ro-parch-border);
+  padding: 7px 8px;
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+.task:hover { background: #f7eed6; }
+.task.done { opacity: .5; background: #d8d2c0; }
+.task.done .task-title { text-decoration: line-through; }
+
+.task-check {
+  width: 16px; height: 16px;
+  flex: 0 0 16px;
+  margin-top: 2px;
+  background: #fbf6e6;
+  border: 2px inset var(--ro-frame-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: bold;
+  color: var(--ro-green);
+  line-height: 1;
+}
+.task-order {
+  color: var(--ro-gold-deep);
+  font-weight: bold;
+  margin-right: 5px;
+}
+.task-title { font-weight: bold; font-size: 12.5px; }
+.task-meta { font-size: 11px; color: var(--ro-ink-soft); margin-top: 3px; }
+.task-warn {
+  margin-top: 5px;
+  background: #f6e2c0;
+  border-left: 4px solid var(--ro-red);
+  padding: 4px 7px;
+  font-size: 11px;
+  color: #6a2020;
+}
+.task-detail { margin-top: 5px; font-size: 11.5px; }
+
+/* ---------- Misc ---------- */
+.kv-table { width: 100%; border-collapse: collapse; font-size: 11.5px; }
+.kv-table th, .kv-table td {
+  border: 1px solid var(--ro-parch-border);
+  padding: 4px 6px;
+  text-align: left;
+  vertical-align: top;
+}
+.kv-table th {
+  background: linear-gradient(180deg, var(--ro-title-top), var(--ro-title-bot));
+  color: #fff;
+  text-shadow: 1px 1px 0 rgba(0,0,0,.6);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.kv-table tr:nth-child(even) td { background: var(--ro-parch-alt); }
+.kv-table td { background: var(--ro-parch); }
+.table-scroll { overflow-x: auto; }
+
+.note-strip {
+  background: #f6e2c0;
+  border: 1px solid var(--ro-parch-border);
+  border-left: 4px solid var(--ro-gold-deep);
+  padding: 6px 9px;
+  font-size: 11.5px;
+  margin-bottom: 8px;
+}
+.break-strip {
+  background: #efdcdc;
+  border: 1px solid #a37272;
+  border-left: 4px solid var(--ro-red);
+  padding: 6px 9px;
+  font-size: 11.5px;
+  margin-bottom: 6px;
+}
+.break-strip .bl {
+  color: var(--ro-red);
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 10px;
+  letter-spacing: 1px;
+}
+
+.char-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 8px;
+}
+.char-card {
+  background: var(--ro-parch);
+  border: 1px solid var(--ro-parch-border);
+  padding: 8px;
+  text-decoration: none;
+  color: var(--ro-ink);
+  display: block;
+}
+.char-card:hover { background: #f7eed6; }
+.char-card .cc-name { font-size: 14px; font-weight: bold; color: #24406b; }
+.char-card .cc-build { font-size: 11px; color: var(--ro-gold-deep); font-weight: bold; }
+.char-card .cc-role { font-size: 11px; color: var(--ro-ink-soft); }
+
+.loading, .empty {
+  padding: 18px;
+  text-align: center;
+  color: var(--ro-ink-soft);
+  font-size: 12px;
+}
+.error-box {
+  background: #f3d6d6;
+  border: 2px solid var(--ro-red);
+  padding: 12px;
+  color: #5f1a1a;
+  font-size: 12px;
+}
+.error-box code {
+  display: block;
+  background: #2b2020;
+  color: #ffd7d7;
+  padding: 6px 8px;
+  margin-top: 6px;
+  font-size: 11px;
+  overflow-x: auto;
+}
+
+.footer {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 4px 14px 22px;
+  color: #7b8698;
+  font-size: 10.5px;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 768px) {
+  .app-shell { grid-template-columns: 1fr; padding: 10px; gap: 10px; }
+  .sidebar { position: static; }
+  .nav-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 3px; }
+  .stat-grid { grid-template-columns: repeat(3, 1fr); }
+  .slot-grid { grid-template-columns: 1fr; }
+  .rot-grid { grid-template-columns: 1fr; }
+  .masthead h1 { font-size: 14px; }
+}
+
+</style>
+</head>
+<body>
+
+  <header class="masthead">
+    <h1>&#9670; GEFFEN CODEX &#9670;</h1>
+    <p>Baldur's Gate 3 party build wiki, written for a Ragnarok Online brain. Runs entirely offline.</p>
+  </header>
+
+  <div class="app-shell">
+
+    <aside class="sidebar">
+      <section class="ro-window">
+        <div class="ro-titlebar"><span>Menu</span><span class="ro-close"></span></div>
+        <div class="ro-body">
+          <ul class="nav-list" id="navList"></ul>
+        </div>
+      </section>
+
+      <section class="ro-window">
+        <div class="ro-titlebar"><span>Search</span><span class="ro-close"></span></div>
+        <div class="ro-body">
+          <input type="search" id="searchBox" class="search-box" placeholder="Search all data..." autocomplete="off">
+          <div class="search-results" id="searchResults"></div>
+        </div>
+      </section>
+    </aside>
+
+    <main>
+      <h2 class="ro-h" id="viewTitle">Loading</h2>
+      <div id="view">
+        <div class="loading">Reading data files...</div>
+      </div>
+    </main>
+
+  </div>
+
+  <footer class="footer">
+    Content lives in <strong>data/*.json</strong> &mdash; edit the JSON, reload the page. No build step, no framework, no CDN.
+  </footer>
+
+  <script>window.__BG3_DATA__ = {"characters":{"meta":{"title":"Geffen Codex — BG3 Party Build Wiki","subtitle":"A Ragnarok Online player's guide to a locked-in Baldur's Gate 3 party","levelCap":12,"assumptions":["Party level 2, early Act 1 (Emerald Grove era). Adjust the checklist start point if you are further along.","Difficulty assumed Balanced or Tactician. Nothing here is Honour-mode-illegal, but Honour mode gives bosses Legendary Actions — the Paladin's chokepoint plan matters more there, not less.","Level cap is 12. Every build below is a complete 12-level plan with nothing left over.","Main character race assumed Wood Elf (+2 DEX / +1 WIS). If yours differs, the stat table's 'base' column still holds — only the racial row changes."],"irreversibleMeaning":"In BG3 almost every CLASS choice can be undone by paying Withers 100 gold to respec. 'Irreversible' on a level row means 'locked until you pay for a respec' — think RO skill reset via Neuralizer, not a permanent mistake. The genuinely permanent things (one-time items, story locks, recruits) are flagged in the Checklist instead.","gearDisclaimer":"Gear locations are written from knowledge of a patched game and Larian moves vendors and loot between patches. Treat every location as 'verify in-game' rather than gospel. The ITEM EFFECTS are what the build depends on — if an item moved, the effect is still what you are shopping for.","provenance":{"summary":"This wiki was written entirely from the author's recall of Baldur's Gate 3. NO SOURCE WAS CONSULTED while writing it — not bg3.wiki, not the game files, not a guide. There is no citation list. Treat it as an experienced player's notes written from memory, not as a reference work. The confidence tiers below tell you which parts are worth double-checking and in what order.","patchRisk":"Written against knowledge current to roughly May 2026. BG3 has patched repeatedly since launch, and Patch 8 in particular added around a dozen new subclasses — believed to include Swarmkeeper (Ranger), Arcane Archer (Fighter), Swashbuckler (Rogue), Oath of the Crown (Paladin) and Death Domain (Cleric). If you are on that patch, every 'alternatives I am rejecting' list in this wiki is INCOMPLETE. Swashbuckler in particular is a serious competitor for Astarion's Rogue slot and does not appear in his level 3 alternatives at all.","high":["Class feature levels: Extra Attack at Ranger 5, Volley at Hunter 11, Conjure Barrage at Ranger 9, Assassin at Rogue 3, Cunning Action at Rogue 2, Uncanny Dodge at 5, Evasion at 7, Action Surge at Fighter 2, Aura of Protection at Paladin 6.","Feats arrive at class levels 4, 8 and 12 — which is why the Rogue 9 / Fighter 3 split yields only two feats.","Sharpshooter is -5 to hit for +10 damage and is a toggle. Sneak Attack fires once per turn, not per hit. One Concentration spell at a time. Level cap is 12.","The BG3-specific deviations from tabletop: Cleric subclass locks at LEVEL 1, and Paladin Oath is chosen at LEVEL 1. Both differ from 5e, where they are picked at level 3.","Point-buy budget of 27 with 14 costing 7 and 15 costing 9, and the racial bonus spreads used in the stat tables.","Major world locations: Withers in the Dank Crypt under the Overgrown Ruins, Lae'zel caged and guarded by two tieflings north of the beach, Gale at Roadside Cliffs, the Adamantine Forge in Grymforge, the House of Hope reached via Helsik's ritual."],"medium":["Exact number of spells known at each Ranger level.","The precise domain spell pairings granted at each Life Domain and Oath of the Ancients tier.","How Divine Intervention's choice actually presents itself at Cleric 10.","Whether Heroes' Feast consumes a material component in the current build."],"low":["FAVOURED ENEMY AND NATURAL EXPLORER option names and effects. This was the weakest recall in the whole document — the text hedges toward 'low stakes, pick anything' partly because the exact menu could not be recalled cleanly. Verify this at character level 1.","EVERY VENDOR NAME AND ITEM LOCATION in the Gear section. Gloves of Archery on Arron, the seller of Whispering Promise, the Amulet of Misty Step, Callous Glow Ring, Boots of Stormy Clamour, The Dead Shot and Killer's Sweetheart are all best-effort.","Gontr Mael's location specifically — flagged in the gear notes as moving between patches.","All gold prices are rough estimates."],"verifyOrder":["1. The four irreversible subclass locks: Life Domain at Cleric 1, Ancients at Paladin 1, Assassin at Rogue 3, Champion at Fighter 3. Each costs 100g to undo.","2. The Hag's Hair to DEX chain, because the level 8 Ability Improvement depends on DEX landing on 18 rather than 17.","3. The Favoured Enemy and Natural Explorer menus at level 1 — the weakest section here.","4. Gear locations lazily, act by act, as you reach them. Do not pre-verify all 37 items.","GOLDEN RULE: whatever the level-up screen or the vendor's inventory actually shows you overrides this wiki. If the game disagrees, the game is right."]},"progressionPrimer":["NO STAT POINTS ON LEVEL UP. This is the biggest break from RO. Your six ability scores are set at character creation and never rise from levelling. They change only at class levels 4, 8 and 12 (where a feat can be traded for +2), and from two one-time items — Auntie Ethel's Hag's Hair (+1, Act 1) and the Mirror of Loss (+2, Act 3). There is no 'I will fix my DEX later'.","NO SKILL POINTS AND NO SKILL TREE. You do not spend anything. The game hands you specific features at specific levels. Most level-ups present NO choice at all — you read what you gained and click Next.","ONLY ABOUT HALF YOUR LEVELS ARE ACTUAL DECISIONS. The rest are automatic. Knowing which is which is most of what 'planning a build' means in BG3.","RESPEC IS 100 GOLD AND UNLIMITED. Withers at camp rebuilds any character from scratch, as many times as you like. In RO a skill reset is a big deal; here it is pocket change. No CLASS choice in this wiki is ever truly permanent — subclass locks just mean 'costs 100g to change'.","WHAT IS ACTUALLY PERMANENT: one-time items (Hag's Hair, Mirror of Loss, your limited Adamantine forgings), story forks, and companion recruitment. Guard those. Relax about everything else.","THE CAP IS 12, reached around the middle of Act 3. There is no grind to 99, no rebirth. You stop levelling with a good chunk of game left, and GEAR is the entire back half of your power curve — which is why the gear list matters more than it would in RO.","SPELLS: Clerics and Paladins PREPARE spells and can re-pick the whole list for free any time outside combat, so those choices are never commitments. Rangers KNOW spells and can only swap them on level-up — so Ranger spell picks are semi-permanent, and they are the only spell choices in this party worth pausing over.","MULTICLASSING IS THE JOB-CHANGE MOMENT, and it is a misclick risk. On the levels where Astarion or the Paladin dips into Fighter, the level-up screen defaults to continuing their current class. You must actively pick the other class — and then actively pick the ORIGINAL class again when the dip is done."],"analogyTopLevel":["The single biggest break from RO: BG3 has no cast time, no ASPD, no delay. Everything is 1 Action + 1 Bonus Action + 1 Movement per turn. Your DPS ceiling is 'how many attack rolls can I buy per turn', not 'how fast can I spam'.","There is no SP pool. Spell slots are per-rest charges, closer to RO consumables than to SP. Running dry means resting, not sitting.","There is no EXP penalty for party size and no leech — everyone in the party of 4 gets full XP. Bench swapping costs nothing.","Levels stop at 12. There is no 99/70 grind, no rebirth. Gear, not levels, is your progression curve for most of the game."]},"characters":[{"id":"main","name":"Sniper","roClass":"Sniper","bg3Build":"Hunter Ranger 12","role":"AoE DPS / Ranged Carry","badge":"sniper","summary":"A pure single-class Ranger. Falcon-less, but Beast Tamer gives you a familiar that plays the Falcon's support role. Your whole game is: stand far away on high ground, toggle Sharpshooter, and convert one Action into as many attack rolls as the party can buy you.","stats":{"str":8,"dex":17,"con":14,"int":8,"wis":15,"cha":12},"statNotes":{"str":"Dumped. Only cost is carry weight and Athletics (shoving). Let the Paladin shove things.","dex":"Primary. Attack rolls, damage, AC, initiative, and Stealth all key off this. Target 20 by level 8.","con":"14 is the floor. Concentration saves for Hunter's Mark and Ensnaring Strike live here, plus HP.","int":"Dumped. Only Arcana checks. Nothing in the build touches it.","wis":"15 sets your spell save DC for Ensnaring Strike and Conjure Barrage, and drives Perception (trap and ambush detection).","cha":"12 is deliberate — the main character does almost all the dialogue in BG3. +1 Persuasion is worth more here than a 16th point of CON."},"statPlan":["Point-buy base (27 points): STR 8, DEX 15, CON 14, INT 8, WIS 14, CHA 12.","Wood Elf racial: +2 DEX, +1 WIS. Result: STR 8, DEX 17, CON 14, INT 8, WIS 15, CHA 12.","Auntie Ethel's Hag's Hair (Act 1, one per playthrough) into DEX: 17 to 18.","Level 8 Ability Improvement +2 DEX: 18 to 20. This is why the hair MUST go to DEX and not to anyone else."],"roMapping":[{"roSkill":"Double Strafe","bg3":"Your basic 2 attacks after Extra Attack (level 5)","breaks":"No SP cost, no cast delay — but you only get ONE Action, so it is 2 shots per turn and that is the cap until Volley."},{"roSkill":"Arrow Shower","bg3":"Conjure Barrage (Ranger 9)","breaks":"Fires from YOU in a cone, not placed on a target cell. It is a spell slot, not spammable, and enemies get a DEX save for half."},{"roSkill":"Sharp Shooting","bg3":"Volley (Hunter 11)","breaks":"Volley is the real AoE workhorse — it hits every enemy in a radius with a SEPARATE attack roll each, so Sharpshooter and all your damage riders apply to every hit. Nothing in RO is this good."},{"roSkill":"Blitz Beat","bg3":"Horde Breaker (Hunter's Prey, level 3)","breaks":"No falcon, no proc chance, no AGI scaling. It is a guaranteed free extra attack once per turn against a DIFFERENT enemy standing next to your target."},{"roSkill":"Falcon","bg3":"Beast Tamer familiar (Natural Explorer, level 1)","breaks":"It does not auto-attack for you. Its job is the Help action to grant advantage, and body-blocking. It is a utility pet, not a damage pet."},{"roSkill":"Trap line / Land Mine","bg3":"Spike Growth + Ensnaring Strike","breaks":"No trap items to farm, no placement charges. Spike Growth is a persistent damaging zone — the closest thing to a trap field you get."}],"levels":[{"level":1,"menu":"Ranger — Favoured Enemy, then Natural Explorer","choice":"Favoured Enemy: Bounty Hunter | Natural Explorer: Beast Tamer","alternatives":["Favoured Enemy: Ranger Knight","Favoured Enemy: Keeper of the Veil","Favoured Enemy: Mage Breaker","Favoured Enemy: Sanctified Stalker","Natural Explorer: Urban Tracker","Natural Explorer: Wasteland Wanderer (Fire / Cold / Poison)"],"reasoning":"Beast Tamer grants Find Familiar — a free pet that can Help an adjacent ally every single round, which is a permanent advantage engine for Astarion and for you.","details":["Favoured Enemy is genuinely low-stakes for an archer — none of the five options change your damage rotation. Bounty Hunter is picked here for the skill proficiency only.","Ranger Knight is the only one that changes your gear options (heavy armour proficiency). SKIP IT: at STR 8 heavy armour just slows your movement, and you want DEX-scaling medium armour anyway.","Wasteland Wanderer: Fire is the honourable-mention Natural Explorer — Act 1 is full of burning ground and the Underdark is full of fire. Take it at level 10 instead."],"irreversible":true},{"level":2,"menu":"Fighting Style, then Spells Known (pick 2)","choice":"Fighting Style: Archery | Spells: Hunter's Mark, Ensnaring Strike","alternatives":["Fighting Style: Defence","Fighting Style: Dueling","Fighting Style: Two-Weapon Fighting","Spells: Longstrider","Spells: Cure Wounds","Spells: Hail of Thorns","Spells: Speak with Animals"],"reasoning":"Archery is +2 to every ranged attack roll for the whole game and directly offsets Sharpshooter's -5; it is not optional for this build.","details":["Rangers KNOW spells, they do not prepare them. You cannot swap them daily — only on level-up. This is unlike Shadowheart, who re-picks every long rest.","Hunter's Mark: +1d6 per hit, costs a Bonus Action and Concentration. With Extra Attack + Horde Breaker that is +3d6 a turn. Move it to a new target for free when your mark dies.","Ensnaring Strike: your ranged Ankle Snare. Restrains a target (they cannot move, attacks against them get advantage). Concentration — so it competes with Hunter's Mark. Use it on the one dangerous melee enemy, not on trash.","Speak with Animals is a real loss to skip. Pick it up on a level-up swap later if you care about the dialogue content — it opens a surprising number of quests in Act 1."],"irreversible":false},{"level":3,"menu":"Ranger Subclass, then Hunter's Prey, then 1 new spell","choice":"Subclass: Hunter | Hunter's Prey: Horde Breaker | Spell: Longstrider","alternatives":["Subclass: Beast Master","Subclass: Gloom Stalker","Hunter's Prey: Colossus Slayer","Hunter's Prey: Giant Killer"],"reasoning":"Horde Breaker is your Blitz Beat — one free extra attack per turn against a second enemy adjacent to your target, which turns every clumped pack into free damage.","details":["Colossus Slayer (+1d8 vs damaged targets, once per turn) is the higher single-target pick and is the honest competitor. You are building AoE, so Horde Breaker wins — but know that on boss-only fights Colossus Slayer would out-damage it.","Giant Killer is a trap. It only works against Large+ creatures and it is a reaction.","Gloom Stalker is the strongest Ranger subclass in the game (extra attack on round 1, +WIS initiative, invisible in darkness). You have committed to Hunter for the RO AoE fantasy and Volley — that is a legitimate choice, just be aware Gloom Stalker is the meta pick.","Longstrider is +3m movement, lasts until Long Rest, and can be cast on the whole party out of combat. Free repositioning forever."],"irreversible":true},{"level":4,"menu":"Feat","choice":"Sharpshooter","alternatives":["Ability Improvement (+2 DEX)","Alert","Savage Attacker","Lucky","Dual Wielder"],"reasoning":"-5 to hit for +10 damage per arrow, and it removes the high-ground disadvantage penalty entirely — with 2-3 attacks a turn that is +20 to +30 damage per round.","details":["Sharpshooter is a TOGGLE in BG3, not always-on. Turn it OFF against high-AC targets (heavily armoured knights, some bosses) and ON against everything else. Learn to check enemy AC by hovering them.","The Archery fighting style (+2) plus Bless from Shadowheart (+1d4) plus advantage from the familiar's Help largely cancels the -5. This is why the party is built the way it is.","Do NOT take the +2 DEX here. Sharpshooter's +10 flat damage dwarfs a +1 modifier, and you get DEX at level 8 anyway."],"irreversible":false},{"level":5,"menu":"No choice for the class feature; 1 new spell (2nd-level unlocked)","choice":"Extra Attack (automatic) | Spell: Spike Growth","alternatives":["Spell: Pass Without Trace","Spell: Silence","Spell: Lesser Restoration","Spell: Darkvision"],"reasoning":"Extra Attack doubles your Action into 2 shots, which also doubles every per-hit rider you own — this is the single biggest power spike in the build.","details":["Extra Attack + Horde Breaker = 3 attack rolls per turn from level 5 onward. With Hunter's Mark that is 3d6 bonus damage; with Sharpshooter that is +30.","Spike Growth is your Land Mine field. It is difficult terrain that deals damage per metre moved — combine it with the Paladin shoving enemies into it, or with Ensnaring Strike to pin something inside it.","Pass Without Trace (+10 party Stealth) is the strong alternative and it is what enables Astarion's Assassinate opener from full party stealth. If you find yourself fumbling stealth openers, swap Longstrider for it."],"irreversible":false},{"level":6,"menu":"Favoured Enemy (second pick)","choice":"Mage Breaker","alternatives":["Ranger Knight","Keeper of the Veil","Sanctified Stalker","Bounty Hunter (if not already taken)"],"reasoning":"Low-stakes menu again; Mage Breaker's Arcana proficiency is the most generally useful of what is left.","details":["Nothing on this menu changes your rotation. Do not agonise. If you already regret the level 1 pick, this is your chance to grab the other one you wanted."],"irreversible":true},{"level":7,"menu":"Hunter — Defensive Tactics, then 1 new spell","choice":"Defensive Tactics: Escape the Horde | Spell: Silence","alternatives":["Defensive Tactics: Multiattack Defence","Defensive Tactics: Steel Will","Spell: Pass Without Trace","Spell: Lesser Restoration"],"reasoning":"Escape the Horde gives enemies disadvantage on opportunity attacks against you — an archer's job is leaving melee alive, and this is the only option that helps you do it.","details":["Multiattack Defence only helps if you are already being hit repeatedly, which means the plan has already failed. Steel Will (advantage vs Frightened) is too situational.","Silence is an underrated pick: it is an AoE zone where no spells can be cast. Drop it on an enemy caster group and they are disabled without a save. Concentration, so you give up Hunter's Mark that fight."],"irreversible":true},{"level":8,"menu":"Feat","choice":"Ability Improvement: +2 DEX (18 to 20)","alternatives":["Alert","Savage Attacker","Lucky","Resilient (Constitution)"],"reasoning":"Takes you to the DEX cap of 20: +1 to every attack roll, +1 damage per arrow, +1 AC, +1 initiative, +1 Stealth — this is why Hag's Hair went into DEX.","details":["CRITICAL DEPENDENCY: this only reaches 20 if you gave Auntie Ethel's Hag's Hair to yourself and put it in DEX. If you gave the hair away or spent it elsewhere, you land on 19 — which is the SAME modifier as 18 and therefore a wasted feat. In that case take Alert here instead and pick up DEX at 12.","Ability scores hard-cap at 20 in BG3 except via specific items. Do not plan past 20."],"irreversible":false},{"level":9,"menu":"1 new spell (3rd-level unlocked)","choice":"Conjure Barrage","alternatives":["Lightning Arrow","Protection from Energy","Plant Growth","Daylight"],"reasoning":"This is your Arrow Shower — a large cone of arrows from your position, one spell slot, DEX save for half.","details":["ANALOGY BREAK: Conjure Barrage does NOT scale with your Sharpshooter, your Hunter's Mark, or your bow's damage riders. It is a flat spell (roughly 3d8 in a cone). It is a slot-limited nuke for packed groups, not your main AoE.","Volley at level 11 is the AoE you actually want, because Volley makes real attack rolls that DO carry all your bonuses. Conjure Barrage is the stopgap for levels 9 and 10.","Lightning Arrow is the single-target-plus-splash competitor and is arguably better damage. Take Conjure Barrage for the fantasy and the wider cone; swap on a later level-up if the numbers disappoint you."],"irreversible":false},{"level":10,"menu":"Natural Explorer (second pick)","choice":"Wasteland Wanderer: Fire","alternatives":["Urban Tracker","Wasteland Wanderer: Cold","Wasteland Wanderer: Poison","Beast Tamer (if not already taken)"],"reasoning":"Fire resistance is the most commonly relevant damage type across Acts 2 and 3, and halves a lot of surface damage you will inevitably stand in.","details":["Poison resistance is the Act 1 pick (spiders, Ethel, kuo-toa) — by level 10 you are past most of that.","If you skipped Beast Tamer at level 1 and now want the familiar, this is your one chance to grab it."],"irreversible":true},{"level":11,"menu":"Hunter — Multiattack, then 1 new spell","choice":"Multiattack: Volley | Spell: Protection from Energy","alternatives":["Multiattack: Whirlwind Attack","Spell: Lightning Arrow","Spell: Daylight"],"reasoning":"Volley is the payoff for the entire build — one Action, one separate attack roll against EVERY enemy in a radius, each carrying Sharpshooter, your bow bonuses, and your DEX.","details":["Whirlwind Attack is the melee version. It is strictly wrong for a longbow build — do not misclick this.","Volley against 4 enemies with Sharpshooter is roughly 4 x (1d8 + 5 + 10). This is the moment the build goes from good to absurd.","Volley does NOT trigger Hunter's Mark on every target (Hunter's Mark is single-target), and it does not proc Horde Breaker. It replaces your normal attack Action, so it is Volley OR 2-shots-plus-Horde-Breaker — use Volley at 3+ targets, normal attacks at 1-2."],"irreversible":true},{"level":12,"menu":"Feat","choice":"Alert","alternatives":["Savage Attacker","Lucky","Resilient (Constitution)","Ability Improvement (+2 WIS)"],"reasoning":"+5 initiative means you Volley before the enemy pack has moved or spread out, which is worth more than any damage feat once your damage is already this high.","details":["Alert also makes you immune to being Surprised — which prevents the worst-case ambush opener where your whole party loses a round.","Lucky (3 rerolls per long rest) is the strongest defensive alternative and is excellent on Honour mode where a single failed save can end a run.","Savage Attacker rerolls weapon damage dice — but your damage is mostly FLAT (+10 Sharpshooter, +5 DEX), so it only rerolls the 1d8. It is the weakest option here despite sounding good.","Resilient (Constitution) is the pick if you keep losing Hunter's Mark concentration."],"irreversible":false}]},{"id":"astarion","name":"Assassin Cross","roClass":"Assassin Cross","bg3Build":"Assassin Rogue 9 / Champion Fighter 3","role":"Single-target Burst / Opener","badge":"assassin","summary":"The Sonic Blow / Meteor Assault turn. Astarion's entire value is round one: win initiative, attack from stealth against enemies that have not acted, and delete the single most dangerous target before it ever takes a turn.","stats":{"str":8,"dex":17,"con":15,"int":9,"wis":14,"cha":10},"statNotes":{"str":"Dumped. He fights with Finesse weapons (daggers), which use DEX for attack and damage.","dex":"Primary. Attack, damage, AC, initiative, Stealth, Sleight of Hand — every single thing he does.","con":"15 for HP and Concentration. He gets focused hard when he opens a fight in the enemy's face.","int":"Dumped (High Elf forces +1 here, which is unavoidable waste).","wis":"14 is deliberately high for a Rogue — WIS saves are the most common save-or-lose in the game (Hold Person, Fear, Command) and he has no proficiency in them.","cha":"10. He is your backup talker for Deception and Persuasion checks the main character fails."},"statPlan":["Point-buy base (27 points): STR 8, DEX 15, CON 15, INT 8, WIS 14, CHA 10.","High Elf racial: +2 DEX, +1 INT. Result: STR 8, DEX 17, CON 15, INT 9, WIS 14, CHA 10.","Rogue 8 Ability Improvement +2 DEX: 17 to 19. (17 and 18 are both +3/+4 — this jump is worth exactly +1 modifier.)","If you Ascend him in Act 3 he gains +2 to ALL abilities, which pushes DEX to 21 and breaks the normal cap. See the Checklist for the cost of that choice."],"roMapping":[{"roSkill":"Cloaking / Hiding","bg3":"Cunning Action: Hide (Bonus Action, from level 2)","breaks":"Hiding requires you to actually break line of sight or pass a Stealth check against enemy Perception — it is not a toggle. Enemies remember roughly where you went."},{"roSkill":"Sonic Blow","bg3":"Sneak Attack + Action Surge multi-hit turn","breaks":"Sneak Attack fires ONCE PER TURN, not per hit. Extra attacks exist to give you more chances to land that one big die pool, not to stack it."},{"roSkill":"Enchant Poison / Weapon Buff","bg3":"Coatings (Basic/Malefic/Drow Poison, Oil of Sharpness)","breaks":"Coatings are consumable items applied as a Bonus Action, last a few turns, and do not stack with each other. Buy them constantly — they are cheap and Astarion is the one who should always be wearing one."},{"roSkill":"Critical / Katar build","bg3":"Champion Improved Critical (crit on 19-20) + Assassinate auto-crit vs Surprised","breaks":"There is no CRIT stat. Crit chance is fixed at 5% per attack (10% with Champion) unless a specific item or condition guarantees it."},{"roSkill":"Grimtooth / Back Slide","bg3":"Cunning Action: Dash / Disengage","breaks":"No hidden-state movement skills. Disengage is the tool that lets him leave melee without eating an opportunity attack."}],"levels":[{"level":1,"menu":"Rogue — Expertise (pick 2 skills)","choice":"Expertise: Stealth + Sleight of Hand","alternatives":["Expertise: Perception","Expertise: Persuasion","Expertise: Acrobatics","Expertise: Deception"],"reasoning":"Stealth is the precondition for his entire opener, and Sleight of Hand is the party's lockpicking and disarming skill — nobody else has it.","details":["Astarion arrives pre-built as a Rogue. You only need Withers if you want to fix his ability spread — his default array is playable but not optimal.","Sneak Attack (1d6 now, 5d6 at Rogue 9) requires either advantage on the attack, or an ally within 1.5m of the target. Remember the second condition — it means he does NOT need to hide every single turn if the Paladin is already in melee.","Expertise doubles your proficiency bonus on that skill. Perception expertise on someone is genuinely valuable for trap detection — but give that to the main character, who has WIS 15."],"irreversible":false},{"level":2,"menu":"No choices","choice":"Cunning Action (automatic)","alternatives":[],"reasoning":"Dash, Disengage, and Hide all become Bonus Actions — this is what makes a Rogue mobile enough to reposition into backstab range every round.","details":["Hide as a Bonus Action is the loop: attack with your Action, Hide with your Bonus Action, and next turn you are attacking with advantage again (which re-enables Sneak Attack).","This loop competes with his off-hand attack, which is also a Bonus Action. Hide when you need advantage; off-hand attack when you already have it."],"irreversible":false},{"level":3,"menu":"Roguish Archetype","choice":"Assassin","alternatives":["Thief","Arcane Trickster"],"reasoning":"Assassinate grants advantage against any creature that has not yet taken a turn, and automatic critical hits against Surprised creatures — it is the burst opener you asked for.","details":["IRREVERSIBLE without a 100g respec. This is the pick your Alert feat exists to support.","HONEST COMPARISON: Thief gives a SECOND Bonus Action every turn, forever. That means off-hand attack AND hide, every round, in every fight. Across a whole playthrough Thief usually out-damages Assassin because Assassin's power is concentrated in round one only.","Assassin is the right pick IF you play to it — full party stealth approach, Alert for initiative, and killing something important before it acts. If you find yourself walking into fights and rolling initiative normally, respec to Thief and do not feel bad.","Arcane Trickster is a caster hybrid and is off-plan entirely."],"irreversible":true},{"level":4,"menu":"Feat","choice":"Alert","alternatives":["Ability Improvement (+2 DEX)","Savage Attacker","Dual Wielder","Mobile"],"reasoning":"Assassinate only works against creatures that have not acted yet, so winning initiative is not a nice-to-have — it is the feature's activation condition.","details":["+5 initiative on a character who already has DEX 17 (+3) means he will win the roll against nearly everything in the game.","Alert also grants immunity to Surprise, so he never loses his own opening round to an ambush.","Do not delay this. Taking Alert at level 8 instead means four levels of a subclass that half-works."],"irreversible":false},{"level":5,"menu":"Fighter — Fighting Style (this is the multiclass dip; choose Fighter at the level-up screen)","choice":"Fighter 1 | Fighting Style: Two-Weapon Fighting","alternatives":["Fighting Style: Archery","Fighting Style: Defence","Fighting Style: Dueling","Stay pure Rogue"],"reasoning":"Two-Weapon Fighting adds your DEX modifier to off-hand damage, which is otherwise flat — with two daggers that is roughly +4 damage per round for free.","details":["MULTICLASS WARNING: at the level-up screen you must click the multiclass option and select Fighter, not continue as Rogue. It is easy to autopilot past this.","Fighter 1 also grants Second Wind (Bonus Action self-heal) and heavy armour proficiency you will never use.","If you decide to run him with hand crossbows instead of daggers, take Archery here instead. Daggers are recommended because the Act 3 endgame items (Bhaalist Armour, Crimson Mischief, Bloodthirst) are all melee piercing and are the strongest package in the game."],"irreversible":false},{"level":6,"menu":"No choices","choice":"Fighter 2 | Action Surge (automatic)","alternatives":[],"reasoning":"One extra full Action per short rest — this is the entire reason for the Fighter dip and it doubles his opening burst.","details":["Action Surge recharges on a SHORT rest, and you get two short rests per long rest. Use it every fight that matters; there is no reason to hoard it.","Round one with Assassinate: Attack (Sneak Attack applies) + Action Surge Attack + Bonus Action off-hand attack. Against a Surprised target, all of those are automatic critical hits."],"irreversible":false},{"level":7,"menu":"Martial Archetype","choice":"Fighter 3 | Champion","alternatives":["Battle Master","Eldritch Knight"],"reasoning":"Improved Critical widens his crit range to 19-20, doubling his crit rate — and Sneak Attack dice are doubled on a crit, so his crits are enormous.","details":["IRREVERSIBLE without respec.","Battle Master is the alternative and gives 3 maneuvers plus superiority dice. It is more versatile. Champion is picked here because it is passive, always-on, and multiplies the one huge hit that defines this character. Your Paladin is already covering the Battle Master role.","Champion pairs with any 'guaranteed crit' item (Killer's Sweetheart in Act 3) to make one turn per fight a certainty rather than a gamble."],"irreversible":true},{"level":8,"menu":"No choices (back to Rogue — remember to select Rogue, not Fighter)","choice":"Rogue 5 | Uncanny Dodge (automatic)","alternatives":[],"reasoning":"Halve the damage of one attack per round as a Reaction — the survivability patch for a character who opens fights standing in the enemy's face.","details":["Sneak Attack rises to 3d6 here.","From this level onward every level is Rogue. Do not accidentally take Fighter 4."],"irreversible":false},{"level":9,"menu":"Rogue — Expertise (pick 2 more skills)","choice":"Rogue 6 | Expertise: Perception + Persuasion","alternatives":["Expertise: Acrobatics","Expertise: Deception","Expertise: Investigation"],"reasoning":"Perception expertise makes him the party's trap-spotter on the character who walks in front, and Persuasion gives you a second dialogue option when the main character's roll is bad.","details":["Deception is the alternative if you are role-playing him as the liar — mechanically Persuasion appears in more checks."],"irreversible":false},{"level":10,"menu":"No choices","choice":"Rogue 7 | Evasion (automatic)","alternatives":[],"reasoning":"Successful DEX saves take zero damage instead of half — this makes him nearly immune to fireballs and breath weapons, which are the main things that kill squishy melee.","details":["Sneak Attack rises to 4d6."],"irreversible":false},{"level":11,"menu":"Feat","choice":"Rogue 8 | Ability Improvement: +2 DEX (17 to 19)","alternatives":["Savage Attacker","Lucky","Mobile","Resilient (Wisdom)"],"reasoning":"17 to 19 is +1 to attack, +1 damage on both weapons, +1 AC and +1 initiative — the broadest single upgrade available at this point.","details":["Savage Attacker is unusually good on THIS character specifically, because he rolls a huge pile of Sneak Attack dice and Savage Attacker rerolls them. If you have already found a way to raise his DEX with items, take Savage Attacker instead.","Note that 19 is not 20 — the Hag's Hair went to your main character. This is the intended trade."],"irreversible":false},{"level":12,"menu":"No choices","choice":"Rogue 9 | Infiltration Expertise (automatic)","alternatives":["Take Fighter 4 instead for a third feat"],"reasoning":"Sneak Attack rises to 5d6, which is the real payoff; the Assassin feature itself at this level is a disguise utility and is close to worthless in combat.","details":["FLAGGING A BETTER OPTION THAN YOUR LOCKED PLAN: Rogue 8 / Fighter 4 instead of Rogue 9 / Fighter 3 trades 1d6 of Sneak Attack for an entire extra FEAT (Savage Attacker or an ASI). That is a straightforwardly better level 12 for combat.","You specified Rogue 9 / Fighter 3, so that is what this table builds. I am flagging the alternative because it costs you nothing to know it and the swap is a single 100g respec.","If you take Fighter 4, the level order is identical except the last level is Fighter instead of Rogue."],"irreversible":false}]},{"id":"shadowheart","name":"High Priest","roClass":"Full Support Priest","bg3Build":"Life Domain Cleric 12","role":"Healer / Buffer / Damage Sponge Proxy","badge":"priest","summary":"Your Full Support. Bless is Gloria, Warding Bond is Devotion, Spirit Guardians is Magnus Exorcismus that follows you around. She never dies because nothing wants to hit her, and the Paladin never dies because she is taking half his damage.","stats":{"str":10,"dex":14,"con":16,"int":8,"wis":16,"cha":10},"statNotes":{"str":"10. Enough to carry things. NOT enough for heavy armour without a speed penalty — see the armour note below, this is a deliberate trade.","dex":"14. +2 AC in medium armour and decent initiative. This is why she wears medium armour, not plate.","con":"16. The most important defensive stat she has: HP, Concentration saves for Bless and Spirit Guardians, and she is soaking half the Paladin's damage through Warding Bond.","int":"Dumped entirely.","wis":"16 to start, 20 by level 12. Spell save DC, healing throughput via Disciple of Life, and Perception.","cha":"10, forced up by the Half-Elf +2. Wasted stat, unavoidable on her race."},"statPlan":["Point-buy base (27 points): STR 10, DEX 14, CON 15, INT 8, WIS 15, CHA 8.","Half-Elf racial: +2 CHA (forced), +1 CON, +1 WIS (your two free picks). Result: STR 10, DEX 14, CON 16, INT 8, WIS 16, CHA 10.","Level 8 Ability Improvement +2 WIS: 16 to 18. Level 12 Ability Improvement +2 WIS: 18 to 20.","ARMOUR TRADE-OFF: Life Domain grants heavy armour proficiency, but BG3 penalises your movement speed if you wear heavy armour below its STR requirement (13 or 15). At STR 10 you would be slowed. The build therefore puts her in MEDIUM armour with DEX 14 and gets similar AC without the penalty. If you would rather wear plate, rebuild with STR 15 and drop CON to 14 and WIS to 15 — it is a real option, just a worse one for a support who repositions."],"roMapping":[{"roSkill":"Devotion","bg3":"Warding Bond (2nd-level spell, Cleric 3)","breaks":"One target only, not five. She takes HALF the damage dealt to the bonded ally, and it lasts until Long Rest. Unlike Devotion it does not reduce the damage — it SPLITS it, so she needs the HP and the damage resistances to survive being the sponge."},{"roSkill":"Gloria / Blessing","bg3":"Bless (1st-level, always prepared via Life Domain)","breaks":"+1d4 to attack rolls AND saving throws for 3 allies, but it requires Concentration — she can only hold ONE concentration spell at a time. Bless or Spirit Guardians, never both."},{"roSkill":"Heal / Sanctuary","bg3":"Cure Wounds, Healing Word, Preserve Life","breaks":"Healing in BG3 is weak relative to enemy damage. Healing Word (Bonus Action, at range) to pick someone up off the floor is the correct use; standing and topping people off is a wasted turn. Prevention beats healing here far more than in RO."},{"roSkill":"Magnus Exorcismus","bg3":"Spirit Guardians (3rd-level, Cleric 5)","breaks":"It is centred on HER and MOVES with her, not placed on the ground. It damages everything in radius at the start of their turn AND halves their movement. She has to physically walk into the enemy pack — which is why CON 16 and Warding Bond matter."},{"roSkill":"Kyrie Eleison / Assumptio","bg3":"Death Ward, Sanctuary, Beacon of Hope","breaks":"Death Ward is the closest thing — it survives one lethal hit. Cast it before boss fights, it lasts until Long Rest."},{"roSkill":"Resurrection","bg3":"Revivify (3rd-level, needs 1 Diamond as a material component)","breaks":"Costs a consumable Diamond every cast. Buy every Diamond you see from every vendor. Withers at camp also resurrects for 200g if she is out of diamonds or also dead."}],"levels":[{"level":1,"menu":"Divine Domain, then Cantrips (pick 3), then Prepared Spells","choice":"Domain: Life | Cantrips: Guidance, Sacred Flame, Resistance | Prepared: Healing Word, Guiding Bolt, Command, Sanctuary (Bless is free from the domain)","alternatives":["Domain: Trickery (her default)","Domain: Light","Domain: War","Domain: Tempest","Cantrips: Blade Ward, Thaumaturgy, Light, Produce Flame","Prepared: Cure Wounds, Shield of Faith, Inflict Wounds, Protection from Evil and Good, Create or Destroy Water"],"reasoning":"Life Domain is the Full Support: Disciple of Life adds bonus HP to every healing spell, Bless is permanently prepared for free, and it grants heavy armour proficiency.","details":["IRREVERSIBLE AND URGENT: Cleric subclass is chosen at LEVEL 1 in BG3, unlike most classes. Shadowheart is currently Trickery. You cannot change domain by levelling — she must be respecced by Withers for 100 gold. Do this before you spend any more levels.","Guidance is the single most-used cantrip in the game: +1d4 to any ability check out of combat. Cast it before every lockpick, every dialogue check, every jump.","Sacred Flame is her at-will damage. It is a DEX save (no attack roll), so it never misses due to AC — but it also does not benefit from advantage.","Resistance (+1d4 to a saving throw) is the third pick; Blade Ward is the defensive alternative if you prefer.","Prepared spells are re-pickable at any time outside combat, for free. Nothing on the prepared list is a commitment — only cantrips and the domain are locked.","Command is the sleeper pick: 'Drop' disarms an enemy, 'Approach' pulls them out of position. It is a WIS save against your DC."],"irreversible":true},{"level":2,"menu":"No choices (Channel Divinity granted automatically)","choice":"Channel Divinity: Preserve Life + Turn Undead","alternatives":[],"reasoning":"Preserve Life is a free party-wide heal that costs no spell slot — one charge per short rest, and it is the emergency button that saves a wipe.","details":["Preserve Life distributes healing across the party up to half their maximum HP. It will not top up someone already above half — target it when several people are hurt.","Channel Divinity recharges on a SHORT rest. Two short rests per long rest means three uses per day. Do not hoard it.","Turn Undead makes undead flee. Act 2 is full of undead. This is more useful than it sounds."],"irreversible":false},{"level":3,"menu":"Prepared spells (2nd level unlocked)","choice":"Prepare: Warding Bond, Aid, Hold Person, Silence (Spiritual Weapon + Lesser Restoration are free domain spells)","alternatives":["Prayer of Healing","Blindness","Enhance Ability","Protection from Poison"],"reasoning":"Warding Bond is your Devotion and the reason the Paladin is functionally unkillable; Spiritual Weapon is a free Bonus Action attack every turn for the rest of the game.","details":["WARDING BOND RULE: cast it on the Paladin at camp before you set out. It lasts until Long Rest and does not need Concentration. He takes half damage; she takes the other half. She MUST have good HP and ideally damage resistance items for this to be a win.","Spiritual Weapon is a floating mace that attacks as a BONUS ACTION. It costs a slot once and then it is free damage every round. It does not require Concentration. Cast it in nearly every fight.","Aid gives +5 maximum HP to the whole party until Long Rest and scales if cast with a higher slot. Cast it at camp every morning alongside Warding Bond.","Hold Person is a save-or-lose: a paralysed humanoid takes automatic critical hits from every melee attack. Hold Person into Astarion is a delete button."],"irreversible":false},{"level":4,"menu":"Feat, then a 4th cantrip","choice":"Feat: War Caster | Cantrip: Blade Ward","alternatives":["Feat: Ability Improvement (+2 WIS)","Feat: Resilient (Constitution)","Feat: Tough","Feat: Lucky","Cantrip: Thaumaturgy, Light, Produce Flame"],"reasoning":"War Caster gives advantage on Concentration saves, which protects Bless and later Spirit Guardians — the two spells that define her contribution.","details":["Losing Concentration on Spirit Guardians while standing inside a mob is the most common way this character fails. War Caster is the fix.","Resilient (Constitution) is the competing answer — it grants CON save proficiency AND +1 CON. War Caster's advantage is mathematically stronger at her CON 16, and War Caster also lets her cast spells as opportunity attacks.","Do NOT take +2 WIS here. Concentration reliability beats a +1 to save DC."],"irreversible":false},{"level":5,"menu":"Prepared spells (3rd level unlocked)","choice":"Prepare: Spirit Guardians, Mass Healing Word, Remove Curse (Revivify + Beacon of Hope are free domain spells)","alternatives":["Bestow Curse","Glyph of Warding","Protection from Energy","Speak with Dead"],"reasoning":"Spirit Guardians is the biggest single upgrade she ever gets — persistent AoE damage plus movement-halving, centred on her, for one Concentration.","details":["Destroy Undead is also granted automatically at this level.","Spirit Guardians changes how you play her: she stops standing at the back and starts walking into the enemy formation. This is the RO Priest going Magnus and body-blocking, and it is correct.","Revivify becomes a domain spell here and is always prepared. KEEP DIAMONDS IN HER INVENTORY. Buy them from every trader.","Beacon of Hope makes all her healing maximise and gives advantage on WIS saves and death saves. Combine with Preserve Life for an absurd emergency heal."],"irreversible":false},{"level":6,"menu":"No choices","choice":"Blessed Healer + second Channel Divinity charge","alternatives":[],"reasoning":"Blessed Healer means every heal she casts on someone else also heals her — which directly funds the HP she is losing to Warding Bond.","details":["Two Channel Divinity charges per short rest means up to six Preserve Life casts per long rest. Her emergency capacity roughly doubles here."],"irreversible":false},{"level":7,"menu":"Prepared spells (4th level unlocked)","choice":"Prepare: Freedom of Movement, Banishment (Death Ward + Guardian of Faith are free domain spells)","alternatives":["Blight","Divination","Stoneskin (if available)"],"reasoning":"Death Ward as a free domain spell is a pre-cast that survives one lethal hit until Long Rest — put it on the Paladin and on Astarion every morning.","details":["Freedom of Movement makes a target immune to being Restrained, Paralysed, and to difficult terrain — including YOUR OWN Spike Growth. Cast it on the Paladin so he can fight inside the main character's Spike Growth field.","Banishment removes one enemy from the fight entirely on a failed CHA save. It is the answer to any single enemy the party cannot handle yet.","Guardian of Faith is a free stationary damage turret that costs no Concentration. Drop it in a doorway next to the Paladin."],"irreversible":false},{"level":8,"menu":"Feat","choice":"Ability Improvement: +2 WIS (16 to 18)","alternatives":["Resilient (Constitution)","Tough","Lucky","Alert"],"reasoning":"+1 to spell save DC on Hold Person, Command, and Sacred Flame, +1 to every heal via Disciple of Life, and one more prepared spell slot.","details":["Divine Strike is also granted automatically here: +1d8 radiant damage on her weapon attacks once per turn. She is not a weapon attacker, but it makes her mace swings non-embarrassing.","Tough (+2 HP per level, so +24 HP) is the alternative worth considering specifically because of Warding Bond. If she keeps dying from the bond, take Tough."],"irreversible":false},{"level":9,"menu":"Prepared spells (5th level unlocked)","choice":"Prepare: Insect Plague, Planar Ally (Mass Cure Wounds + Greater Restoration are free domain spells)","alternatives":["Flame Strike","Contagion","Dispel Evil and Good"],"reasoning":"Greater Restoration as a free domain spell removes the conditions nothing else in the party can fix, and Mass Cure Wounds is the full-party emergency heal.","details":["Flame Strike is the damage pick if you want a nuke; Insect Plague is chosen because it is a persistent zone that also blocks vision, which is better with a Sharpshooter who ignores cover.","Planar Ally summons a permanent-until-rest ally. It is a free extra body and free action economy."],"irreversible":false},{"level":10,"menu":"Divine Intervention (choose the effect), then a 5th cantrip","choice":"Divine Intervention: choose the healing/revival option | Cantrip: Thaumaturgy","alternatives":["Divine Intervention: the damage option","Divine Intervention: the utility/equipment option","Cantrip: Light, Produce Flame"],"reasoning":"Divine Intervention is effectively once per playthrough — the full-party revive-and-heal is the one that turns a lost fight into a won one.","details":["FLAG: the game asks you to pick ONE intervention and that choice sticks. It is a once-per-long-rest ability on paper but in practice you will use it once, in the fight that is going wrong.","The damage option is a large single nuke; the utility option grants gear. Neither saves a wipe."],"irreversible":true},{"level":11,"menu":"Prepared spells (6th level unlocked)","choice":"Prepare: Heroes' Feast, Blade Barrier","alternatives":["Harm","Planar Ally (greater)","Word of Recall"],"reasoning":"Heroes' Feast gives the entire party bonus maximum HP, immunity to Frightened, and immunity to poison until Long Rest — it is a permanent party-wide buff for one slot.","details":["Heroes' Feast requires a material component in some versions — check her inventory prompt. Cast it at camp every morning from Act 3 onward.","Blade Barrier is a wall of spinning blades — pure chokepoint control, and it pairs directly with the Paladin's job."],"irreversible":false},{"level":12,"menu":"Feat","choice":"Ability Improvement: +2 WIS (18 to 20)","alternatives":["Resilient (Constitution)","Tough","Lucky","Warcaster (if not taken)"],"reasoning":"Caps her spell save DC and healing bonus, and gives a final extra prepared spell.","details":["If she has been dying to Warding Bond damage through Acts 2 and 3, take Tough here instead and accept a WIS of 18 — a dead cleric has a save DC of zero."],"irreversible":false}]},{"id":"paladin","name":"Crusader","roClass":"Crusader","bg3Build":"Oath of the Ancients Paladin 9 / Battle Master Fighter 3","role":"Tank / Chokepoint Lockdown","badge":"crusader","summary":"The Crusader with a spear. He stands in a doorway, forces enemies to attack him, and physically prevents them from walking past. Sentinel plus Polearm Master is the closest BG3 gets to a hard taunt, and Warding Bond from Shadowheart means he takes half of everything anyway.","stats":{"str":17,"dex":10,"con":14,"int":9,"wis":10,"cha":14},"statNotes":{"str":"Primary. Attack and damage with a glaive/halberd, plus Athletics for shoving enemies off cliffs and into Spike Growth.","dex":"10. He wears heavy armour, which ignores DEX for AC entirely. Dumped on purpose.","con":"14. HP and Concentration for Bless and Misty Step-adjacent buffs. Warding Bond means he needs less of this than you would expect.","int":"Dumped (Githyanki forces +1 here).","wis":"10. His weakest save — Aura of Protection at level 6 patches this for the whole party.","cha":"14. Not for talking: Aura of Protection adds his CHA modifier to the saving throws of every ally within range. +2 to all saves, party-wide, is the best defensive ability in the game."},"statPlan":["Point-buy base (27 points): STR 15, DEX 10, CON 14, INT 8, WIS 10, CHA 14.","Githyanki racial (if you respec Lae'zel): +2 STR, +1 INT. Result: STR 17, DEX 10, CON 14, INT 9, WIS 10, CHA 14.","If you use a different body (Karlach, a hireling, Minthara), apply whatever racial you get to STR first, then CHA.","GITHYANKI BONUS: Lae'zel keeps her racial spells through a respec, including a free Misty Step around level 5. That is separate from the Misty Step your Ancients oath grants, so the chokepoint tank gets two teleports per rest and only one of them costs a spell slot.","A respec at Withers changes MECHANICS ONLY. Lae'zel's dialogue, personal questline, and Githyanki story beats are completely unaffected by turning her into a Paladin.","STR stays at 17 all game. Both feats go to Sentinel and Polearm Master instead of an ASI. You fix STR with Elixirs of Hill Giant Strength (sets STR to 21), which are cheap and sold constantly. Drink one every morning.","ELIXIR NOTE: an Elixir SETS your STR to a value, it does not add. Once you are drinking Hill Giant Strength (21), your base 17 is irrelevant — this is what frees both feats."],"roMapping":[{"roSkill":"Provoke","bg3":"Compelled Duel (Paladin 1 spell) + Goading Attack (Battle Master maneuver)","breaks":"Neither is a hard taunt. Compelled Duel gives the target disadvantage on attacks against anyone else and stops it moving away — but it gets a WIS save. Goading Attack gives disadvantage on attacks against others. BG3 has no forced-target mechanic at all; you are manipulating odds, not compelling behaviour."},{"roSkill":"Devotion (receiving end)","bg3":"Warding Bond cast on him by Shadowheart","breaks":"In RO the Crusader casts Devotion outward. Here he is the RECEIVER — Shadowheart is the one who takes the damage. The role is inverted."},{"roSkill":"Grand Cross / Holy Cross","bg3":"Divine Smite","breaks":"Divine Smite is not an AoE. It is a spell slot burned to add radiant damage to a single melee hit, decided AFTER you see the roll. Save it for critical hits — a crit doubles the smite dice."},{"roSkill":"Spear Quicken / Spear Boomerang","bg3":"Polearm Master (bonus action butt-end attack, plus opportunity attacks at reach)","breaks":"No ranged spear throw. Polearm Master's real value is the reach opportunity attack: enemies get hit when they ENTER your reach, before they can close."},{"roSkill":"Shield Boomerang / Shield Chain","bg3":"Not taken — this build is two-handed polearm","breaks":"You can build a shield Paladin instead, but Sentinel plus Polearm Master lockdown is far stronger for chokepoint work than the +2 AC a shield gives."},{"roSkill":"Auto Guard / Reflect Shield","bg3":"Aura of Protection (level 6) + Aura of Warding (level 10)","breaks":"These are party-wide passive auras with no activation. Aura of Warding (Ancients) gives everyone near him resistance to spell damage — that is half damage from every fireball in the game, for the whole party."}],"levels":[{"level":1,"menu":"Sacred Oath (BG3 asks at level 1, not level 3)","choice":"Oath of the Ancients","alternatives":["Oath of Devotion","Oath of Vengeance","Oathbreaker (not selectable at creation)"],"reasoning":"Ancients gives Aura of Warding at level 10 — resistance to spell damage for the whole party — which is the single best defensive aura available to any class.","details":["IRREVERSIBLE-ISH AND STORY-RELEVANT: breaking your Oath turns you into an Oathbreaker and you lose all oath features. You can pay the Oathbreaker Knight at camp to restore it (cost scales, roughly 1000-2000g).","ANCIENTS OATH TENETS — the things that break it: showing cruelty, killing surrendered or helpless creatures, wanton destruction of nature, betraying an innocent. In practice: do not execute prisoners, do not side with obviously cruel factions, and be careful in the Act 1 Grove decision.","PARTY CONFLICT WARNING: if you are running Minthara as the Paladin body, the goblin-camp path that recruits her involves attacking the Grove — which is exactly the kind of act that breaks an Ancients oath. Minthara-as-Ancients is thematically and mechanically awkward. Use Lae'zel, Karlach, or a hireling instead.","Devotion is the alternative if you want Sacred Weapon (add CHA to attack rolls). It is a strong pick and arguably better offence. Ancients is better defence and better for the whole party."],"irreversible":true},{"level":2,"menu":"Fighting Style, then Prepared Spells","choice":"Fighting Style: Great Weapon Fighting | Prepare: Compelled Duel, Shield of Faith, Bless (Ensnaring Strike + Speak with Animals are free Ancients oath spells)","alternatives":["Fighting Style: Defence","Fighting Style: Protection","Fighting Style: Dueling","Prepare: Wrathful Smite, Searing Smite, Heroism, Divine Favour, Cure Wounds"],"reasoning":"Great Weapon Fighting rerolls 1s and 2s on your glaive's damage dice, which meaningfully smooths out a two-handed weapon's swingy damage.","details":["Divine Smite unlocks here. It is not a prepared spell — it is a prompt that appears AFTER you hit. Answer 'yes' on critical hits, 'no' on ordinary hits against trash.","Compelled Duel is your Provoke: the target gets disadvantage attacking anyone but you, and cannot willingly move away from you. It is a WIS save each turn, so it is unreliable against high-WIS enemies — this is the biggest analogy break from RO Provoke.","Defence (+1 AC) is the safe alternative fighting style. You get it anyway at Fighter 1, which is why Great Weapon Fighting is taken here."],"irreversible":false},{"level":3,"menu":"No choices (Channel Oath granted automatically)","choice":"Channel Oath: Nature's Wrath + Turn the Faithless","alternatives":[],"reasoning":"Nature's Wrath restrains enemies in an area — restrained enemies cannot move and are attacked with advantage, which is chokepoint control on a free charge.","details":["Ancients grants both channel options rather than making you choose. Nature's Wrath is the combat one; Turn the Faithless routs fiends and fey.","Channel Oath recharges on a SHORT rest."],"irreversible":false},{"level":4,"menu":"Feat","choice":"Sentinel","alternatives":["Polearm Master","Great Weapon Master","Ability Improvement (+2 STR)","Tough"],"reasoning":"Sentinel is the closest thing to a real taunt in the game: when you hit a creature with an opportunity attack its speed drops to zero, and you get an opportunity attack even against enemies who Disengage.","details":["Sentinel's third clause is the sleeper: when an enemy attacks an ALLY within your reach, you get a free reaction attack against it. Standing next to Shadowheart means anything that swings at her gets hit by you.","Sentinel + a glaive's 3m reach means enemies are stopped a full square before they reach your squishies.","You specified Sentinel and it is correct. Polearm Master at level 8 completes the combo.","Great Weapon Master (-5 hit / +10 damage) is the damage alternative — you are building a tank, not a damage dealer, so lockdown wins."],"irreversible":false},{"level":5,"menu":"No choices for the feature; Prepared spells (2nd level unlocked)","choice":"Extra Attack (automatic) | Prepare: Aid, Magic Weapon (Misty Step + Moonbeam are free Ancients oath spells)","alternatives":["Prepare: Branding Smite, Find Steed, Protection from Poison"],"reasoning":"Extra Attack doubles his Action, and with Polearm Master later that becomes three attacks per turn.","details":["MISTY STEP as a free oath spell is a big deal on a tank — it lets him teleport to the chokepoint on turn one instead of walking for two rounds, or teleport out when he is being focused.","Moonbeam is a movable damage zone. Park it on the chokepoint he is holding."],"irreversible":false},{"level":6,"menu":"No choices","choice":"Aura of Protection (automatic)","alternatives":[],"reasoning":"Every ally within range adds his CHA modifier (+2) to EVERY saving throw — this is why he has CHA 14 and it is the best party-wide defence in the game.","details":["Positioning changes here. He is no longer just a wall; he is a mobile buff radius. Keep the party clustered near him where the fight allows.","This stacks with Bless (+1d4 to saves) from Shadowheart. Your party's save success rate roughly doubles across levels 6-7."],"irreversible":false},{"level":7,"menu":"Fighter — Fighting Style (multiclass dip: select Fighter at the level-up screen)","choice":"Fighter 1 | Fighting Style: Defence","alternatives":["Fighting Style: Protection","Fighting Style: Great Weapon Fighting (if not taken)","Stay pure Paladin"],"reasoning":"+1 AC on the character who is being attacked deliberately, plus Second Wind as a free Bonus Action self-heal.","details":["MULTICLASS WARNING: click the multiclass option and choose Fighter. It is easy to autopilot into Paladin 7.","TIMING NOTE: taking the Fighter dip AFTER Paladin 6 is deliberate — Aura of Protection at Paladin 6 is too important to delay. If you would rather have Action Surge earlier, you can dip at Paladin 5 instead and push Aura to character level 8. Both are defensible; this table delays the dip.","Protection (impose disadvantage on an attack against an adjacent ally, as a reaction) requires a SHIELD, which this build does not use."],"irreversible":false},{"level":8,"menu":"No choices","choice":"Fighter 2 | Action Surge (automatic)","alternatives":[],"reasoning":"An extra full Action per short rest — on a Paladin that means two extra attacks, or two extra chances to land a Divine Smite crit.","details":["On a tank, Action Surge is also an emergency: an extra Action can be used to Dash to a collapsing flank or to cast a spell in the same turn you attack."],"irreversible":false},{"level":9,"menu":"Martial Archetype, then Maneuvers (pick 3)","choice":"Fighter 3 | Battle Master | Maneuvers: Goading Attack, Trip Attack, Riposte","alternatives":["Archetype: Champion","Archetype: Eldritch Knight","Maneuvers: Menacing Attack, Pushing Attack, Precision Attack, Disarming Attack, Sweeping Attack, Rally"],"reasoning":"Goading Attack is your second Provoke, Trip Attack knocks enemies Prone (melee attacks against Prone targets have advantage), and Riposte is a free counterattack when something misses you.","details":["IRREVERSIBLE without respec.","Goading Attack: the target has disadvantage on attacks against anyone except you. Combined with Compelled Duel, you have two independent Provoke effects with different save types — cast Compelled Duel on the dangerous one, Goad the rest.","Trip Attack is arguably the strongest maneuver in the game. Prone enemies lose their turn standing up and are hit with advantage by everyone.","Riposte is pure value on a character who is deliberately being attacked all the time.","Pushing Attack is the honourable mention — shoving enemies into the main character's Spike Growth or off a ledge. Swap it in if your maps have cliffs.","You get 4 Superiority Dice, recharging on a short rest."],"irreversible":true},{"level":10,"menu":"No choices (back to Paladin — select Paladin, not Fighter)","choice":"Paladin 7 | Aura of Warding (automatic)","alternatives":[],"reasoning":"Everyone in his aura takes HALF damage from spells — this is the Ancients payoff and it trivialises enemy casters for the entire party.","details":["Combined with Astarion's Evasion and the party clustering for Aura of Protection, enemy AoE spells stop being a threat around here.","This is the single best reason to have picked Ancients over Devotion or Vengeance."],"irreversible":false},{"level":11,"menu":"Feat","choice":"Paladin 8 | Polearm Master","alternatives":["Ability Improvement (+2 STR)","Great Weapon Master","Tough","Resilient (Wisdom)"],"reasoning":"Completes the lockdown: you get an opportunity attack when an enemy ENTERS your reach (not just when it leaves), and Sentinel then sets its speed to zero — enemies literally cannot walk past you.","details":["Polearm Master also grants a Bonus Action butt-end attack (1d4 + STR) every turn. That is a third attack per round for free.","REQUIREMENT: you must be wielding a glaive, halberd, quarterstaff, or spear. If he is holding a greatsword this feat does nothing. Check his weapon before you take it.","THE COMBO IN FULL: enemy walks toward the party, enters your 3m reach, Polearm Master triggers an opportunity attack, the hit triggers Sentinel, its speed becomes 0, and it is now stuck in front of you at reach, unable to close. This is the chokepoint.","You are skipping the STR ASI here on purpose — Elixirs of Hill Giant Strength set STR to 21, which is better than 19."],"irreversible":false},{"level":12,"menu":"Prepared spells (3rd level unlocked)","choice":"Paladin 9 | Prepare: Elemental Weapon, Blinding Smite (Plant Growth + Protection from Energy are free Ancients oath spells)","alternatives":["Prepare: Crusader's Mantle, Daylight, Remove Curse"],"reasoning":"Third-level slots mostly exist to fuel bigger Divine Smites, but Elemental Weapon is a solid until-rest damage buff and Blinding Smite is a save-or-lose rider.","details":["Plant Growth as a free oath spell is a huge area of difficult terrain — it stacks conceptually with the main character's Spike Growth to make an entire approach lane unusable.","Crusader's Mantle (allies near you deal +1d4 radiant) is the alternative if your party is clustered anyway for the auras. Genuinely close call.","Reminder: your 3rd-level slots are usually better spent as Divine Smite fuel on critical hits than on casting these."],"irreversible":false}]}]},"gear":{"meta":{"disclaimer":"Locations are written from knowledge of a patched game; Larian moves vendors and loot between patches. Verify in-game rather than trusting the location text. The EFFECT column is what the build actually depends on — if an item has moved or been renamed, the effect is still what you are shopping for.","vendorTip":"Vendors restock after every long rest and their attitude affects prices — send whoever has the highest Charisma to trade. You can also pickpocket vendors with Astarion (Sleight of Hand expertise) and then buy the rest legitimately.","actNote":"You can return to Act 1 zones during Act 2. You CANNOT return to Acts 1 or 2 once you travel to Act 3 (Rivington). Clear every Act 1 and Act 2 shopping list before that transition."},"act1":[{"item":"Titanstring Bow","slot":"Ranged Weapon","wearer":"main","location":"Zhentarim Hideout (under the Waukeen's Rest area) — Brem, vendor. Roughly 400-600g.","effect":"Adds your STRENGTH modifier to ranged damage, on top of DEX.","replaces":"Starting longbow","missable":false,"note":"You have STR 8 (-1), so out of the box this is a DOWNGRADE. It becomes the best bow in Act 1 the moment you pair it with an Elixir of Hill Giant Strength (STR 21 = +5 damage per arrow) or the Club of Hill Giant Strength held in your off-hand slot. Buy the elixirs, drink one every morning. This is a real gold cost — budget for it."},{"item":"Gloves of Archery","slot":"Gloves","wearer":"main","location":"Emerald Grove — Arron, the general trader (verify; may also appear on other Act 1 vendors).","effect":"+2 damage with ranged weapons and proficiency with longbows/shortbows.","replaces":"Empty glove slot","missable":false,"note":"Flat +2 per arrow applies to every shot, so with 3 attacks a turn it is +6. Cheap and immediately good."},{"item":"Elixir of Hill Giant Strength","slot":"Consumable","wearer":"paladin","location":"Sold by almost every Act 1 vendor (Arron in the Grove, Dammon, Zhentarim). Also craftable from Salts of Hill Giant Strength.","effect":"Sets Strength to 21 until Long Rest.","replaces":"Nothing","missable":false,"note":"This is the item that lets the Paladin skip his STR ASI and take Polearm Master instead. Buy every one you see, all game. Also the enabler for the Titanstring Bow if you would rather drink them on the main character — you cannot easily supply both, so pick one. Recommendation: Paladin gets the elixirs, main character uses the Club of Hill Giant Strength trick or just skips Titanstring."},{"item":"Club of Hill Giant Strength","slot":"Off-hand / carried","wearer":"main","location":"Act 1 — from the Githyanki patrol area / Ethel's teahouse region (verify).","effect":"Sets Strength to 19 while equipped.","replaces":"Nothing","missable":true,"note":"The non-consumable way to power the Titanstring Bow. You cannot hold a club and a longbow at the same time, so this works via the weapon-swap slot: it is fiddly. If it annoys you, skip Titanstring entirely and use The Dead Shot in Act 2."},{"item":"Hag's Hair (Auntie Ethel)","slot":"One-time permanent","wearer":"main","location":"Sussur Bog — Auntie Ethel. Obtained either by sparing her for it, or by looting it after you kill her (verify your route).","effect":"Permanent +1 to one ability score of your choice.","replaces":"Nothing","missable":true,"note":"IRREVERSIBLE AND ONE PER PLAYTHROUGH. Put it in the main character's DEXTERITY, taking 17 to 18. This is the only way the level 8 ASI reaches DEX 20 instead of a wasted 19. Do not let a companion take it."},{"item":"Strange Conduit Ring","slot":"Ring","wearer":"main","location":"Underdark — Myconid Colony, reward from Sovereign Spaw's quest line (kill Nere / the duergar).","effect":"+1d4 psychic damage on weapon attacks while you are Concentrating on a spell.","replaces":"Empty ring slot","missable":true,"note":"You are Concentrating on Hunter's Mark essentially permanently, so this is +1d4 on every single arrow. With 3 attacks a turn that is a large, quiet damage increase. One of the best Act 1 items for this specific build."},{"item":"Hellrider's Pride","slot":"Gloves","wearer":"shadowheart","location":"Emerald Grove — reward from Zevlor for resolving the tiefling/druid situation.","effect":"Creatures you heal gain Blade Ward (resistance to physical damage) until end of next turn.","replaces":"Empty glove slot","missable":true,"note":"Turns every Healing Word into a defensive buff. Combined with Whispering Promise below, a single Bonus Action heal buffs and protects at the same time."},{"item":"Whispering Promise","slot":"Ring","wearer":"shadowheart","location":"Act 1 vendor (commonly the goblin camp trader or Grove trader — verify).","effect":"Creatures you heal gain Bless (+1d4 to attack rolls and saves).","replaces":"Empty ring slot","missable":false,"note":"This is the key to the Sharpshooter maths. Shadowheart heals the main character for 1 HP with a Bonus Action and the main character gets Bless without her spending Concentration on it — leaving her Concentration free for Spirit Guardians."},{"item":"Adamantine Scale Mail","slot":"Chest (Medium armour)","wearer":"shadowheart","location":"Grymforge — Adamantine Forge. Requires Mithral Ore + the Scale Mail mould.","effect":"Solid AC, and critical hits against the wearer become normal hits.","replaces":"Starting scale mail / chain shirt","missable":true,"note":"Medium armour, so no STR requirement and it uses her DEX 14. 'Cannot be critically hit' is enormous on the character carrying Warding Bond. ONE-TIME RESOURCE: you can only forge a limited number of items (usually 2) because Mithral Ore is scarce. Spend your moulds on this and the Adamantine Splint or Shield for the Paladin."},{"item":"Adamantine Splint Armour","slot":"Chest (Heavy armour)","wearer":"paladin","location":"Grymforge — Adamantine Forge. Requires Mithral Ore + the Splint mould.","effect":"AC 18 flat, and critical hits against the wearer become normal hits.","replaces":"Starting chain mail / scale mail","missable":true,"note":"Requires STR 15 to avoid a movement penalty — his base is 17, and he is drinking Hill Giant Strength elixirs anyway, so this is free for him. The anti-crit clause is the single best tanking property in Act 1. Competes with the Adamantine Shield for your limited Mithral Ore — take the armour, since this build is two-handed."},{"item":"The Blood of Lathander","slot":"Weapon (Mace) — or give to Shadowheart as a stat stick","wearer":"shadowheart","location":"Rosymorn Monastery (Mountain Pass route) — solve the sunlight/mural puzzle in the Githyanki Creche area.","effect":"Legendary mace: +1d4 radiant damage, casts Sunbeam, and once per rest it revives the whole party at 1 HP when someone would die.","replaces":"Any starting mace","missable":true,"note":"MISSABLE: only reachable if you take the Mountain Pass / Creche route in Act 1. If you go straight to Act 2 through the Underdark and never come back, you lose it permanently. The auto-revive clause has saved more runs than any other Act 1 item."},{"item":"Boots of Striding","slot":"Boots","wearer":"paladin","location":"Act 1 vendors (Grove / Zhentarim).","effect":"Cannot be knocked Prone while Concentrating, and grants a movement bonus.","replaces":"Starting boots","missable":false,"note":"A tank who gets knocked prone has failed at being a wall. Cheap fix."},{"item":"Amulet of Misty Step","slot":"Amulet","wearer":"main","location":"Underdark (commonly around the Arcane Tower / Underdark vendors — verify).","effect":"Grants the Misty Step spell (Bonus Action teleport) once per Short Rest.","replaces":"Empty amulet slot","missable":true,"note":"This is the archer's panic button and his high-ground button. Teleport to the top of a ledge on turn one, or teleport out when melee reaches you. The Paladin gets Misty Step for free from the Ancients oath, so it goes to the main character."},{"item":"Caustic Band","slot":"Ring","wearer":"astarion","location":"Act 1 vendor (Zhentarim Hideout — verify).","effect":"+2 acid damage on weapon attacks.","replaces":"Empty ring slot","missable":false,"note":"Flat damage per hit. Astarion makes 3 attacks in a burst turn, so this is +6 on his opener. Cheap filler until Act 3."},{"item":"Basic / Malefic / Drow Poison (coatings)","slot":"Consumable","wearer":"astarion","location":"Every Act 1 vendor; Drow Poison from the Underdark.","effect":"Applied as a Bonus Action; adds damage or an unconsciousness save to your next several hits.","replaces":"Nothing","missable":false,"note":"This is your Enchant Poison. Astarion should have a coating on his daggers in every real fight. Buy them constantly — they are cheap and you will always be short."},{"item":"Diamonds","slot":"Consumable (spell component)","wearer":"shadowheart","location":"Every vendor with a gems tab, all acts.","effect":"Required material component for Revivify.","replaces":"Nothing","missable":false,"note":"Buy every Diamond you ever see. Being out of Diamonds is the difference between a bad round and a reload. Keep at least 3 in Shadowheart's inventory at all times."}],"act2":[{"item":"The Dead Shot","slot":"Ranged Weapon","wearer":"main","location":"Act 2 — Last Light Inn quartermaster / Moonrise Towers vendor (verify).","effect":"Longbow with a bonus to attack rolls and improved critical range.","replaces":"Titanstring Bow","missable":false,"note":"The upgrade path if you got tired of managing Hill Giant Strength for Titanstring. The bonus to hit directly offsets Sharpshooter's -5, which is worth more than raw damage on a Sharpshooter build."},{"item":"Risky Ring","slot":"Ring","wearer":"main","location":"Moonrise Towers — Araj Oblodra. She will only trade it if Astarion (or another party member) drinks her blood.","effect":"Advantage on ALL attack rolls; disadvantage on saving throws.","replaces":"Caustic Band or an empty ring slot","missable":true,"note":"PERMANENT ADVANTAGE is the best possible item for a Sharpshooter — advantage roughly cancels the -5 penalty on its own. The disadvantage on saves is mitigated by the Paladin's Aura of Protection (+2) and Bless (+1d4). CONDITIONAL: requires agreeing to Araj's request, which has a story/companion-approval cost with Astarion. Flag this before you commit."},{"item":"Boots of Stormy Clamour","slot":"Boots","wearer":"shadowheart","location":"Act 2 (Moonrise Towers area — verify).","effect":"Enemies affected by your conditions gain Reverberation stacks; enough stacks knock them Prone.","replaces":"Starting boots","missable":true,"note":"Pairs with Spirit Guardians, which applies a condition to everything around her every single turn. She becomes a walking crowd-control aura on top of the damage."},{"item":"Callous Glow Ring","slot":"Ring","wearer":"main","location":"Act 2 (Moonrise / Last Light vendor — verify).","effect":"+2 radiant damage against creatures that are Illuminated.","replaces":"Empty ring slot","missable":true,"note":"Act 2 is the Shadow-Cursed Lands and you will be carrying light sources constantly, so 'Illuminated' is easier to satisfy than it sounds. Flat +2 on every arrow."},{"item":"Dark Justiciar Half-Plate / Mask","slot":"Chest / Head","wearer":"shadowheart","location":"Gauntlet of Shar — Dark Justiciar gear, and the Shar quest line rewards.","effect":"Strong medium armour with Shar-themed bonuses.","replaces":"Adamantine Scale Mail (compare AC — the Adamantine anti-crit clause is often still better)","missable":true,"note":"Compare these directly against Adamantine Scale Mail. 'Cannot be critically hit' is usually worth more than 1 point of AC on the Warding Bond carrier. Keep whichever you prefer; the Gauntlet gear is thematically hers regardless."},{"item":"Cloak of Protection","slot":"Cloak","wearer":"paladin","location":"Act 2 vendors (verify).","effect":"+1 AC and +1 to all saving throws.","replaces":"Starting cloak","missable":false,"note":"Boring and excellent. Put it on whoever is being attacked most; if you find two, the second goes to Shadowheart."},{"item":"Spellcrux Amulet","slot":"Amulet","wearer":"shadowheart","location":"Act 2 (verify).","effect":"Once per Long Rest, recover one expended spell slot.","replaces":"Empty amulet slot","missable":true,"note":"One extra Spirit Guardians or Revivify per day. Good until the Amulet of Greater Health appears in Act 3."},{"item":"Sentinel Shield","slot":"Shield","wearer":"paladin","location":"Act 2 (verify).","effect":"Advantage on Initiative and Perception.","replaces":"Nothing — he is two-handed","missable":true,"note":"Listed only so you know to SKIP it. A two-handed Polearm Master build cannot use a shield. If you decide to run him sword-and-board instead, this is the shield you want."}],"act3":[{"item":"Bhaalist Armour","slot":"Chest","wearer":"astarion","location":"Temple of Bhaal, beneath the Undercity — found during the Orin / Murder Tribunal questline.","effect":"Emits an aura that makes nearby enemies VULNERABLE to piercing damage (they take double).","replaces":"Any light armour he is wearing","missable":true,"note":"The single strongest item in the game for this party. Piercing vulnerability doubles his dagger damage AND doubles his Sneak Attack dice. The aura is small (about 2m), so it only helps allies standing next to him — your archer is far away and will not benefit. Astarion wears it for himself."},{"item":"Crimson Mischief","slot":"Main-hand (Shortsword)","wearer":"astarion","location":"Dropped by Orin the Red (Act 3 Temple of Bhaal boss).","effect":"+1d4 piercing against targets with full HP, and an extra off-hand attack rider.","replaces":"Any dagger","missable":false,"note":"Piercing damage, so it doubles inside the Bhaalist Armour aura. This plus Bloodthirst is the intended endgame pair."},{"item":"Bloodthirst","slot":"Off-hand (Dagger)","wearer":"astarion","location":"Also from the Orin encounter / Bhaal temple area.","effect":"+2 to attack, and improved critical range.","replaces":"Any off-hand dagger","missable":false,"note":"Stacks its crit range with Champion's Improved Critical, pushing his crit chance meaningfully higher — and a crit doubles all 5d6 of Sneak Attack."},{"item":"Killer's Sweetheart","slot":"Ring","wearer":"astarion","location":"Act 3 — Devil's Fee (Helsik's shop) in Lower City (verify).","effect":"After you kill a creature, your next attack roll is an automatic critical hit.","replaces":"Caustic Band","missable":true,"note":"Guaranteed crits on a 5d6 Sneak Attack character. Kill a minion, then delete the boss. This is the RO 'crit build without a crit stat' answer."},{"item":"Helldusk Armour","slot":"Chest (Heavy)","wearer":"paladin","location":"Raphael's House of Hope (Act 3) — the vault, during the Orphic Hammer heist.","effect":"AC 21, resistance to fire, advantage on saves vs spells, and it cannot be removed by enemy effects.","replaces":"Adamantine Splint Armour","missable":true,"note":"The best heavy armour in the game. MISSABLE: the House of Hope is only reachable via a specific questline (Helsik's ritual in the Devil's Fee, or accepting Raphael's deal path). If you skip the House of Hope you lose this, the Gloves of Soul Catching, and the Amulet of Greater Health all at once. Do not skip it."},{"item":"Gloves of Soul Catching","slot":"Gloves","wearer":"paladin","location":"Raphael's House of Hope (Act 3).","effect":"+10 temporary HP or +1d10 psychic damage on unarmed/melee hits, plus healing on hit.","replaces":"Whatever gloves he is wearing","missable":true,"note":"Self-sustain on the tank means Shadowheart spends fewer turns healing him and more turns on Spirit Guardians."},{"item":"Amulet of Greater Health","slot":"Amulet","wearer":"shadowheart","location":"Raphael's House of Hope (Act 3) — vault.","effect":"Sets CONSTITUTION to 23 and grants advantage on Constitution saving throws.","replaces":"Spellcrux Amulet","missable":true,"note":"GIVE THIS TO SHADOWHEART, not the Paladin. CON 23 means a massive HP pool (she is soaking half the Paladin's damage via Warding Bond) plus near-unbreakable Concentration on Spirit Guardians. This single item fixes both of her weaknesses at once."},{"item":"Gontr Mael","slot":"Ranged Weapon (Legendary longbow)","wearer":"main","location":"Act 3 — Lorroakan / Ramazith's Tower questline area (verify; this one moves between patches).","effect":"Legendary longbow with bonus radiant damage and a free flight/utility effect.","replaces":"The Dead Shot","missable":true,"note":"The endgame bow. If you cannot find it, The Dead Shot carries you to the credits perfectly well — bows matter less than your riders (Sharpshooter, Hunter's Mark, Strange Conduit, Callous Glow) on this build."},{"item":"Mirror of Loss","slot":"One-time permanent","wearer":"main","location":"Act 3 — hidden Sharran sanctum beneath Sharess' Caress, Lower City.","effect":"Permanent +2 to one ability score of your choice, once per character.","replaces":"Nothing","missable":true,"note":"IRREVERSIBLE, and each character can only use it once. STORY WARNING: using it has consequences for Shadowheart's personal questline depending on where she is in it — read the prompt carefully before you let her near it. Put the main character's +2 into DEX if you have not reached 20; otherwise into CON or WIS."},{"item":"Armour of Agility","slot":"Chest (Medium)","wearer":"shadowheart","location":"Act 3 vendors, Lower City (verify).","effect":"Medium armour that allows your full DEX bonus to AC rather than capping at +2.","replaces":"Adamantine Scale Mail / Dark Justiciar Half-Plate","missable":false,"note":"The clean answer to her STR 10 heavy-armour problem. Compare its AC against Adamantine's anti-crit clause and pick per fight if you are being thorough."},{"item":"Band of the Mystic Scoundrel","slot":"Ring","wearer":"shadowheart","location":"Act 3 — Circus of the Last Days / Lower City vendor (verify).","effect":"After a weapon attack, you can cast Illusion or Enchantment spells as a Bonus Action.","replaces":"Whispering Promise (situationally)","missable":true,"note":"Lets her attack and then Hold Person or Command in the same turn. Strong, but do not drop Whispering Promise for it unless you have a second Bless source."},{"item":"Ring of Regeneration","slot":"Ring","wearer":"shadowheart","location":"Act 3 vendors (verify).","effect":"Regain HP at the start of each turn.","replaces":"Empty ring slot","missable":false,"note":"Passive sustain for the Warding Bond sponge. Also ticks out of combat, saving camp supplies."},{"item":"Helldusk Gloves / Boots","slot":"Gloves / Boots","wearer":"paladin","location":"Act 3 — House of Hope and related Hells content.","effect":"Fire damage riders and immunity to being knocked Prone / difficult terrain.","replaces":"Boots of Striding","missable":true,"note":"The prone immunity is the relevant part — a chokepoint tank that can be knocked over is not a chokepoint."}]},"rotations":{"meta":{"actionEconomy":"Every turn you get exactly: 1 Action, 1 Bonus Action, 1 Movement, and 1 Reaction (used on someone else's turn). There is no cast time, no ASPD, no delay. 'Rotation' in BG3 means 'how do I spend these four things', not 'what order do I mash keys'.","concentrationRule":"One Concentration spell per character at a time. Casting a second one cancels the first. This is the hardest constraint in the game and most rotation mistakes are Concentration mistakes.","restRule":"Short Rest (2 per day) recharges Action Surge, Channel Divinity, Channel Oath, Second Wind, and some item charges. Long Rest recharges spell slots and advances the story. Take short rests aggressively — hoarding them is a beginner mistake."},"rotations":[{"characterId":"main","name":"Sniper — Hunter Ranger 12","preCombat":["Drink an Elixir of Hill Giant Strength if you are running the Titanstring Bow (this lasts until Long Rest, so do it at camp).","Cast Longstrider on the whole party (lasts until Long Rest, free out of combat).","Summon your Beast Tamer familiar (Find Familiar) — it persists and costs nothing to keep.","Position on HIGH GROUND before triggering the fight. Sharpshooter removes the high-ground penalty and elevation gives you range and line of sight.","Ungroup from the party and sneak into position separately, then let Astarion open."],"opener":["Turn 1, Bonus Action: Hunter's Mark on the most dangerous single target (or skip it if you are opening with Volley — see note).","Turn 1, Action: if 3 or more enemies are within a radius, VOLLEY. Otherwise attack twice with the longbow.","Horde Breaker fires automatically on your first attack if a second enemy is adjacent to your target — no button, it just happens once per turn.","Make sure Sharpshooter is TOGGLED ON before you shoot. Check the toggle every fight; it does not persist reliably through reloads.","Have the familiar use Help on an adjacent ally for advantage if it has nothing better to do."],"sustain":["Action: 2 longbow attacks (Extra Attack), plus the free Horde Breaker attack on a second adjacent enemy.","Bonus Action: re-cast Hunter's Mark on a new target when the marked one dies (this is free targeting, not a new slot, once the target dies).","Movement: stay at range and stay elevated. Never end your turn within reach of a melee enemy.","Toggle Sharpshooter OFF against high-AC targets — if you are missing more than half your shots, the -5 is costing you damage, not adding it.","Switch to Volley the moment 3+ enemies cluster, then back to normal attacks when they spread."],"panic":["Melee has reached you: Bonus Action Misty Step (Amulet of Misty Step) to a ledge, then shoot. This does not provoke opportunity attacks.","No Misty Step available: Disengage (Action) and walk out — Escape the Horde gives enemies disadvantage on opportunity attacks against you anyway.","Multiple enemies incoming down a lane: cast Spike Growth across the lane. They take damage per metre and are slowed to a crawl.","One dangerous melee enemy: Ensnaring Strike to Restrain it. Note this REPLACES Hunter's Mark as your Concentration.","Enemy casters ruining you: Silence centred on the caster group. No saving throw, no spells.","Low HP: drink a potion (Bonus Action) or retreat behind the Paladin and let Shadowheart's Healing Word reach you."],"notes":["VOLLEY vs NORMAL ATTACKS: Volley replaces your attack Action, so it is Volley OR (2 attacks + Horde Breaker). Volley wins at 3+ targets, loses at 1-2. Do the count before you click.","Volley does not proc Horde Breaker and only applies Hunter's Mark to the marked target — but every Volley hit is a real attack roll, so Sharpshooter, Gloves of Archery, Strange Conduit, and Callous Glow all apply to EVERY hit.","Conjure Barrage (levels 9-10) is a flat spell that ignores all your damage riders. It is a slot-burn for packed groups, not a rotation staple. Once Volley comes online at 11, Conjure Barrage is nearly retired.","ANALOGY BREAK: there is no 'spam'. Your damage per turn is fixed by your attack count. The way you increase DPS is by increasing accuracy (Bless, advantage, Archery style) so fewer attacks miss — not by attacking faster."]},{"characterId":"astarion","name":"Assassin Cross — Assassin Rogue 9 / Champion Fighter 3","preCombat":["Apply a weapon coating (Basic/Malefic/Drow Poison, or Oil of Sharpness) as a Bonus Action — do this OUT of combat so it does not cost you a turn.","Ungroup from the party and Hide (he has Stealth expertise; nobody else should be sneaking with him).","Move into flanking or backstab position BEFORE the fight starts. Position is worth more than any item on this character.","If the party has Pass Without Trace up (+10 Stealth), move the whole party into position for a Surprise round — Surprised enemies take AUTOMATIC CRITS from Assassinate."],"opener":["This is the whole build. Execute it correctly and the fight is usually decided in round one.","Alert guarantees he acts first. Assassinate grants ADVANTAGE against every creature that has not yet taken a turn — which on round one is all of them.","Action: main-hand attack. Sneak Attack applies automatically (5d6 at level 12) because you have advantage.","Action Surge (free, no action cost): a SECOND full Action — attack again. Note Sneak Attack has already been used this turn, so this hit is smaller.","Bonus Action: off-hand dagger attack (+DEX damage from Two-Weapon Fighting).","That is 3 attacks in round one, all with advantage, all with Champion's 19-20 crit range. Against a Surprised target every one of them is an automatic critical hit and the Sneak Attack dice double."],"sustain":["Rounds 2+, Assassinate is OFF (everything has acted). You now need advantage from another source to keep Sneak Attack online.","Source 1 — an ally within 1.5m of your target. If the Paladin is in melee with it, you get Sneak Attack with no extra work. This is the easiest and most reliable option.","Source 2 — Bonus Action: Hide (Cunning Action), then attack next turn with advantage. Costs you the off-hand attack.","Source 3 — attack a Prone target (Paladin's Trip Attack) or a Restrained target (main character's Ensnaring Strike).","Default sustain turn: Action attack + Bonus Action off-hand attack, standing next to the Paladin's target."],"panic":["Being focused: Uncanny Dodge (Reaction) halves the damage of one incoming attack. It is automatic-prompt — say yes to the biggest hit.","Surrounded: Bonus Action Disengage (Cunning Action) and move out. No opportunity attacks.","Low HP: Bonus Action Second Wind (from the Fighter dip) to self-heal, or a potion.","Caught in an AoE: Evasion (level 10) means a successful DEX save takes ZERO damage. Do not panic about fireballs.","Really bad: Bonus Action Hide, break line of sight, and let the fight come to the Paladin instead."],"notes":["SNEAK ATTACK FIRES ONCE PER TURN, not per attack. Extra attacks exist to give you more CHANCES to land it, not to stack it. This is the biggest break from Sonic Blow.","Sneak Attack in BG3 is a separate button (Sneak Attack: Melee) as well as an automatic rider — using the explicit button guarantees it applies to that specific hit. Use the button on your highest-advantage attack.","Action Surge recharges on a SHORT REST. Use it every meaningful fight. There is no reason to save it.","If you find yourself never getting the round-one alpha strike (walking into fights, losing initiative), the Assassin subclass is doing nothing for you — respec to Thief for a permanent second Bonus Action instead. That is a 100g fix, not a failure."]},{"characterId":"shadowheart","name":"High Priest — Life Domain Cleric 12","preCombat":["AT CAMP, EVERY MORNING — this is a checklist, run it every long rest:","1. Warding Bond on the Paladin (lasts until Long Rest, no Concentration). He takes half damage; she takes the other half.","2. Aid on the party (+5 max HP each, more at higher slots, lasts until Long Rest).","3. Death Ward on the Paladin and on Astarion (level 7+, survives one lethal hit, lasts until Long Rest).","4. Heroes' Feast (level 11+) for party-wide bonus HP and immunities.","5. Confirm she is carrying at least 3 Diamonds for Revivify.","Guidance before every out-of-combat skill check. It costs nothing. Just do it."],"opener":["Turn 1, Action: cast Spirit Guardians and walk INTO the enemy pack. It damages everything around her at the start of their turns and halves their movement.","Alternative turn 1 if the party needs accuracy more than she needs damage: cast Bless on the main character, Astarion, and the Paladin. Bless is +1d4 to attack rolls and saves for 3 allies.","YOU CANNOT DO BOTH — Bless and Spirit Guardians both need Concentration.","The workaround: equip Whispering Promise, then heal an ally for 1 HP with a Bonus Action Healing Word. That grants Bless via the ring WITHOUT using her Concentration, leaving Spirit Guardians up.","Turn 2, Action: cast Spiritual Weapon (a floating mace). It costs a slot once, needs no Concentration, and attacks as a Bonus Action for the rest of the fight."],"sustain":["Movement: walk her through the enemy formation. Spirit Guardians damages everything she passes and slows it.","Bonus Action: Spiritual Weapon attack (free damage, every single turn).","Action: Sacred Flame at range, or Guiding Bolt on a priority target (grants advantage to the next attacker — feed it to Astarion), or Hold Person on a dangerous humanoid.","Hold Person is the best thing she does offensively: a Paralysed humanoid takes AUTOMATIC CRITICAL HITS from every melee attack. Hold Person into Astarion's Sneak Attack is a delete button.","Reaction: with War Caster she can cast a spell as an opportunity attack instead of a weapon swing."],"panic":["An ally is DOWNED (on the floor, rolling death saves): Bonus Action Healing Word at range. 1 HP is enough to stand them up. This is the single most important button she has.","An ally actually DIED: Revivify (Action, consumes a Diamond).","Several allies badly hurt: Channel Divinity — Preserve Life. No spell slot, heals the party up to half max HP. Two charges per short rest from level 6.","Maximum emergency: Beacon of Hope first (all healing maximised), then Preserve Life. This is the wipe-preventer.","SHE is being focused: cast Sanctuary on herself — enemies must pass a save to even target her, and it breaks only if she attacks. She can still heal and buff under Sanctuary.","One enemy is too strong: Banishment (level 7+). On a failed CHA save it leaves the fight entirely."],"notes":["WARDING BOND IS A DAMAGE SPLIT, NOT A REDUCTION. If the Paladin takes 40, he takes 20 and she takes 20. The build wins because she has high CON, the Amulet of Greater Health (CON 23), anti-crit armour, and Blessed Healer feeding her HP back — not because the damage disappears.","If she is dying to Warding Bond, that is a signal to fix HER defences, not to drop the bond.","HEALING IS WEAK IN BG3. Do not spend Actions topping people off. Spend Actions on Spirit Guardians damage and control; spend BONUS Actions on Healing Word to pick people up off the floor. Prevention beats healing by a wide margin here — this is a real departure from RO Full Support.","Prepared spells can be swapped for free outside combat. Re-tune her list before big fights: more control for boss fights, more healing for attrition fights."]},{"characterId":"paladin","name":"Crusader — Oath of the Ancients 9 / Battle Master Fighter 3","preCombat":["Drink an Elixir of Hill Giant Strength (sets STR to 21, lasts until Long Rest). Do this every morning at camp.","Confirm Shadowheart has Warding Bond on him and Death Ward up.","Identify the CHOKEPOINT before the fight starts — a doorway, a bridge, a narrow ledge, the top of a staircase. Your entire value is standing in it.","Confirm he is holding a glaive or halberd, not a greatsword. Polearm Master does nothing with the wrong weapon."],"opener":["Turn 1, Movement or Bonus Action: Misty Step (free from the Ancients oath) directly into the chokepoint. This is faster and safer than walking.","Turn 1, Action: attack twice (Extra Attack). Use GOADING ATTACK (Battle Master maneuver) on one of them — the target gets disadvantage attacking anyone but you.","Bonus Action: Polearm Master butt-end attack (1d4 + STR). That is 3 attacks on turn one.","Alternative turn 1 against a single dangerous enemy: cast Compelled Duel (Action) instead — it stops the target moving away from you and gives it disadvantage against everyone else. It is a WIS save, so use it on low-WIS bruisers, not on casters.","If several enemies are clumped: Channel Oath — Nature's Wrath to Restrain them in place."],"sustain":["Stand still. Do not chase. The whole point is that enemies have to come to you and cannot get past.","Action: 2 attacks. Add a maneuver when it is worth a Superiority Die — Trip Attack to knock something Prone (everyone then hits it with advantage), Goading Attack to redirect a new arrival.","Bonus Action: Polearm Master butt-end attack, every single turn, for free.","Reaction — this is where the build actually lives. Polearm Master gives you an opportunity attack when an enemy ENTERS your reach. If that attack hits, Sentinel sets its speed to ZERO. It is now stuck 3 metres away from your squishies, unable to advance.","Reaction alternative: Riposte when an enemy misses you, or Sentinel's free attack when something swings at an ally within your reach.","DIVINE SMITE DISCIPLINE: only smite on CRITICAL HITS (the dice double) or to finish a dangerous enemy. Smiting every hit empties your slots by round three."],"panic":["Low HP: Lay on Hands (Bonus Action pool of healing — he heals himself and it also cures disease/poison).","Still low: Second Wind (Bonus Action, from the Fighter dip, recharges on a short rest).","Getting overwhelmed at the chokepoint: Action Surge for two extra attacks to clear the pressure, or use it to Dash out and re-establish somewhere better.","The line has broken and enemies are past you: Misty Step behind them, or Compelled Duel the fastest one to drag it back.","Enemy caster is nuking the clustered party: your Aura of Warding (level 10) already halves it — move TOWARD the party, not away, so everyone is inside the radius.","About to die with allies down: Channel Oath, or just accept a downed turn — Shadowheart's Healing Word is a Bonus Action and she can pick you up from across the map."],"notes":["THE LOCKDOWN COMBO, IN ORDER: enemy walks toward your party → it enters your 3m glaive reach → Polearm Master grants you an opportunity attack → the hit triggers Sentinel → its movement drops to 0 for the rest of its turn → it is stranded in front of you. Repeat for every enemy that tries to walk past. This is the closest BG3 has to a hard taunt.","ANALOGY BREAK — PROVOKE IS NOT A TAUNT. Compelled Duel and Goading Attack both allow saving throws and both only impose DISADVANTAGE on attacking others; a determined enemy can still ignore you and hit your archer. BG3 has no forced-target mechanic at all. You control enemies with geometry (chokepoints, reach, Sentinel) far more than with 'taunt' abilities. If you try to play this like RO Provoke you will be disappointed.","ANALOGY BREAK — DEVOTION IS INVERTED. In RO the Crusader casts Devotion outward onto others. Here he RECEIVES Warding Bond from Shadowheart. He is the protected one, not the protector, in that specific mechanic.","Positioning priority when you cannot have everything: (1) block the lane to Shadowheart and the main character, (2) stay within aura range of the party, (3) deal damage. Damage is third."]}]},"checklist":{"meta":{"startingPoint":"Written from your stated current state: party level 2, early Act 1, Astarion and Shadowheart recruited but unmodified, 4th slot empty. If you are further along, skip to the first task that is still undone — nothing here breaks if done late except the items marked MISSABLE.","respecCost":"Withers charges 100 gold per respec, every time, for any character including yourself. He must be recruited first (see task 1). There is no limit on how many times you respec.","pointOfNoReturn":"You can walk back to Act 1 zones during Act 2. You CANNOT return to Acts 1 or 2 once you travel to Act 3 (Rivington). Finish every Act 1 and Act 2 item on this list before that transition."},"tasks":[{"id":1,"order":1,"task":"Recruit Withers from the Dank Crypt","characterId":"party","act":1,"cost":"Free","warning":"Nothing else on this list works until he is at camp, and the Shadowheart respec is time-sensitive. Do this before you walk north to find Lae'zel.","detail":"The ornate stone door in the Overgrown Ruins, right by the Ravaged Beach (the door Shadowheart stands at if you did not free her on the nautiloid), leads down into the Dank Crypt. Explore to the back and open the sarcophagus — Withers is inside. He then appears at camp permanently. He provides respecs (100g), resurrection (200g), and hireling recruitment (100g each), and he is the single most important 'vendor' in the game for a build-focused playthrough.","done":false},{"id":2,"order":2,"task":"Respec Shadowheart from Trickery to LIFE DOMAIN","characterId":"shadowheart","act":1,"cost":"100 gold","warning":"URGENT — Cleric subclass is locked at LEVEL 1 in BG3. Levelling up will never let you change it. Every level you gain as Trickery is a level you will pay to undo.","detail":"On respec pick: Domain LIFE. Cantrips Guidance, Sacred Flame, Resistance. Ability array STR 10 / DEX 14 / CON 15 / INT 8 / WIS 15 / CHA 8, then Half-Elf bonuses +2 CHA (forced) +1 CON +1 WIS. Prepared: Healing Word, Guiding Bolt, Command, Sanctuary (Bless is free from the domain).","done":false},{"id":3,"order":3,"task":"Respec Astarion to fix his ability array (keep him Rogue)","characterId":"astarion","act":1,"cost":"100 gold","warning":"Optional but recommended now — his default spread wastes points, and respeccing later means re-picking more choices.","detail":"Array STR 8 / DEX 15 / CON 15 / INT 8 / WIS 14 / CHA 10, then High Elf +2 DEX +1 INT. Expertise: Stealth + Sleight of Hand. He stays Rogue — you pick Assassin at level 3, not now.","done":false},{"id":4,"order":4,"task":"Decide and recruit your 4th slot (the Paladin body)","characterId":"paladin","act":1,"cost":"Free (companion) or 100 gold (hireling)","warning":"IRREVERSIBLE RECRUITMENT DECISIONS. At Lae'zel's cage the dialogue offers a branch where you side with the tieflings against her — taking it loses her permanently. Persuade them to leave, or fight them, then free the cage yourself.","detail":"RECOMMENDED — LAE'ZEL (Githyanki, +2 STR, best racial fit). DIRECTIONS FROM THE RAVAGED BEACH: head north-east and uphill, away from the water. Pass the Overgrown Ruins door, reach the Roadside Cliffs waypoint (Gale is here as a hand sticking out of a rune-covered rock — interact or you walk past him), then keep following the road. Lae'zel is in a cage strung between two trees on raised ground just off the path, guarded by two tieflings. If you hit the goblin-vs-tiefling fight at the Emerald Grove front gate, you have gone slightly too far. TWO BONUSES: Githyanki get Misty Step as a free racial cast around level 5, which stacks with the Ancients oath Misty Step for two slot-free teleports per rest; and her questline routes you to the Creche at Rosymorn Monastery, where the missable Blood of Lathander is (task 14). ALTERNATIVES: (b) Karlach on the Risen Road — great character, no STR racial. (c) A Withers hireling for 100g — no story, fully custom stats. AVOID MINTHARA for this build: recruiting her in Act 1 requires sacking the Emerald Grove, which is close to a textbook Oath of the Ancients break, and it permanently loses Halsin, Wyll, and the tiefling questlines.","done":false},{"id":5,"order":5,"task":"Respec your 4th slot to Oath of the Ancients Paladin","characterId":"paladin","act":1,"cost":"100 gold","warning":"Paladin Oath is chosen at LEVEL 1 in BG3 (unlike tabletop). Breaking the Oath later turns them into an Oathbreaker and costs 1000g+ to restore.","detail":"Array STR 15 / DEX 10 / CON 14 / INT 8 / WIS 10 / CHA 14 plus racial to STR. Oath: ANCIENTS. Ancients tenets to avoid breaking: no cruelty, no killing surrendered or helpless creatures, no wanton destruction of nature, no betraying innocents.","done":false},{"id":6,"order":6,"task":"Level everyone to 3 and lock in the subclasses","characterId":"party","act":1,"cost":"Free","warning":"Three subclass locks happen at once here. Each costs 100g to undo.","detail":"Main: Hunter subclass, then Hunter's Prey = HORDE BREAKER. Astarion: ASSASSIN. Shadowheart: no choice (Channel Divinity is automatic). Paladin: no choice (Channel Oath is automatic).","done":false},{"id":7,"order":7,"task":"Buy Gloves of Archery and stock up on poison coatings","characterId":"main","act":1,"cost":"~200-400 gold","warning":null,"detail":"Arron in the Emerald Grove is the main early vendor. Gloves of Archery (+2 ranged damage) for the main character; Basic and Malefic poison coatings for Astarion; every Diamond in stock for Shadowheart's Revivify. Vendors restock after each Long Rest.","done":false},{"id":8,"order":8,"task":"Resolve the Emerald Grove — save the tieflings, get Hellrider's Pride","characterId":"shadowheart","act":1,"cost":"Free","warning":"MAJOR IRREVERSIBLE STORY FORK. Siding with the goblins destroys the Grove, permanently loses Wyll, Karlach's questline, Halsin, and the tiefling vendors — and would likely break your Paladin's Ancients Oath. Take the save-the-Grove path.","detail":"Zevlor rewards you with Hellrider's Pride gloves (creatures you heal gain Blade Ward). This is a core Shadowheart item.","done":false},{"id":9,"order":9,"task":"Auntie Ethel — take the Hag's Hair and put it in the MAIN CHARACTER's DEXTERITY","characterId":"main","act":1,"cost":"Free","warning":"IRREVERSIBLE AND ONE PER PLAYTHROUGH. If you give this to a companion or spend it on a different stat, your level 8 feat lands on DEX 19 instead of 20 — the same modifier as 18, i.e. a completely wasted feat.","detail":"Sussur Bog, Auntie Ethel's teahouse. DEX 17 becomes 18, so the level 8 Ability Improvement takes you to 20. This is the single most important one-time item decision in your Act 1.","done":false},{"id":10,"order":10,"task":"Level 4 feats — Sharpshooter and Alert","characterId":"party","act":1,"cost":"Free","warning":null,"detail":"Main character: SHARPSHOOTER. Astarion: ALERT (his Assassinate needs him to win initiative — do not delay this). Shadowheart: WAR CASTER. Paladin: SENTINEL.","done":false},{"id":11,"order":11,"task":"Zhentarim Hideout — buy the Titanstring Bow and Hill Giant Strength elixirs","characterId":"main","act":1,"cost":"~500-800 gold","warning":"The Zhentarim can be turned hostile by earlier choices in the Waukeen's Rest / Rescue-the-Zhent questline. If Brem is dead you lose this vendor permanently.","detail":"Titanstring Bow adds your STR modifier to ranged damage. At STR 8 that is -1, so it is only good WITH a Hill Giant Strength source. Buy elixirs at the same time. If juggling elixirs annoys you, skip Titanstring and wait for The Dead Shot in Act 2 — that is a legitimate simplification.","done":false},{"id":12,"order":12,"task":"Underdark — Myconid Colony questline for the Strange Conduit Ring","characterId":"main","act":1,"cost":"Free","warning":"MISSABLE if you skip the Underdark entirely or side against the myconids.","detail":"+1d4 psychic damage while Concentrating — and you Concentrate on Hunter's Mark permanently, so it is +1d4 on every arrow. Also pick up the Amulet of Misty Step in this region.","done":false},{"id":13,"order":13,"task":"Grymforge — Adamantine Forge, spend your Mithral Ore","characterId":"party","act":1,"cost":"Free (limited Mithral Ore)","warning":"ONE-TIME LIMITED RESOURCE. You can typically only forge 2 items in the whole game because Mithral Ore is that scarce. Choose deliberately.","detail":"Recommended: Adamantine SCALE MAIL for Shadowheart (medium armour, no STR requirement, cannot be critically hit — critical for the Warding Bond carrier) and Adamantine SPLINT ARMOUR for the Paladin (AC 18, cannot be critically hit). Skip the shield — your Paladin is two-handed.","done":false},{"id":14,"order":14,"task":"Rosymorn Monastery — get The Blood of Lathander BEFORE leaving Act 1","characterId":"shadowheart","act":1,"cost":"Free","warning":"MISSABLE. Only reachable via the Mountain Pass / Githyanki Creche route. If you go to Act 2 through the Underdark and never come back, it is gone.","detail":"Legendary mace: +1d4 radiant, casts Sunbeam, and once per rest it revives the entire party at 1 HP instead of letting someone die. Solve the sunlight-and-mural puzzle at the top of the monastery.","done":false},{"id":15,"order":15,"task":"Level 5 — the biggest power spike in the game","characterId":"party","act":1,"cost":"Free","warning":null,"detail":"Main: Extra Attack + Spike Growth. Astarion: FIGHTER 1 multiclass dip, Two-Weapon Fighting (do not autopilot into Rogue 5). Shadowheart: SPIRIT GUARDIANS — her whole playstyle changes here. Paladin: Extra Attack, and Misty Step becomes available from the oath.","done":false},{"id":16,"order":16,"task":"Start the camp buff routine every Long Rest","characterId":"shadowheart","act":1,"cost":"Free (spell slots)","warning":null,"detail":"Every single morning: Warding Bond on the Paladin, Aid on the party, Longstrider on the party (main character), Hill Giant Strength elixir for the Paladin, and later Death Ward and Heroes' Feast. This routine is worth more than most items.","done":false},{"id":17,"order":17,"task":"Astarion's Fighter dip completes — Action Surge and Champion","characterId":"astarion","act":1,"cost":"Free","warning":"Champion is a subclass lock (100g to undo). Also: at character level 8 you must switch BACK to Rogue.","detail":"Character level 6 = Fighter 2 (Action Surge). Character level 7 = Fighter 3, pick CHAMPION. Character level 8 onward = Rogue again, all the way to Rogue 9.","done":false},{"id":18,"order":18,"task":"Sweep every remaining Act 1 vendor before crossing into Act 2","characterId":"party","act":1,"cost":"All your gold","warning":"SOFT POINT OF NO RETURN. You can technically walk back to Act 1 during Act 2, but it is a long trip and easy to forget. Clear the list now.","detail":"Confirm you have: Hag's Hair spent on main DEX, Hellrider's Pride, Whispering Promise, Strange Conduit Ring, Amulet of Misty Step, both Adamantine items forged, Blood of Lathander, a stack of Diamonds, and a stack of poison coatings and Hill Giant Strength elixirs.","done":false},{"id":19,"order":19,"task":"Act 2 — Last Light Inn vendors, The Dead Shot and Cloak of Protection","characterId":"main","act":2,"cost":"~1000 gold","warning":"Last Light Inn can be destroyed by story events later in Act 2. Shop there EARLY, not late.","detail":"The Dead Shot (longbow with bonus to hit — offsets Sharpshooter's -5), Cloak of Protection, Boots of Stormy Clamour for Shadowheart, Callous Glow Ring.","done":false},{"id":20,"order":20,"task":"Moonrise Towers — Araj Oblodra and the Risky Ring","characterId":"main","act":2,"cost":"Story cost, not gold","warning":"CONDITIONAL AND MISSABLE. She only trades the ring if Astarion agrees to let her drink his blood. This has an approval and story consequence with Astarion — read the dialogue before you commit.","detail":"Risky Ring grants ADVANTAGE ON ALL ATTACK ROLLS with disadvantage on saves. On a Sharpshooter build, permanent advantage is close to the best item in the game — and the Paladin's Aura of Protection plus Bless largely covers the save penalty.","done":false},{"id":21,"order":21,"task":"Gauntlet of Shar — Shadowheart's questline and Dark Justiciar gear","characterId":"shadowheart","act":2,"cost":"Free","warning":"MAJOR IRREVERSIBLE STORY FORK for Shadowheart at the end of this questline. It affects her available gear, her personal arc, and later the Mirror of Loss interaction in Act 3.","detail":"Compare Dark Justiciar Half-Plate against Adamantine Scale Mail before swapping — the 'cannot be critically hit' clause is often still better on the Warding Bond carrier.","done":false},{"id":22,"order":22,"task":"Level 8 feats","characterId":"party","act":2,"cost":"Free","warning":null,"detail":"Main: Ability Improvement +2 DEX (18 to 20 — this only works if the Hag's Hair went into DEX). Astarion: this is Rogue 5, no feat yet. Shadowheart: +2 WIS. Paladin: this is Fighter 2, no feat yet.","done":false},{"id":23,"order":23,"task":"Paladin Fighter dip completes — Battle Master maneuvers","characterId":"paladin","act":2,"cost":"Free","warning":"Battle Master is a subclass lock. Also remember to switch back to Paladin at character level 10.","detail":"Character level 7 = Fighter 1 (Defence style). Level 8 = Fighter 2 (Action Surge). Level 9 = Fighter 3, BATTLE MASTER, maneuvers = GOADING ATTACK, TRIP ATTACK, RIPOSTE. Level 10 onward = Paladin again.","done":false},{"id":24,"order":24,"task":"Finish all Act 2 business — HARD POINT OF NO RETURN AHEAD","characterId":"party","act":2,"cost":"Free","warning":"ONCE YOU TRAVEL TO ACT 3 (RIVINGTON) YOU CAN NEVER RETURN TO ACT 1 OR ACT 2. Every unbought item, unfinished companion quest, and unlooted area is permanently gone.","detail":"Final Act 2 sweep: all vendors emptied, all companion quests advanced, Gauntlet of Shar complete, Risky Ring decided, and everyone at level 9-10.","done":false},{"id":25,"order":25,"task":"Level 11 — Volley and Polearm Master come online","characterId":"party","act":3,"cost":"Free","warning":null,"detail":"Main: Hunter Multiattack = VOLLEY (not Whirlwind Attack — that is the melee version). Astarion: Rogue 8 feat = +2 DEX. Shadowheart: 6th-level spells, Heroes' Feast. Paladin: Paladin 8 feat = POLEARM MASTER (confirm he is holding a glaive or halberd first).","done":false},{"id":26,"order":26,"task":"Act 3 — Raphael's House of Hope heist","characterId":"party","act":3,"cost":"Ritual components from Helsik (~2000 gold)","warning":"MISSABLE AS A BUNDLE. Skipping the House of Hope loses you Helldusk Armour, Gloves of Soul Catching, AND the Amulet of Greater Health in one go. This is the highest-value single location in the game.","detail":"Access via Helsik at the Devil's Fee in the Lower City (buy the ritual components) or via Raphael's deal path. Loot the vault. Amulet of Greater Health goes to SHADOWHEART (CON 23 fixes her Warding Bond survivability and her Concentration in one item), Helldusk Armour and Gloves of Soul Catching to the Paladin.","done":false},{"id":27,"order":27,"task":"Act 3 — Temple of Bhaal for Bhaalist Armour, Crimson Mischief and Bloodthirst","characterId":"astarion","act":3,"cost":"Free","warning":"Tied to the Orin / Murder Tribunal questline. Do not resolve Orin before looting the temple area.","detail":"Bhaalist Armour makes nearby enemies VULNERABLE to piercing damage — it doubles Astarion's dagger damage and his entire 5d6 Sneak Attack. Crimson Mischief and Bloodthirst are the piercing daggers that exploit it. This is his endgame package and it roughly doubles his output.","done":false},{"id":28,"order":28,"task":"Act 3 — Mirror of Loss beneath Sharess' Caress","characterId":"party","act":3,"cost":"Free","warning":"IRREVERSIBLE, once per character. STORY WARNING: using it has consequences for Shadowheart's personal arc depending on where her questline stands. Read the prompt carefully before letting her use it.","detail":"Permanent +2 to one ability score. Main character: DEX if not yet at 20, otherwise CON or WIS. Astarion: DEX (17+2 ASI = 19, +2 here = 21, breaking the normal cap). Paladin: CHA (bigger Aura of Protection for the whole party) or STR.","done":false},{"id":29,"order":29,"task":"Astarion's Ascension decision","characterId":"astarion","act":3,"cost":"Free","warning":"PERMANENT AND STORY-DEFINING. Ascending grants +2 to ALL ability scores and other combat bonuses — mechanically it is a large power increase. It is also the darker resolution of his arc and it changes his ending and his relationship outcomes. Decide on the story you want, not the stat line.","detail":"Mechanically: +2 to every stat is roughly two free feats. Narratively: it is the opposite of the redemption ending. There is no way to have both. This is flagged because it is the single biggest optional power decision left in the game and it is easy to stumble into during the ritual scene.","done":false},{"id":30,"order":30,"task":"Level 12 — final feats","characterId":"party","act":3,"cost":"Free","warning":"Level 12 is the cap. There is nothing after this.","detail":"Main: ALERT (or Lucky). Astarion: Rogue 9 for 5d6 Sneak Attack — or take Fighter 4 instead for a third feat, which is honestly the stronger option. Shadowheart: +2 WIS to 20 (or Tough if Warding Bond keeps killing her). Paladin: this is Paladin 9, 3rd-level spell slots for bigger Divine Smites.","done":false}]}};</script>
+<script>
+/* ==========================================================================
+   Geffen Codex — BG3 build wiki
+   All build content lives in /data/*.json. This file fetches and renders it.
+   index.html contains no build data.
+   ========================================================================== */
+(function () {
+  'use strict';
+
+  var STORE_KEY = 'bg3_ro_wiki_checklist_v1';
+
+  var DB = { characters: null, gear: null, rotations: null, checklist: null };
+  var doneSet = loadDone();
+
+  var els = {
+    nav: document.getElementById('navList'),
+    view: document.getElementById('view'),
+    search: document.getElementById('searchBox'),
+    searchResults: document.getElementById('searchResults'),
+    viewTitle: document.getElementById('viewTitle')
+  };
+
+  /* ---------- utilities ---------- */
+
+  function esc(s) {
+    return String(s == null ? '' : s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  }
+
+  function mod(score) {
+    var m = Math.floor((score - 10) / 2);
+    return (m >= 0 ? '+' : '') + m;
+  }
+
+  function loadDone() {
+    try {
+      var raw = localStorage.getItem(STORE_KEY);
+      if (!raw) return {};
+      var parsed = JSON.parse(raw);
+      return (parsed && typeof parsed === 'object') ? parsed : {};
+    } catch (e) { return {}; }
+  }
+
+  function saveDone() {
+    try { localStorage.setItem(STORE_KEY, JSON.stringify(doneSet)); }
+    catch (e) { /* private mode / quota — checklist just will not persist */ }
+  }
+
+  function charById(id) {
+    var list = (DB.characters && DB.characters.characters) || [];
+    for (var i = 0; i < list.length; i++) if (list[i].id === id) return list[i];
+    return null;
+  }
+
+  function charName(id) {
+    if (id === 'party') return 'Whole party';
+    var c = charById(id);
+    return c ? c.name : id;
+  }
+
+  function badgeFor(id) {
+    if (id === 'party') return '<span class="badge party">Party</span>';
+    var c = charById(id);
+    if (!c) return '';
+    return '<span class="badge ' + esc(c.badge) + '">' + esc(c.name) + '</span>';
+  }
+
+  function win(title, bodyHtml, extraClass) {
+    return '' +
+      '<section class="ro-window ' + (extraClass || '') + '">' +
+        '<div class="ro-titlebar"><span>' + esc(title) + '</span><span class="ro-close"></span></div>' +
+        '<div class="ro-body">' + bodyHtml + '</div>' +
+      '</section>';
+  }
+
+  function list(items, cls) {
+    if (!items || !items.length) return '';
+    return '<ul class="' + (cls || '') + '">' +
+      items.map(function (i) { return '<li>' + esc(i) + '</li>'; }).join('') + '</ul>';
+  }
+
+  /* ---------- navigation ---------- */
+
+  function buildNav() {
+    var chars = (DB.characters && DB.characters.characters) || [];
+    var html = '';
+    html += '<li><a href="#/overview" data-route="/overview">Overview</a></li>';
+    html += '<li class="nav-section">Characters</li>';
+    chars.forEach(function (c) {
+      html += '<li><a href="#/character/' + esc(c.id) + '" data-route="/character/' + esc(c.id) + '">' +
+                '<span class="badge ' + esc(c.badge) + '">' + esc(c.roClass.slice(0, 3)) + '</span>' +
+                esc(c.name) +
+              '</a></li>';
+    });
+    html += '<li class="nav-section">Reference</li>';
+    html += '<li><a href="#/progression" data-route="/progression">Party Progression</a></li>';
+    html += '<li><a href="#/gear" data-route="/gear">Gear by Act</a></li>';
+    html += '<li><a href="#/rotations" data-route="/rotations">Rotations</a></li>';
+    html += '<li><a href="#/checklist" data-route="/checklist">Checklist</a></li>';
+    els.nav.innerHTML = html;
+  }
+
+  function markActive(route) {
+    var links = els.nav.querySelectorAll('a');
+    for (var i = 0; i < links.length; i++) {
+      var r = links[i].getAttribute('data-route');
+      links[i].classList.toggle('active', route.indexOf(r) === 0 && (route === r || route.charAt(r.length) === '/'));
+    }
+  }
+
+  /* ---------- views ---------- */
+
+  function viewOverview() {
+    var meta = DB.characters.meta || {};
+    var chars = DB.characters.characters || [];
+    var html = '';
+
+    html += win('Party Overview', (function () {
+      var s = '<div class="parch"><strong>' + esc(meta.subtitle || '') + '</strong></div>';
+      s += '<div class="char-card-grid" style="margin-top:8px">';
+      chars.forEach(function (c) {
+        s += '<a class="char-card" href="#/character/' + esc(c.id) + '">' +
+               '<span class="badge ' + esc(c.badge) + '">' + esc(c.roClass) + '</span>' +
+               '<div class="cc-name">' + esc(c.name) + '</div>' +
+               '<div class="cc-build">' + esc(c.bg3Build) + '</div>' +
+               '<div class="cc-role">' + esc(c.role) + '</div>' +
+             '</a>';
+      });
+      s += '</div>';
+      return s;
+    })());
+
+    html += win('RO to BG3 — Party Mapping', (function () {
+      var s = '<div class="table-scroll"><table class="kv-table"><thead><tr>' +
+        '<th>Slot</th><th>RO concept</th><th>BG3 build</th><th>Role</th></tr></thead><tbody>';
+      chars.forEach(function (c) {
+        s += '<tr><td>' + badgeFor(c.id) + '</td><td>' + esc(c.roClass) + '</td><td>' +
+             esc(c.bg3Build) + '</td><td>' + esc(c.role) + '</td></tr>';
+      });
+      s += '</tbody></table></div>';
+      return s;
+    })());
+
+    if (meta.analogyTopLevel) {
+      html += win('Where the RO Analogy Breaks Down', (function () {
+        return meta.analogyTopLevel.map(function (t) {
+          return '<div class="break-strip"><span class="bl">Analogy break</span><br>' + esc(t) + '</div>';
+        }).join('');
+      })());
+    }
+
+    if (meta.provenance) {
+      var p = meta.provenance;
+      html += win('Sources & Confidence — read before trusting anything here', (function () {
+        var s = '<div class="break-strip"><span class="bl">No sources were consulted</span><br>' + esc(p.summary) + '</div>';
+        if (p.patchRisk) s += '<div class="break-strip"><span class="bl">Patch drift</span><br>' + esc(p.patchRisk) + '</div>';
+        if (p.high) s += '<h3 class="ro-h3">High confidence</h3><div class="parch">' + list(p.high, 'details-list') + '</div>';
+        if (p.medium) s += '<h3 class="ro-h3">Medium confidence — may be off by a level</h3><div class="parch alt">' + list(p.medium, 'details-list') + '</div>';
+        if (p.low) s += '<h3 class="ro-h3">Low confidence — verify before relying on it</h3>' +
+          '<div class="parch" style="border-left:4px solid var(--ro-red)">' + list(p.low, 'details-list') + '</div>';
+        if (p.verifyOrder) s += '<h3 class="ro-h3">What to check, in order</h3><div class="note-strip">' + list(p.verifyOrder, 'details-list') + '</div>';
+        return s;
+      })());
+    }
+
+    if (meta.assumptions) {
+      html += win('Assumptions This Guide Makes', '<div class="parch">' + list(meta.assumptions, 'details-list') + '</div>');
+    }
+
+    if (meta.irreversibleMeaning) {
+      html += win('What "Irreversible" Means Here',
+        '<div class="note-strip">' + esc(meta.irreversibleMeaning) + '</div>');
+    }
+
+    els.viewTitle.textContent = 'Overview';
+    els.view.innerHTML = html;
+  }
+
+  function viewCharacter(id) {
+    var c = charById(id);
+    if (!c) { els.view.innerHTML = win('Not found', '<div class="empty">No character with id "' + esc(id) + '".</div>'); return; }
+
+    var html = '';
+
+    html += win(c.name + ' — ' + c.bg3Build, (function () {
+      var s = '<div class="parch">';
+      s += '<span class="badge ' + esc(c.badge) + '">' + esc(c.roClass) + '</span> ';
+      s += '<strong>' + esc(c.role) + '</strong>';
+      s += '<div style="margin-top:6px">' + esc(c.summary) + '</div>';
+      s += '</div>';
+      return s;
+    })());
+
+    /* stats */
+    html += win('Ability Scores — final (level 12)', (function () {
+      var order = ['str', 'dex', 'con', 'int', 'wis', 'cha'];
+      var s = '<div class="stat-grid">';
+      order.forEach(function (k) {
+        var v = c.stats[k];
+        s += '<div class="stat-cell">' +
+               '<div class="s-name">' + k.toUpperCase() + '</div>' +
+               '<div class="s-val">' + esc(v) + '</div>' +
+               '<div class="s-mod">' + mod(v) + '</div>' +
+             '</div>';
+      });
+      s += '</div>';
+      s += '<h3 class="ro-h3">What each stat is doing</h3>';
+      order.forEach(function (k) {
+        if (!c.statNotes || !c.statNotes[k]) return;
+        s += '<div class="parch" style="margin-bottom:4px"><strong>' + k.toUpperCase() + ' ' +
+             esc(c.stats[k]) + '</strong> — ' + esc(c.statNotes[k]) + '</div>';
+      });
+      if (c.statPlan) {
+        s += '<h3 class="ro-h3">How to build the array</h3>';
+        s += '<div class="parch alt">' + list(c.statPlan, 'details-list') + '</div>';
+      }
+      return s;
+    })());
+
+    /* RO mapping */
+    if (c.roMapping && c.roMapping.length) {
+      html += win('Skill Mapping — and where it breaks', (function () {
+        return c.roMapping.map(function (m) {
+          return '<div class="parch" style="margin-bottom:6px">' +
+                   '<strong style="color:#24406b">' + esc(m.roSkill) + '</strong> &rarr; ' +
+                   '<strong>' + esc(m.bg3) + '</strong>' +
+                   '<div class="break-strip" style="margin-top:5px;margin-bottom:0">' +
+                     '<span class="bl">Breaks down</span><br>' + esc(m.breaks) +
+                   '</div>' +
+                 '</div>';
+        }).join('');
+      })());
+    }
+
+    /* level tree */
+    html += win('Level Tree 1 to 12 — exact clicks', (function () {
+      var s = '<div class="note-strip">Every row is one level-up screen. <strong>Pick</strong> is what to click; ' +
+              'rejected options and the reason are listed underneath. Rows with a red edge and a warning badge ' +
+              'lock a choice that costs 100g at Withers to undo.</div>';
+      s += '<div class="skilltree">';
+      c.levels.forEach(function (lv) {
+        s += '<div class="skillnode">';
+        s += '<div class="skillbox' + (lv.irreversible ? ' locked' : '') + '">';
+        s += '<div class="skillbox-head">' +
+               '<span class="lvl-chip">Lv ' + esc(lv.level) + '</span>' +
+               '<span class="menu-label">' + esc(lv.menu) + '</span>' +
+               (lv.irreversible ? '<span class="warn-badge">Locks in</span>' : '') +
+             '</div>';
+        s += '<div class="skillbox-body">';
+        s += '<div class="pick-line">' + esc(lv.choice) + '</div>';
+        s += '<p class="reason">' + esc(lv.reasoning) + '</p>';
+        if (lv.alternatives && lv.alternatives.length) {
+          s += '<div class="alts"><strong>Rejecting:</strong>' + list(lv.alternatives) + '</div>';
+        }
+        if (lv.details && lv.details.length) {
+          s += list(lv.details, 'details-list');
+        }
+        s += '</div></div></div>';
+      });
+      s += '</div>';
+      return s;
+    })());
+
+    /* that character's gear, pulled from gear.json */
+    html += win('Gear for ' + c.name, (function () {
+      var acts = ['act1', 'act2', 'act3'];
+      var any = false, s = '';
+      acts.forEach(function (a) {
+        var items = (DB.gear[a] || []).filter(function (g) { return g.wearer === c.id; });
+        if (!items.length) return;
+        any = true;
+        s += '<h3 class="ro-h3">' + a.toUpperCase().replace('ACT', 'Act ') + '</h3>';
+        s += '<div class="slot-grid">' + items.map(gearTile).join('') + '</div>';
+      });
+      return any ? s : '<div class="empty">No gear assigned to this character.</div>';
+    })());
+
+    /* rotation */
+    var rot = (DB.rotations.rotations || []).filter(function (r) { return r.characterId === c.id; })[0];
+    if (rot) html += win('Combat Rotation — ' + c.name, rotationBody(rot));
+
+    els.viewTitle.textContent = c.name;
+    els.view.innerHTML = html;
+  }
+
+  /* ---------- inventory icons ----------
+     Drawn from scratch as inline SVG. No game assets, no sprites, no external
+     files — same rule the RO window chrome follows. A gear entry may override
+     the auto-detected icon with an explicit "icon" field naming a key below. */
+
+  var ICONS = {
+    bow: '<g fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">' +
+         '<path d="M5 2C11 5.5 11 10.5 5 14"/><path d="M5 2v12"/><path d="M3 8h11"/><path d="M11 5.5L14 8l-3 2.5"/></g>',
+    sword: '<polygon points="8,1 9.6,4 9.6,10 6.4,10 6.4,4"/><rect x="4" y="10" width="8" height="1.6"/>' +
+           '<rect x="7.2" y="11.6" width="1.6" height="3"/><rect x="5.9" y="13.9" width="4.2" height="1.4"/>',
+    dagger: '<polygon points="8,3 9.4,5.6 9.4,9.5 6.6,9.5 6.6,5.6"/><rect x="4.8" y="9.5" width="6.4" height="1.4"/>' +
+            '<rect x="7.3" y="10.9" width="1.4" height="3"/><rect x="6.3" y="13.7" width="3.4" height="1.3"/>',
+    mace: '<rect x="7.3" y="7" width="1.4" height="8"/><rect x="6" y="13.9" width="4" height="1.3"/>' +
+          '<polygon points="8,1 11.2,3 11.2,6.2 8,8.2 4.8,6.2 4.8,3"/>',
+    polearm: '<rect x="7.4" y="5" width="1.2" height="10"/><polygon points="8,0.5 10.3,4 8,5.6 5.7,4"/>' +
+             '<rect x="5.4" y="5.3" width="5.2" height="1"/>',
+    armour: '<path d="M4 3l4 1.5L12 3l1 4c0 4-2.5 6.5-5 7.5C5.5 13.5 3 11 3 7z"/>',
+    helm: '<path d="M3.5 7c0-3.5 2.5-5 4.5-5s4.5 1.5 4.5 5v5H10V9H6v3H3.5z"/>',
+    shield: '<path d="M8 1.5l5.5 2v4.5c0 3.5-2.5 6-5.5 7-3-1-5.5-3.5-5.5-7V3.5z"/>',
+    ring: '<g fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="8" cy="10" r="4.2"/></g>' +
+          '<polygon points="8,1.4 10.1,4 8,6.2 5.9,4"/>',
+    amulet: '<g fill="none" stroke="currentColor" stroke-width="1.3"><path d="M4 2c0 5 2 6.5 4 6.5s4-1.5 4-6.5"/></g>' +
+            '<polygon points="8,8.4 11.1,12 8,15.5 4.9,12"/>',
+    gloves: '<path d="M4.6 6.2V3.6c0-.9 1.5-.9 1.5 0v2.6h.6V2.9c0-.9 1.5-.9 1.5 0v3.3h.6V3.3c0-.9 1.5-.9 1.5 0V7l1.3-1.4c.7-.7 1.7.4 1.1 1.2l-2.1 3.2V14H5v-3.4L3.8 8.1c-.5-1 .4-1.7.8-1.9z"/>',
+    boots: '<path d="M5 2h4v7l3.5 2c1 .6 1 3-0.5 3H5z"/>',
+    potion: '<path d="M6.5 1.5h3V5l2.5 5c.8 2-.5 4.5-2.5 4.5h-3C4.5 14.5 3.2 12 4 10l2.5-5z"/>' +
+            '<rect x="5.6" y="0.8" width="4.8" height="1.4"/>',
+    cloak: '<path d="M8 1.5c1.7 0 2.6.9 3.2 1.7l2.6 3.4-2 1.3.8 6.6H9.4l-.5-5h-1.8l-.5 5H3.4l.8-6.6-2-1.3 2.6-3.4C5.4 2.4 6.3 1.5 8 1.5z"/>',
+    gem: '<polygon points="8,1.5 13,6 8,14.5 3,6"/>',
+    star: '<polygon points="8,0.8 9.7,5.9 15.1,5.9 10.7,9.1 12.4,14.2 8,11 3.6,14.2 5.3,9.1 0.9,5.9 6.3,5.9"/>',
+    box: '<rect x="3" y="3.5" width="10" height="9"/>'
+  };
+
+  var ICON_RULES = [
+    [/one-time permanent/i, 'star'],
+    [/spell component|gem|diamond/i, 'gem'],
+    [/consumable/i, 'potion'],
+    [/bow|ranged/i, 'bow'],
+    [/dagger/i, 'dagger'],
+    [/shortsword|main-hand|sword/i, 'sword'],
+    [/mace|carried|off-hand/i, 'mace'],
+    [/polearm|glaive|halberd|spear/i, 'polearm'],
+    [/shield/i, 'shield'],
+    [/cloak|cape/i, 'cloak'],
+    [/chest|armour|armor/i, 'armour'],
+    [/head|helm|mask/i, 'helm'],
+    [/ring/i, 'ring'],
+    [/amulet/i, 'amulet'],
+    [/glove/i, 'gloves'],
+    [/boot/i, 'boots']
+  ];
+
+  function iconFor(g) {
+    if (g.icon && ICONS[g.icon]) return ICONS[g.icon];
+    var slot = String(g.slot || '');
+    for (var i = 0; i < ICON_RULES.length; i++) {
+      if (ICON_RULES[i][0].test(slot)) return ICONS[ICON_RULES[i][1]];
+    }
+    return ICONS.box;
+  }
+
+  function gearTile(g) {
+    var s = '<div class="slot-tile">';
+    s += '<div class="tile-top">' +
+           '<div class="tile-icon w-' + esc(g.wearer) + '">' +
+             '<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">' + iconFor(g) + '</svg>' +
+           '</div>' +
+           '<div><div class="tile-name">' + esc(g.item) + '</div>' +
+           '<div class="tile-slot">' + esc(g.slot) + '</div></div>' +
+         '</div>';
+    s += '<div class="tile-body">';
+    s += '<div class="tile-row"><span class="k">Wearer</span> ' + badgeFor(g.wearer) + '</div>';
+    s += '<div class="tile-row"><span class="k">Effect</span> ' + esc(g.effect) + '</div>';
+    s += '<div class="tile-row"><span class="k">Where</span> ' + esc(g.location) + '</div>';
+    s += '<div class="tile-row"><span class="k">Replaces</span> ' + esc(g.replaces) + '</div>';
+    if (g.missable) s += '<div class="tile-row"><span class="miss-badge">Missable</span></div>';
+    if (g.note) s += '<div class="tile-note">' + esc(g.note) + '</div>';
+    s += '</div></div>';
+    return s;
+  }
+
+  /* Pivots characters[].levels by party level, because the whole party levels
+     together — this is the view you actually use at a level-up screen. */
+  function viewProgression() {
+    var meta = DB.characters.meta || {};
+    var chars = DB.characters.characters || [];
+    var html = '';
+
+    if (meta.progressionPrimer) {
+      html += win('How Levelling Works — vs Ragnarok Online', (function () {
+        return meta.progressionPrimer.map(function (t) {
+          return '<div class="break-strip"><span class="bl">Differs from RO</span><br>' + esc(t) + '</div>';
+        }).join('');
+      })());
+    }
+
+    /* find the level range present in the data */
+    var maxLevel = 0;
+    chars.forEach(function (c) {
+      (c.levels || []).forEach(function (lv) { if (lv.level > maxLevel) maxLevel = lv.level; });
+    });
+
+    var body = '<div class="note-strip">One row per character, per party level. ' +
+               '<strong>Click this</strong> is what to select on the level-up screen. ' +
+               'Levels with no locks and no feat are marked as free — read and click Next.</div>';
+
+    for (var L = 1; L <= maxLevel; L++) {
+      var rows = [], locks = 0, feats = 0;
+
+      chars.forEach(function (c) {
+        var lv = (c.levels || []).filter(function (x) { return x.level === L; })[0];
+        if (!lv) return;
+        if (lv.irreversible) locks++;
+        /* \b matters: "feature" must not count as "feat" */
+        var isFeat = /\bfeats?\b/i.test(lv.menu || '') || /\bfeats?\b/i.test(lv.choice || '');
+        if (isFeat) feats++;
+        var isMulti = /multiclass|Fighter \d|back to/i.test(lv.menu || '');
+        rows.push(
+          '<tr>' +
+            '<td>' + badgeFor(c.id) + '</td>' +
+            '<td>' + esc(lv.menu) +
+              (isMulti ? '<br><span class="miss-badge">Multiclass — do not autopilot</span>' : '') + '</td>' +
+            '<td><strong>' + esc(lv.choice) + '</strong>' +
+              (lv.irreversible ? ' <span class="warn-badge">Locks in</span>' : '') + '</td>' +
+          '</tr>'
+        );
+      });
+
+      if (!rows.length) continue;
+
+      var tag = locks
+        ? '<span class="warn-badge">' + locks + ' choice(s) lock in</span>'
+        : (feats ? '<span class="badge party">Feat level</span>'
+                 : '<span class="badge party">Free level — nothing to decide</span>');
+
+      body += '<h3 class="ro-h3">Party Level ' + L + ' &nbsp;' + tag + '</h3>';
+      body += '<div class="table-scroll"><table class="kv-table"><thead><tr>' +
+                '<th style="width:15%">Who</th><th style="width:32%">Menu shown</th><th>Click this</th>' +
+              '</tr></thead><tbody>' + rows.join('') + '</tbody></table></div>';
+    }
+
+    html += win('Party Progression — Level 1 to ' + maxLevel, body);
+    els.viewTitle.textContent = 'Party Progression';
+    els.view.innerHTML = html;
+  }
+
+  var gearFilter = { act: 'all', wearer: 'all' };
+
+  function viewGear() {
+    var meta = DB.gear.meta || {};
+    var chars = DB.characters.characters || [];
+    var html = '';
+
+    if (meta.disclaimer) {
+      html += win('Read This First', '<div class="break-strip"><span class="bl">Verify in-game</span><br>' +
+        esc(meta.disclaimer) + '</div>' +
+        (meta.actNote ? '<div class="note-strip">' + esc(meta.actNote) + '</div>' : '') +
+        (meta.vendorTip ? '<div class="note-strip">' + esc(meta.vendorTip) + '</div>' : ''));
+    }
+
+    var bar = '<div class="filterbar"><span class="flabel">Act</span>';
+    ['all', 'act1', 'act2', 'act3'].forEach(function (a) {
+      bar += '<button class="fbtn' + (gearFilter.act === a ? ' on' : '') + '" data-gfilter="act" data-val="' + a + '">' +
+             (a === 'all' ? 'All' : a.replace('act', 'Act ')) + '</button>';
+    });
+    bar += '</div><div class="filterbar"><span class="flabel">Wearer</span>';
+    bar += '<button class="fbtn' + (gearFilter.wearer === 'all' ? ' on' : '') + '" data-gfilter="wearer" data-val="all">All</button>';
+    chars.forEach(function (c) {
+      bar += '<button class="fbtn' + (gearFilter.wearer === c.id ? ' on' : '') + '" data-gfilter="wearer" data-val="' + esc(c.id) + '">' + esc(c.name) + '</button>';
+    });
+    bar += '</div>';
+
+    var acts = gearFilter.act === 'all' ? ['act1', 'act2', 'act3'] : [gearFilter.act];
+    var body = bar;
+    var total = 0;
+
+    acts.forEach(function (a) {
+      var items = (DB.gear[a] || []).filter(function (g) {
+        return gearFilter.wearer === 'all' || g.wearer === gearFilter.wearer;
+      });
+      if (!items.length) return;
+      total += items.length;
+      body += '<h3 class="ro-h3">' + a.replace('act', 'Act ') + ' &mdash; ' + items.length + ' item(s)</h3>';
+      body += '<div class="slot-grid">' + items.map(gearTile).join('') + '</div>';
+    });
+
+    if (!total) body += '<div class="empty">Nothing matches that filter.</div>';
+
+    html += win('Gear by Act', body);
+    els.viewTitle.textContent = 'Gear';
+    els.view.innerHTML = html;
+  }
+
+  function rotationBody(r) {
+    var s = '';
+    if (r.notes && r.notes.length) {
+      s += r.notes.map(function (n) {
+        var isBreak = n.indexOf('ANALOGY BREAK') === 0 || n.indexOf('ANALOGY BREAK') > -1;
+        return isBreak
+          ? '<div class="break-strip"><span class="bl">Analogy break</span><br>' + esc(n) + '</div>'
+          : '<div class="note-strip">' + esc(n) + '</div>';
+      }).join('');
+    }
+    s += '<div class="rot-grid">';
+    if (r.preCombat) s += '<div class="rot-col pre"><h4>Pre-combat / Camp</h4>' + orderedList(r.preCombat) + '</div>';
+    s += '<div class="rot-col opener"><h4>Opener</h4>' + orderedList(r.opener) + '</div>';
+    s += '<div class="rot-col sustain"><h4>Sustain</h4>' + orderedList(r.sustain) + '</div>';
+    s += '<div class="rot-col panic"><h4>Emergency / Panic</h4>' + orderedList(r.panic) + '</div>';
+    s += '</div>';
+    return s;
+  }
+
+  function orderedList(arr) {
+    if (!arr || !arr.length) return '<ul><li>&mdash;</li></ul>';
+    return '<ol>' + arr.map(function (i) { return '<li>' + esc(i) + '</li>'; }).join('') + '</ol>';
+  }
+
+  function viewRotations() {
+    var meta = DB.rotations.meta || {};
+    var html = '';
+    var strips = '';
+    ['actionEconomy', 'concentrationRule', 'restRule'].forEach(function (k) {
+      if (meta[k]) strips += '<div class="note-strip">' + esc(meta[k]) + '</div>';
+    });
+    if (strips) html += win('Combat Rules That Differ From RO', strips);
+
+    (DB.rotations.rotations || []).forEach(function (r) {
+      html += win(r.name || charName(r.characterId), rotationBody(r));
+    });
+
+    els.viewTitle.textContent = 'Rotations';
+    els.view.innerHTML = html;
+  }
+
+  function viewChecklist() {
+    var meta = DB.checklist.meta || {};
+    var tasks = (DB.checklist.tasks || []).slice().sort(function (a, b) { return a.order - b.order; });
+    var doneCount = tasks.filter(function (t) { return doneSet[t.id]; }).length;
+    var pct = tasks.length ? Math.round(doneCount / tasks.length * 100) : 0;
+
+    var html = '';
+    var intro = '';
+    if (meta.startingPoint) intro += '<div class="note-strip">' + esc(meta.startingPoint) + '</div>';
+    if (meta.respecCost) intro += '<div class="note-strip">' + esc(meta.respecCost) + '</div>';
+    if (meta.pointOfNoReturn) intro += '<div class="break-strip"><span class="bl">Point of no return</span><br>' + esc(meta.pointOfNoReturn) + '</div>';
+    if (intro) html += win('How To Use This List', intro);
+
+    var body = '<div class="progress-wrap">' +
+                 '<div class="progress-bar" style="width:' + pct + '%"></div>' +
+                 '<div class="progress-text">' + doneCount + ' / ' + tasks.length + ' complete (' + pct + '%)</div>' +
+               '</div>' +
+               '<div class="filterbar"><button class="fbtn" id="resetChecklist">Reset progress</button>' +
+               '<span class="flabel">Progress is saved in this browser</span></div>';
+
+    var currentAct = null;
+    tasks.forEach(function (t) {
+      if (t.act !== currentAct) {
+        currentAct = t.act;
+        body += '<h3 class="ro-h3">Act ' + esc(currentAct) + '</h3>';
+      }
+      var isDone = !!doneSet[t.id];
+      body += '<div class="task' + (isDone ? ' done' : '') + '" data-task="' + esc(t.id) + '">';
+      body += '<div class="task-check">' + (isDone ? '&#10003;' : '') + '</div>';
+      body += '<div style="flex:1">';
+      body += '<div class="task-title"><span class="task-order">' + esc(t.order) + '.</span>' + esc(t.task) + '</div>';
+      body += '<div class="task-meta">' + badgeFor(t.characterId) +
+              ' &nbsp;Cost: <strong>' + esc(t.cost) + '</strong></div>';
+      if (t.detail) body += '<div class="task-detail">' + esc(t.detail) + '</div>';
+      if (t.warning) body += '<div class="task-warn"><strong>WARNING:</strong> ' + esc(t.warning) + '</div>';
+      body += '</div></div>';
+    });
+
+    html += win('Chronological Action Checklist', body);
+    els.viewTitle.textContent = 'Checklist';
+    els.view.innerHTML = html;
+  }
+
+  /* ---------- search ---------- */
+
+  function collectSearchIndex() {
+    var idx = [];
+
+    (DB.characters.characters || []).forEach(function (c) {
+      idx.push({ kind: 'Character', title: c.name, text: [c.bg3Build, c.role, c.roClass, c.summary].join(' '), route: '#/character/' + c.id });
+      (c.levels || []).forEach(function (lv) {
+        idx.push({
+          kind: c.name + ' — Level ' + lv.level,
+          title: lv.choice,
+          text: [lv.menu, lv.reasoning, (lv.alternatives || []).join(' '), (lv.details || []).join(' ')].join(' '),
+          route: '#/character/' + c.id
+        });
+      });
+      (c.roMapping || []).forEach(function (m) {
+        idx.push({ kind: c.name + ' — Mapping', title: m.roSkill + ' to ' + m.bg3, text: m.breaks, route: '#/character/' + c.id });
+      });
+    });
+
+    ['act1', 'act2', 'act3'].forEach(function (a) {
+      (DB.gear[a] || []).forEach(function (g) {
+        idx.push({
+          kind: 'Gear — ' + a.replace('act', 'Act '),
+          title: g.item,
+          text: [g.effect, g.location, g.slot, g.replaces, g.note, charName(g.wearer)].join(' '),
+          route: '#/gear'
+        });
+      });
+    });
+
+    (DB.rotations.rotations || []).forEach(function (r) {
+      idx.push({
+        kind: 'Rotation',
+        title: r.name || charName(r.characterId),
+        text: [].concat(r.preCombat || [], r.opener || [], r.sustain || [], r.panic || [], r.notes || []).join(' '),
+        route: '#/rotations'
+      });
+    });
+
+    (DB.checklist.tasks || []).forEach(function (t) {
+      idx.push({
+        kind: 'Checklist — Act ' + t.act,
+        title: t.order + '. ' + t.task,
+        text: [t.detail, t.warning, t.cost, charName(t.characterId)].join(' '),
+        route: '#/checklist'
+      });
+    });
+
+    return idx;
+  }
+
+  var SEARCH_INDEX = null;
+
+  function highlight(text, q) {
+    var i = text.toLowerCase().indexOf(q);
+    if (i < 0) return esc(text.slice(0, 120));
+    var start = Math.max(0, i - 40);
+    var snip = (start > 0 ? '...' : '') + text.slice(start, i + q.length + 70);
+    var at = snip.toLowerCase().indexOf(q);
+    return esc(snip.slice(0, at)) + '<mark>' + esc(snip.slice(at, at + q.length)) + '</mark>' + esc(snip.slice(at + q.length));
+  }
+
+  function runSearch() {
+    var q = els.search.value.trim().toLowerCase();
+    if (q.length < 2) { els.searchResults.innerHTML = ''; return; }
+    if (!SEARCH_INDEX) SEARCH_INDEX = collectSearchIndex();
+
+    var hits = [];
+    for (var i = 0; i < SEARCH_INDEX.length && hits.length < 40; i++) {
+      var e = SEARCH_INDEX[i];
+      var hay = (e.title + ' ' + e.text).toLowerCase();
+      if (hay.indexOf(q) > -1) hits.push(e);
+    }
+
+    if (!hits.length) { els.searchResults.innerHTML = '<div class="empty">No matches.</div>'; return; }
+
+    els.searchResults.innerHTML = hits.map(function (h) {
+      return '<div class="search-hit" data-route="' + esc(h.route) + '">' +
+               '<div class="hit-kind">' + esc(h.kind) + '</div>' +
+               '<div class="hit-title">' + esc(h.title) + '</div>' +
+               '<div class="hit-snip">' + highlight(h.title + ' ' + h.text, q) + '</div>' +
+             '</div>';
+    }).join('');
+  }
+
+  /* ---------- router ---------- */
+
+  function route() {
+    var hash = location.hash.replace(/^#/, '') || '/overview';
+    markActive(hash);
+    window.scrollTo(0, 0);
+
+    if (hash === '/overview') return viewOverview();
+    if (hash.indexOf('/character/') === 0) return viewCharacter(hash.split('/')[2]);
+    if (hash === '/progression') return viewProgression();
+    if (hash === '/gear') return viewGear();
+    if (hash === '/rotations') return viewRotations();
+    if (hash === '/checklist') return viewChecklist();
+
+    els.view.innerHTML = win('Not found', '<div class="empty">Unknown route: ' + esc(hash) + '</div>');
+  }
+
+  /* ---------- delegated events ---------- */
+
+  document.addEventListener('click', function (ev) {
+    var hit = ev.target.closest ? ev.target.closest('.search-hit') : null;
+    if (hit) { location.hash = hit.getAttribute('data-route'); return; }
+
+    var fbtn = ev.target.closest ? ev.target.closest('[data-gfilter]') : null;
+    if (fbtn) {
+      gearFilter[fbtn.getAttribute('data-gfilter')] = fbtn.getAttribute('data-val');
+      viewGear();
+      return;
+    }
+
+    if (ev.target.id === 'resetChecklist') {
+      doneSet = {};
+      saveDone();
+      viewChecklist();
+      return;
+    }
+
+    var task = ev.target.closest ? ev.target.closest('[data-task]') : null;
+    if (task) {
+      var id = task.getAttribute('data-task');
+      if (doneSet[id]) delete doneSet[id]; else doneSet[id] = true;
+      saveDone();
+      viewChecklist();
+    }
+  });
+
+  els.search.addEventListener('input', runSearch);
+
+  window.addEventListener('hashchange', route);
+
+  /* ---------- boot ---------- */
+
+  function fetchJSON(path) {
+    return fetch(path).then(function (r) {
+      if (!r.ok) throw new Error(path + ' -> HTTP ' + r.status);
+      return r.json();
+    });
+  }
+
+  /* Two supply routes for the same data, one codebase:
+       - Normal folder (dev, or GitHub Pages): fetch the four JSON files.
+       - Single-file build from build.js: the data is already inlined on
+         window.__BG3_DATA__, so no fetch happens and file:// works too.
+     JSON files stay the single source of truth in both cases. */
+  var source = window.__BG3_DATA__
+    ? Promise.resolve([
+        window.__BG3_DATA__.characters,
+        window.__BG3_DATA__.gear,
+        window.__BG3_DATA__.rotations,
+        window.__BG3_DATA__.checklist
+      ])
+    : Promise.all([
+        fetchJSON('data/characters.json'),
+        fetchJSON('data/gear.json'),
+        fetchJSON('data/rotations.json'),
+        fetchJSON('data/checklist.json')
+      ]);
+
+  source.then(function (res) {
+    DB.characters = res[0];
+    DB.gear = res[1];
+    DB.rotations = res[2];
+    DB.checklist = res[3];
+
+    var meta = DB.characters.meta || {};
+    if (meta.title) document.title = meta.title;
+
+    buildNav();
+    route();
+  }).catch(function (err) {
+    els.view.innerHTML =
+      '<div class="error-box"><strong>Could not load the build data.</strong>' +
+      '<p>This wiki reads its content from the JSON files with <code>fetch()</code>, which browsers block on ' +
+      'the <code>file://</code> protocol. Opening index.html by double-clicking it will always fail with a CORS error.</p>' +
+      '<p>Serve the folder over HTTP instead:</p>' +
+      '<code>npx -y http-server . -p 8126 -c-1</code>' +
+      '<p>Then open <strong>http://localhost:8126</strong></p>' +
+      '<code>' + esc(err.message) + '</code></div>';
+  });
+})();
+
+</script>
+</body>
+</html>

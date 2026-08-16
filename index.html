@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Geffen Codex</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <header class="masthead">
+    <h1>&#9670; GEFFEN CODEX &#9670;</h1>
+    <p>Baldur's Gate 3 party build wiki, written for a Ragnarok Online brain. Runs entirely offline.</p>
+  </header>
+
+  <div class="app-shell">
+
+    <aside class="sidebar">
+      <section class="ro-window">
+        <div class="ro-titlebar"><span>Menu</span><span class="ro-close"></span></div>
+        <div class="ro-body">
+          <ul class="nav-list" id="navList"></ul>
+        </div>
+      </section>
+
+      <section class="ro-window">
+        <div class="ro-titlebar"><span>Search</span><span class="ro-close"></span></div>
+        <div class="ro-body">
+          <input type="search" id="searchBox" class="search-box" placeholder="Search all data..." autocomplete="off">
+          <div class="search-results" id="searchResults"></div>
+        </div>
+      </section>
+    </aside>
+
+    <main>
+      <h2 class="ro-h" id="viewTitle">Loading</h2>
+      <div id="view">
+        <div class="loading">Reading data files...</div>
+      </div>
+    </main>
+
+  </div>
+
+  <footer class="footer">
+    Content lives in <strong>data/*.json</strong> &mdash; edit the JSON, reload the page. No build step, no framework, no CDN.
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

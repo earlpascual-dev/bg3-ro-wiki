@@ -1,0 +1,339 @@
+{
+  "meta": {
+    "startingPoint": "Written from your stated current state: party level 2, early Act 1, Astarion and Shadowheart recruited but unmodified, 4th slot empty. If you are further along, skip to the first task that is still undone — nothing here breaks if done late except the items marked MISSABLE.",
+    "respecCost": "Withers charges 100 gold per respec, every time, for any character including yourself. He must be recruited first (see task 1). There is no limit on how many times you respec.",
+    "pointOfNoReturn": "You can walk back to Act 1 zones during Act 2. You CANNOT return to Acts 1 or 2 once you travel to Act 3 (Rivington). Finish every Act 1 and Act 2 item on this list before that transition."
+  },
+  "tasks": [
+    {
+      "id": 1,
+      "order": 1,
+      "task": "Recruit Withers from the Dank Crypt",
+      "characterId": "party",
+      "act": 1,
+      "cost": "Free",
+      "warning": "Nothing else on this list works until he is at camp, and the Shadowheart respec is time-sensitive. Do this before you walk north to find Lae'zel.",
+      "detail": "The ornate stone door in the Overgrown Ruins, right by the Ravaged Beach (the door Shadowheart stands at if you did not free her on the nautiloid), leads down into the Dank Crypt. Explore to the back and open the sarcophagus — Withers is inside. He then appears at camp permanently. He provides respecs (100g), resurrection (200g), and hireling recruitment (100g each), and he is the single most important 'vendor' in the game for a build-focused playthrough.",
+      "done": false
+    },
+    {
+      "id": 2,
+      "order": 2,
+      "task": "Respec Shadowheart from Trickery to LIFE DOMAIN",
+      "characterId": "shadowheart",
+      "act": 1,
+      "cost": "100 gold",
+      "warning": "URGENT — Cleric subclass is locked at LEVEL 1 in BG3. Levelling up will never let you change it. Every level you gain as Trickery is a level you will pay to undo.",
+      "detail": "On respec pick: Domain LIFE. Cantrips Guidance, Sacred Flame, Resistance. Ability array STR 10 / DEX 14 / CON 15 / INT 8 / WIS 15 / CHA 8, then Half-Elf bonuses +2 CHA (forced) +1 CON +1 WIS. Prepared: Healing Word, Guiding Bolt, Command, Sanctuary (Bless is free from the domain).",
+      "done": false
+    },
+    {
+      "id": 3,
+      "order": 3,
+      "task": "Respec Astarion to fix his ability array (keep him Rogue)",
+      "characterId": "astarion",
+      "act": 1,
+      "cost": "100 gold",
+      "warning": "Optional but recommended now — his default spread wastes points, and respeccing later means re-picking more choices.",
+      "detail": "Array STR 8 / DEX 15 / CON 15 / INT 8 / WIS 14 / CHA 10, then High Elf +2 DEX +1 INT. Expertise: Stealth + Sleight of Hand. He stays Rogue — you pick Assassin at level 3, not now.",
+      "done": false
+    },
+    {
+      "id": 4,
+      "order": 4,
+      "task": "Decide and recruit your 4th slot (the Paladin body)",
+      "characterId": "paladin",
+      "act": 1,
+      "cost": "Free (companion) or 100 gold (hireling)",
+      "warning": "IRREVERSIBLE RECRUITMENT DECISIONS. At Lae'zel's cage the dialogue offers a branch where you side with the tieflings against her — taking it loses her permanently. Persuade them to leave, or fight them, then free the cage yourself.",
+      "detail": "RECOMMENDED — LAE'ZEL (Githyanki, +2 STR, best racial fit). DIRECTIONS FROM THE RAVAGED BEACH: head north-east and uphill, away from the water. Pass the Overgrown Ruins door, reach the Roadside Cliffs waypoint (Gale is here as a hand sticking out of a rune-covered rock — interact or you walk past him), then keep following the road. Lae'zel is in a cage strung between two trees on raised ground just off the path, guarded by two tieflings. If you hit the goblin-vs-tiefling fight at the Emerald Grove front gate, you have gone slightly too far. TWO BONUSES: Githyanki get Misty Step as a free racial cast around level 5, which stacks with the Ancients oath Misty Step for two slot-free teleports per rest; and her questline routes you to the Creche at Rosymorn Monastery, where the missable Blood of Lathander is (task 14). ALTERNATIVES: (b) Karlach on the Risen Road — great character, no STR racial. (c) A Withers hireling for 100g — no story, fully custom stats. AVOID MINTHARA for this build: recruiting her in Act 1 requires sacking the Emerald Grove, which is close to a textbook Oath of the Ancients break, and it permanently loses Halsin, Wyll, and the tiefling questlines.",
+      "done": false
+    },
+    {
+      "id": 5,
+      "order": 5,
+      "task": "Respec your 4th slot to Oath of the Ancients Paladin",
+      "characterId": "paladin",
+      "act": 1,
+      "cost": "100 gold",
+      "warning": "Paladin Oath is chosen at LEVEL 1 in BG3 (unlike tabletop). Breaking the Oath later turns them into an Oathbreaker and costs 1000g+ to restore.",
+      "detail": "Array STR 15 / DEX 10 / CON 14 / INT 8 / WIS 10 / CHA 14 plus racial to STR. Oath: ANCIENTS. Ancients tenets to avoid breaking: no cruelty, no killing surrendered or helpless creatures, no wanton destruction of nature, no betraying innocents.",
+      "done": false
+    },
+    {
+      "id": 6,
+      "order": 6,
+      "task": "Level everyone to 3 and lock in the subclasses",
+      "characterId": "party",
+      "act": 1,
+      "cost": "Free",
+      "warning": "Three subclass locks happen at once here. Each costs 100g to undo.",
+      "detail": "Main: Hunter subclass, then Hunter's Prey = HORDE BREAKER. Astarion: ASSASSIN. Shadowheart: no choice (Channel Divinity is automatic). Paladin: no choice (Channel Oath is automatic).",
+      "done": false
+    },
+    {
+      "id": 7,
+      "order": 7,
+      "task": "Buy Gloves of Archery and stock up on poison coatings",
+      "characterId": "main",
+      "act": 1,
+      "cost": "~200-400 gold",
+      "warning": null,
+      "detail": "Arron in the Emerald Grove is the main early vendor. Gloves of Archery (+2 ranged damage) for the main character; Basic and Malefic poison coatings for Astarion; every Diamond in stock for Shadowheart's Revivify. Vendors restock after each Long Rest.",
+      "done": false
+    },
+    {
+      "id": 8,
+      "order": 8,
+      "task": "Resolve the Emerald Grove — save the tieflings, get Hellrider's Pride",
+      "characterId": "shadowheart",
+      "act": 1,
+      "cost": "Free",
+      "warning": "MAJOR IRREVERSIBLE STORY FORK. Siding with the goblins destroys the Grove, permanently loses Wyll, Karlach's questline, Halsin, and the tiefling vendors — and would likely break your Paladin's Ancients Oath. Take the save-the-Grove path.",
+      "detail": "Zevlor rewards you with Hellrider's Pride gloves (creatures you heal gain Blade Ward). This is a core Shadowheart item.",
+      "done": false
+    },
+    {
+      "id": 9,
+      "order": 9,
+      "task": "Auntie Ethel — take the Hag's Hair and put it in the MAIN CHARACTER's DEXTERITY",
+      "characterId": "main",
+      "act": 1,
+      "cost": "Free",
+      "warning": "IRREVERSIBLE AND ONE PER PLAYTHROUGH. If you give this to a companion or spend it on a different stat, your level 8 feat lands on DEX 19 instead of 20 — the same modifier as 18, i.e. a completely wasted feat.",
+      "detail": "Sussur Bog, Auntie Ethel's teahouse. DEX 17 becomes 18, so the level 8 Ability Improvement takes you to 20. This is the single most important one-time item decision in your Act 1.",
+      "done": false
+    },
+    {
+      "id": 10,
+      "order": 10,
+      "task": "Level 4 feats — Sharpshooter and Alert",
+      "characterId": "party",
+      "act": 1,
+      "cost": "Free",
+      "warning": null,
+      "detail": "Main character: SHARPSHOOTER. Astarion: ALERT (his Assassinate needs him to win initiative — do not delay this). Shadowheart: WAR CASTER. Paladin: SENTINEL.",
+      "done": false
+    },
+    {
+      "id": 11,
+      "order": 11,
+      "task": "Zhentarim Hideout — buy the Titanstring Bow and Hill Giant Strength elixirs",
+      "characterId": "main",
+      "act": 1,
+      "cost": "~500-800 gold",
+      "warning": "The Zhentarim can be turned hostile by earlier choices in the Waukeen's Rest / Rescue-the-Zhent questline. If Brem is dead you lose this vendor permanently.",
+      "detail": "Titanstring Bow adds your STR modifier to ranged damage. At STR 8 that is -1, so it is only good WITH a Hill Giant Strength source. Buy elixirs at the same time. If juggling elixirs annoys you, skip Titanstring and wait for The Dead Shot in Act 2 — that is a legitimate simplification.",
+      "done": false
+    },
+    {
+      "id": 12,
+      "order": 12,
+      "task": "Underdark — Myconid Colony questline for the Strange Conduit Ring",
+      "characterId": "main",
+      "act": 1,
+      "cost": "Free",
+      "warning": "MISSABLE if you skip the Underdark entirely or side against the myconids.",
+      "detail": "+1d4 psychic damage while Concentrating — and you Concentrate on Hunter's Mark permanently, so it is +1d4 on every arrow. Also pick up the Amulet of Misty Step in this region.",
+      "done": false
+    },
+    {
+      "id": 13,
+      "order": 13,
+      "task": "Grymforge — Adamantine Forge, spend your Mithral Ore",
+      "characterId": "party",
+      "act": 1,
+      "cost": "Free (limited Mithral Ore)",
+      "warning": "ONE-TIME LIMITED RESOURCE. You can typically only forge 2 items in the whole game because Mithral Ore is that scarce. Choose deliberately.",
+      "detail": "Recommended: Adamantine SCALE MAIL for Shadowheart (medium armour, no STR requirement, cannot be critically hit — critical for the Warding Bond carrier) and Adamantine SPLINT ARMOUR for the Paladin (AC 18, cannot be critically hit). Skip the shield — your Paladin is two-handed.",
+      "done": false
+    },
+    {
+      "id": 14,
+      "order": 14,
+      "task": "Rosymorn Monastery — get The Blood of Lathander BEFORE leaving Act 1",
+      "characterId": "shadowheart",
+      "act": 1,
+      "cost": "Free",
+      "warning": "MISSABLE. Only reachable via the Mountain Pass / Githyanki Creche route. If you go to Act 2 through the Underdark and never come back, it is gone.",
+      "detail": "Legendary mace: +1d4 radiant, casts Sunbeam, and once per rest it revives the entire party at 1 HP instead of letting someone die. Solve the sunlight-and-mural puzzle at the top of the monastery.",
+      "done": false
+    },
+    {
+      "id": 15,
+      "order": 15,
+      "task": "Level 5 — the biggest power spike in the game",
+      "characterId": "party",
+      "act": 1,
+      "cost": "Free",
+      "warning": null,
+      "detail": "Main: Extra Attack + Spike Growth. Astarion: FIGHTER 1 multiclass dip, Two-Weapon Fighting (do not autopilot into Rogue 5). Shadowheart: SPIRIT GUARDIANS — her whole playstyle changes here. Paladin: Extra Attack, and Misty Step becomes available from the oath.",
+      "done": false
+    },
+    {
+      "id": 16,
+      "order": 16,
+      "task": "Start the camp buff routine every Long Rest",
+      "characterId": "shadowheart",
+      "act": 1,
+      "cost": "Free (spell slots)",
+      "warning": null,
+      "detail": "Every single morning: Warding Bond on the Paladin, Aid on the party, Longstrider on the party (main character), Hill Giant Strength elixir for the Paladin, and later Death Ward and Heroes' Feast. This routine is worth more than most items.",
+      "done": false
+    },
+    {
+      "id": 17,
+      "order": 17,
+      "task": "Astarion's Fighter dip completes — Action Surge and Champion",
+      "characterId": "astarion",
+      "act": 1,
+      "cost": "Free",
+      "warning": "Champion is a subclass lock (100g to undo). Also: at character level 8 you must switch BACK to Rogue.",
+      "detail": "Character level 6 = Fighter 2 (Action Surge). Character level 7 = Fighter 3, pick CHAMPION. Character level 8 onward = Rogue again, all the way to Rogue 9.",
+      "done": false
+    },
+    {
+      "id": 18,
+      "order": 18,
+      "task": "Sweep every remaining Act 1 vendor before crossing into Act 2",
+      "characterId": "party",
+      "act": 1,
+      "cost": "All your gold",
+      "warning": "SOFT POINT OF NO RETURN. You can technically walk back to Act 1 during Act 2, but it is a long trip and easy to forget. Clear the list now.",
+      "detail": "Confirm you have: Hag's Hair spent on main DEX, Hellrider's Pride, Whispering Promise, Strange Conduit Ring, Amulet of Misty Step, both Adamantine items forged, Blood of Lathander, a stack of Diamonds, and a stack of poison coatings and Hill Giant Strength elixirs.",
+      "done": false
+    },
+    {
+      "id": 19,
+      "order": 19,
+      "task": "Act 2 — Last Light Inn vendors, The Dead Shot and Cloak of Protection",
+      "characterId": "main",
+      "act": 2,
+      "cost": "~1000 gold",
+      "warning": "Last Light Inn can be destroyed by story events later in Act 2. Shop there EARLY, not late.",
+      "detail": "The Dead Shot (longbow with bonus to hit — offsets Sharpshooter's -5), Cloak of Protection, Boots of Stormy Clamour for Shadowheart, Callous Glow Ring.",
+      "done": false
+    },
+    {
+      "id": 20,
+      "order": 20,
+      "task": "Moonrise Towers — Araj Oblodra and the Risky Ring",
+      "characterId": "main",
+      "act": 2,
+      "cost": "Story cost, not gold",
+      "warning": "CONDITIONAL AND MISSABLE. She only trades the ring if Astarion agrees to let her drink his blood. This has an approval and story consequence with Astarion — read the dialogue before you commit.",
+      "detail": "Risky Ring grants ADVANTAGE ON ALL ATTACK ROLLS with disadvantage on saves. On a Sharpshooter build, permanent advantage is close to the best item in the game — and the Paladin's Aura of Protection plus Bless largely covers the save penalty.",
+      "done": false
+    },
+    {
+      "id": 21,
+      "order": 21,
+      "task": "Gauntlet of Shar — Shadowheart's questline and Dark Justiciar gear",
+      "characterId": "shadowheart",
+      "act": 2,
+      "cost": "Free",
+      "warning": "MAJOR IRREVERSIBLE STORY FORK for Shadowheart at the end of this questline. It affects her available gear, her personal arc, and later the Mirror of Loss interaction in Act 3.",
+      "detail": "Compare Dark Justiciar Half-Plate against Adamantine Scale Mail before swapping — the 'cannot be critically hit' clause is often still better on the Warding Bond carrier.",
+      "done": false
+    },
+    {
+      "id": 22,
+      "order": 22,
+      "task": "Level 8 feats",
+      "characterId": "party",
+      "act": 2,
+      "cost": "Free",
+      "warning": null,
+      "detail": "Main: Ability Improvement +2 DEX (18 to 20 — this only works if the Hag's Hair went into DEX). Astarion: this is Rogue 5, no feat yet. Shadowheart: +2 WIS. Paladin: this is Fighter 2, no feat yet.",
+      "done": false
+    },
+    {
+      "id": 23,
+      "order": 23,
+      "task": "Paladin Fighter dip completes — Battle Master maneuvers",
+      "characterId": "paladin",
+      "act": 2,
+      "cost": "Free",
+      "warning": "Battle Master is a subclass lock. Also remember to switch back to Paladin at character level 10.",
+      "detail": "Character level 7 = Fighter 1 (Defence style). Level 8 = Fighter 2 (Action Surge). Level 9 = Fighter 3, BATTLE MASTER, maneuvers = GOADING ATTACK, TRIP ATTACK, RIPOSTE. Level 10 onward = Paladin again.",
+      "done": false
+    },
+    {
+      "id": 24,
+      "order": 24,
+      "task": "Finish all Act 2 business — HARD POINT OF NO RETURN AHEAD",
+      "characterId": "party",
+      "act": 2,
+      "cost": "Free",
+      "warning": "ONCE YOU TRAVEL TO ACT 3 (RIVINGTON) YOU CAN NEVER RETURN TO ACT 1 OR ACT 2. Every unbought item, unfinished companion quest, and unlooted area is permanently gone.",
+      "detail": "Final Act 2 sweep: all vendors emptied, all companion quests advanced, Gauntlet of Shar complete, Risky Ring decided, and everyone at level 9-10.",
+      "done": false
+    },
+    {
+      "id": 25,
+      "order": 25,
+      "task": "Level 11 — Volley and Polearm Master come online",
+      "characterId": "party",
+      "act": 3,
+      "cost": "Free",
+      "warning": null,
+      "detail": "Main: Hunter Multiattack = VOLLEY (not Whirlwind Attack — that is the melee version). Astarion: Rogue 8 feat = +2 DEX. Shadowheart: 6th-level spells, Heroes' Feast. Paladin: Paladin 8 feat = POLEARM MASTER (confirm he is holding a glaive or halberd first).",
+      "done": false
+    },
+    {
+      "id": 26,
+      "order": 26,
+      "task": "Act 3 — Raphael's House of Hope heist",
+      "characterId": "party",
+      "act": 3,
+      "cost": "Ritual components from Helsik (~2000 gold)",
+      "warning": "MISSABLE AS A BUNDLE. Skipping the House of Hope loses you Helldusk Armour, Gloves of Soul Catching, AND the Amulet of Greater Health in one go. This is the highest-value single location in the game.",
+      "detail": "Access via Helsik at the Devil's Fee in the Lower City (buy the ritual components) or via Raphael's deal path. Loot the vault. Amulet of Greater Health goes to SHADOWHEART (CON 23 fixes her Warding Bond survivability and her Concentration in one item), Helldusk Armour and Gloves of Soul Catching to the Paladin.",
+      "done": false
+    },
+    {
+      "id": 27,
+      "order": 27,
+      "task": "Act 3 — Temple of Bhaal for Bhaalist Armour, Crimson Mischief and Bloodthirst",
+      "characterId": "astarion",
+      "act": 3,
+      "cost": "Free",
+      "warning": "Tied to the Orin / Murder Tribunal questline. Do not resolve Orin before looting the temple area.",
+      "detail": "Bhaalist Armour makes nearby enemies VULNERABLE to piercing damage — it doubles Astarion's dagger damage and his entire 5d6 Sneak Attack. Crimson Mischief and Bloodthirst are the piercing daggers that exploit it. This is his endgame package and it roughly doubles his output.",
+      "done": false
+    },
+    {
+      "id": 28,
+      "order": 28,
+      "task": "Act 3 — Mirror of Loss beneath Sharess' Caress",
+      "characterId": "party",
+      "act": 3,
+      "cost": "Free",
+      "warning": "IRREVERSIBLE, once per character. STORY WARNING: using it has consequences for Shadowheart's personal arc depending on where her questline stands. Read the prompt carefully before letting her use it.",
+      "detail": "Permanent +2 to one ability score. Main character: DEX if not yet at 20, otherwise CON or WIS. Astarion: DEX (17+2 ASI = 19, +2 here = 21, breaking the normal cap). Paladin: CHA (bigger Aura of Protection for the whole party) or STR.",
+      "done": false
+    },
+    {
+      "id": 29,
+      "order": 29,
+      "task": "Astarion's Ascension decision",
+      "characterId": "astarion",
+      "act": 3,
+      "cost": "Free",
+      "warning": "PERMANENT AND STORY-DEFINING. Ascending grants +2 to ALL ability scores and other combat bonuses — mechanically it is a large power increase. It is also the darker resolution of his arc and it changes his ending and his relationship outcomes. Decide on the story you want, not the stat line.",
+      "detail": "Mechanically: +2 to every stat is roughly two free feats. Narratively: it is the opposite of the redemption ending. There is no way to have both. This is flagged because it is the single biggest optional power decision left in the game and it is easy to stumble into during the ritual scene.",
+      "done": false
+    },
+    {
+      "id": 30,
+      "order": 30,
+      "task": "Level 12 — final feats",
+      "characterId": "party",
+      "act": 3,
+      "cost": "Free",
+      "warning": "Level 12 is the cap. There is nothing after this.",
+      "detail": "Main: ALERT (or Lucky). Astarion: Rogue 9 for 5d6 Sneak Attack — or take Fighter 4 instead for a third feat, which is honestly the stronger option. Shadowheart: +2 WIS to 20 (or Tough if Warding Bond keeps killing her). Paladin: this is Paladin 9, 3rd-level spell slots for bigger Divine Smites.",
+      "done": false
+    }
+  ]
+}

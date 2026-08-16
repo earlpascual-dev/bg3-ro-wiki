@@ -1,0 +1,166 @@
+{
+  "meta": {
+    "actionEconomy": "Every turn you get exactly: 1 Action, 1 Bonus Action, 1 Movement, and 1 Reaction (used on someone else's turn). There is no cast time, no ASPD, no delay. 'Rotation' in BG3 means 'how do I spend these four things', not 'what order do I mash keys'.",
+    "concentrationRule": "One Concentration spell per character at a time. Casting a second one cancels the first. This is the hardest constraint in the game and most rotation mistakes are Concentration mistakes.",
+    "restRule": "Short Rest (2 per day) recharges Action Surge, Channel Divinity, Channel Oath, Second Wind, and some item charges. Long Rest recharges spell slots and advances the story. Take short rests aggressively — hoarding them is a beginner mistake."
+  },
+  "rotations": [
+    {
+      "characterId": "main",
+      "name": "Sniper — Hunter Ranger 12",
+      "preCombat": [
+        "Drink an Elixir of Hill Giant Strength if you are running the Titanstring Bow (this lasts until Long Rest, so do it at camp).",
+        "Cast Longstrider on the whole party (lasts until Long Rest, free out of combat).",
+        "Summon your Beast Tamer familiar (Find Familiar) — it persists and costs nothing to keep.",
+        "Position on HIGH GROUND before triggering the fight. Sharpshooter removes the high-ground penalty and elevation gives you range and line of sight.",
+        "Ungroup from the party and sneak into position separately, then let Astarion open."
+      ],
+      "opener": [
+        "Turn 1, Bonus Action: Hunter's Mark on the most dangerous single target (or skip it if you are opening with Volley — see note).",
+        "Turn 1, Action: if 3 or more enemies are within a radius, VOLLEY. Otherwise attack twice with the longbow.",
+        "Horde Breaker fires automatically on your first attack if a second enemy is adjacent to your target — no button, it just happens once per turn.",
+        "Make sure Sharpshooter is TOGGLED ON before you shoot. Check the toggle every fight; it does not persist reliably through reloads.",
+        "Have the familiar use Help on an adjacent ally for advantage if it has nothing better to do."
+      ],
+      "sustain": [
+        "Action: 2 longbow attacks (Extra Attack), plus the free Horde Breaker attack on a second adjacent enemy.",
+        "Bonus Action: re-cast Hunter's Mark on a new target when the marked one dies (this is free targeting, not a new slot, once the target dies).",
+        "Movement: stay at range and stay elevated. Never end your turn within reach of a melee enemy.",
+        "Toggle Sharpshooter OFF against high-AC targets — if you are missing more than half your shots, the -5 is costing you damage, not adding it.",
+        "Switch to Volley the moment 3+ enemies cluster, then back to normal attacks when they spread."
+      ],
+      "panic": [
+        "Melee has reached you: Bonus Action Misty Step (Amulet of Misty Step) to a ledge, then shoot. This does not provoke opportunity attacks.",
+        "No Misty Step available: Disengage (Action) and walk out — Escape the Horde gives enemies disadvantage on opportunity attacks against you anyway.",
+        "Multiple enemies incoming down a lane: cast Spike Growth across the lane. They take damage per metre and are slowed to a crawl.",
+        "One dangerous melee enemy: Ensnaring Strike to Restrain it. Note this REPLACES Hunter's Mark as your Concentration.",
+        "Enemy casters ruining you: Silence centred on the caster group. No saving throw, no spells.",
+        "Low HP: drink a potion (Bonus Action) or retreat behind the Paladin and let Shadowheart's Healing Word reach you."
+      ],
+      "notes": [
+        "VOLLEY vs NORMAL ATTACKS: Volley replaces your attack Action, so it is Volley OR (2 attacks + Horde Breaker). Volley wins at 3+ targets, loses at 1-2. Do the count before you click.",
+        "Volley does not proc Horde Breaker and only applies Hunter's Mark to the marked target — but every Volley hit is a real attack roll, so Sharpshooter, Gloves of Archery, Strange Conduit, and Callous Glow all apply to EVERY hit.",
+        "Conjure Barrage (levels 9-10) is a flat spell that ignores all your damage riders. It is a slot-burn for packed groups, not a rotation staple. Once Volley comes online at 11, Conjure Barrage is nearly retired.",
+        "ANALOGY BREAK: there is no 'spam'. Your damage per turn is fixed by your attack count. The way you increase DPS is by increasing accuracy (Bless, advantage, Archery style) so fewer attacks miss — not by attacking faster."
+      ]
+    },
+    {
+      "characterId": "astarion",
+      "name": "Assassin Cross — Assassin Rogue 9 / Champion Fighter 3",
+      "preCombat": [
+        "Apply a weapon coating (Basic/Malefic/Drow Poison, or Oil of Sharpness) as a Bonus Action — do this OUT of combat so it does not cost you a turn.",
+        "Ungroup from the party and Hide (he has Stealth expertise; nobody else should be sneaking with him).",
+        "Move into flanking or backstab position BEFORE the fight starts. Position is worth more than any item on this character.",
+        "If the party has Pass Without Trace up (+10 Stealth), move the whole party into position for a Surprise round — Surprised enemies take AUTOMATIC CRITS from Assassinate."
+      ],
+      "opener": [
+        "This is the whole build. Execute it correctly and the fight is usually decided in round one.",
+        "Alert guarantees he acts first. Assassinate grants ADVANTAGE against every creature that has not yet taken a turn — which on round one is all of them.",
+        "Action: main-hand attack. Sneak Attack applies automatically (5d6 at level 12) because you have advantage.",
+        "Action Surge (free, no action cost): a SECOND full Action — attack again. Note Sneak Attack has already been used this turn, so this hit is smaller.",
+        "Bonus Action: off-hand dagger attack (+DEX damage from Two-Weapon Fighting).",
+        "That is 3 attacks in round one, all with advantage, all with Champion's 19-20 crit range. Against a Surprised target every one of them is an automatic critical hit and the Sneak Attack dice double."
+      ],
+      "sustain": [
+        "Rounds 2+, Assassinate is OFF (everything has acted). You now need advantage from another source to keep Sneak Attack online.",
+        "Source 1 — an ally within 1.5m of your target. If the Paladin is in melee with it, you get Sneak Attack with no extra work. This is the easiest and most reliable option.",
+        "Source 2 — Bonus Action: Hide (Cunning Action), then attack next turn with advantage. Costs you the off-hand attack.",
+        "Source 3 — attack a Prone target (Paladin's Trip Attack) or a Restrained target (main character's Ensnaring Strike).",
+        "Default sustain turn: Action attack + Bonus Action off-hand attack, standing next to the Paladin's target."
+      ],
+      "panic": [
+        "Being focused: Uncanny Dodge (Reaction) halves the damage of one incoming attack. It is automatic-prompt — say yes to the biggest hit.",
+        "Surrounded: Bonus Action Disengage (Cunning Action) and move out. No opportunity attacks.",
+        "Low HP: Bonus Action Second Wind (from the Fighter dip) to self-heal, or a potion.",
+        "Caught in an AoE: Evasion (level 10) means a successful DEX save takes ZERO damage. Do not panic about fireballs.",
+        "Really bad: Bonus Action Hide, break line of sight, and let the fight come to the Paladin instead."
+      ],
+      "notes": [
+        "SNEAK ATTACK FIRES ONCE PER TURN, not per attack. Extra attacks exist to give you more CHANCES to land it, not to stack it. This is the biggest break from Sonic Blow.",
+        "Sneak Attack in BG3 is a separate button (Sneak Attack: Melee) as well as an automatic rider — using the explicit button guarantees it applies to that specific hit. Use the button on your highest-advantage attack.",
+        "Action Surge recharges on a SHORT REST. Use it every meaningful fight. There is no reason to save it.",
+        "If you find yourself never getting the round-one alpha strike (walking into fights, losing initiative), the Assassin subclass is doing nothing for you — respec to Thief for a permanent second Bonus Action instead. That is a 100g fix, not a failure."
+      ]
+    },
+    {
+      "characterId": "shadowheart",
+      "name": "High Priest — Life Domain Cleric 12",
+      "preCombat": [
+        "AT CAMP, EVERY MORNING — this is a checklist, run it every long rest:",
+        "1. Warding Bond on the Paladin (lasts until Long Rest, no Concentration). He takes half damage; she takes the other half.",
+        "2. Aid on the party (+5 max HP each, more at higher slots, lasts until Long Rest).",
+        "3. Death Ward on the Paladin and on Astarion (level 7+, survives one lethal hit, lasts until Long Rest).",
+        "4. Heroes' Feast (level 11+) for party-wide bonus HP and immunities.",
+        "5. Confirm she is carrying at least 3 Diamonds for Revivify.",
+        "Guidance before every out-of-combat skill check. It costs nothing. Just do it."
+      ],
+      "opener": [
+        "Turn 1, Action: cast Spirit Guardians and walk INTO the enemy pack. It damages everything around her at the start of their turns and halves their movement.",
+        "Alternative turn 1 if the party needs accuracy more than she needs damage: cast Bless on the main character, Astarion, and the Paladin. Bless is +1d4 to attack rolls and saves for 3 allies.",
+        "YOU CANNOT DO BOTH — Bless and Spirit Guardians both need Concentration.",
+        "The workaround: equip Whispering Promise, then heal an ally for 1 HP with a Bonus Action Healing Word. That grants Bless via the ring WITHOUT using her Concentration, leaving Spirit Guardians up.",
+        "Turn 2, Action: cast Spiritual Weapon (a floating mace). It costs a slot once, needs no Concentration, and attacks as a Bonus Action for the rest of the fight."
+      ],
+      "sustain": [
+        "Movement: walk her through the enemy formation. Spirit Guardians damages everything she passes and slows it.",
+        "Bonus Action: Spiritual Weapon attack (free damage, every single turn).",
+        "Action: Sacred Flame at range, or Guiding Bolt on a priority target (grants advantage to the next attacker — feed it to Astarion), or Hold Person on a dangerous humanoid.",
+        "Hold Person is the best thing she does offensively: a Paralysed humanoid takes AUTOMATIC CRITICAL HITS from every melee attack. Hold Person into Astarion's Sneak Attack is a delete button.",
+        "Reaction: with War Caster she can cast a spell as an opportunity attack instead of a weapon swing."
+      ],
+      "panic": [
+        "An ally is DOWNED (on the floor, rolling death saves): Bonus Action Healing Word at range. 1 HP is enough to stand them up. This is the single most important button she has.",
+        "An ally actually DIED: Revivify (Action, consumes a Diamond).",
+        "Several allies badly hurt: Channel Divinity — Preserve Life. No spell slot, heals the party up to half max HP. Two charges per short rest from level 6.",
+        "Maximum emergency: Beacon of Hope first (all healing maximised), then Preserve Life. This is the wipe-preventer.",
+        "SHE is being focused: cast Sanctuary on herself — enemies must pass a save to even target her, and it breaks only if she attacks. She can still heal and buff under Sanctuary.",
+        "One enemy is too strong: Banishment (level 7+). On a failed CHA save it leaves the fight entirely."
+      ],
+      "notes": [
+        "WARDING BOND IS A DAMAGE SPLIT, NOT A REDUCTION. If the Paladin takes 40, he takes 20 and she takes 20. The build wins because she has high CON, the Amulet of Greater Health (CON 23), anti-crit armour, and Blessed Healer feeding her HP back — not because the damage disappears.",
+        "If she is dying to Warding Bond, that is a signal to fix HER defences, not to drop the bond.",
+        "HEALING IS WEAK IN BG3. Do not spend Actions topping people off. Spend Actions on Spirit Guardians damage and control; spend BONUS Actions on Healing Word to pick people up off the floor. Prevention beats healing by a wide margin here — this is a real departure from RO Full Support.",
+        "Prepared spells can be swapped for free outside combat. Re-tune her list before big fights: more control for boss fights, more healing for attrition fights."
+      ]
+    },
+    {
+      "characterId": "paladin",
+      "name": "Crusader — Oath of the Ancients 9 / Battle Master Fighter 3",
+      "preCombat": [
+        "Drink an Elixir of Hill Giant Strength (sets STR to 21, lasts until Long Rest). Do this every morning at camp.",
+        "Confirm Shadowheart has Warding Bond on him and Death Ward up.",
+        "Identify the CHOKEPOINT before the fight starts — a doorway, a bridge, a narrow ledge, the top of a staircase. Your entire value is standing in it.",
+        "Confirm he is holding a glaive or halberd, not a greatsword. Polearm Master does nothing with the wrong weapon."
+      ],
+      "opener": [
+        "Turn 1, Movement or Bonus Action: Misty Step (free from the Ancients oath) directly into the chokepoint. This is faster and safer than walking.",
+        "Turn 1, Action: attack twice (Extra Attack). Use GOADING ATTACK (Battle Master maneuver) on one of them — the target gets disadvantage attacking anyone but you.",
+        "Bonus Action: Polearm Master butt-end attack (1d4 + STR). That is 3 attacks on turn one.",
+        "Alternative turn 1 against a single dangerous enemy: cast Compelled Duel (Action) instead — it stops the target moving away from you and gives it disadvantage against everyone else. It is a WIS save, so use it on low-WIS bruisers, not on casters.",
+        "If several enemies are clumped: Channel Oath — Nature's Wrath to Restrain them in place."
+      ],
+      "sustain": [
+        "Stand still. Do not chase. The whole point is that enemies have to come to you and cannot get past.",
+        "Action: 2 attacks. Add a maneuver when it is worth a Superiority Die — Trip Attack to knock something Prone (everyone then hits it with advantage), Goading Attack to redirect a new arrival.",
+        "Bonus Action: Polearm Master butt-end attack, every single turn, for free.",
+        "Reaction — this is where the build actually lives. Polearm Master gives you an opportunity attack when an enemy ENTERS your reach. If that attack hits, Sentinel sets its speed to ZERO. It is now stuck 3 metres away from your squishies, unable to advance.",
+        "Reaction alternative: Riposte when an enemy misses you, or Sentinel's free attack when something swings at an ally within your reach.",
+        "DIVINE SMITE DISCIPLINE: only smite on CRITICAL HITS (the dice double) or to finish a dangerous enemy. Smiting every hit empties your slots by round three."
+      ],
+      "panic": [
+        "Low HP: Lay on Hands (Bonus Action pool of healing — he heals himself and it also cures disease/poison).",
+        "Still low: Second Wind (Bonus Action, from the Fighter dip, recharges on a short rest).",
+        "Getting overwhelmed at the chokepoint: Action Surge for two extra attacks to clear the pressure, or use it to Dash out and re-establish somewhere better.",
+        "The line has broken and enemies are past you: Misty Step behind them, or Compelled Duel the fastest one to drag it back.",
+        "Enemy caster is nuking the clustered party: your Aura of Warding (level 10) already halves it — move TOWARD the party, not away, so everyone is inside the radius.",
+        "About to die with allies down: Channel Oath, or just accept a downed turn — Shadowheart's Healing Word is a Bonus Action and she can pick you up from across the map."
+      ],
+      "notes": [
+        "THE LOCKDOWN COMBO, IN ORDER: enemy walks toward your party → it enters your 3m glaive reach → Polearm Master grants you an opportunity attack → the hit triggers Sentinel → its movement drops to 0 for the rest of its turn → it is stranded in front of you. Repeat for every enemy that tries to walk past. This is the closest BG3 has to a hard taunt.",
+        "ANALOGY BREAK — PROVOKE IS NOT A TAUNT. Compelled Duel and Goading Attack both allow saving throws and both only impose DISADVANTAGE on attacking others; a determined enemy can still ignore you and hit your archer. BG3 has no forced-target mechanic at all. You control enemies with geometry (chokepoints, reach, Sentinel) far more than with 'taunt' abilities. If you try to play this like RO Provoke you will be disappointed.",
+        "ANALOGY BREAK — DEVOTION IS INVERTED. In RO the Crusader casts Devotion outward onto others. Here he RECEIVES Warding Bond from Shadowheart. He is the protected one, not the protector, in that specific mechanic.",
+        "Positioning priority when you cannot have everything: (1) block the lane to Shadowheart and the main character, (2) stay within aura range of the party, (3) deal damage. Damage is third."
+      ]
+    }
+  ]
+}

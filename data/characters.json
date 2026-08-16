@@ -1,0 +1,814 @@
+{
+  "meta": {
+    "title": "Geffen Codex — BG3 Party Build Wiki",
+    "subtitle": "A Ragnarok Online player's guide to a locked-in Baldur's Gate 3 party",
+    "levelCap": 12,
+    "assumptions": [
+      "Party level 2, early Act 1 (Emerald Grove era). Adjust the checklist start point if you are further along.",
+      "Difficulty assumed Balanced or Tactician. Nothing here is Honour-mode-illegal, but Honour mode gives bosses Legendary Actions — the Paladin's chokepoint plan matters more there, not less.",
+      "Level cap is 12. Every build below is a complete 12-level plan with nothing left over.",
+      "Main character race assumed Wood Elf (+2 DEX / +1 WIS). If yours differs, the stat table's 'base' column still holds — only the racial row changes."
+    ],
+    "irreversibleMeaning": "In BG3 almost every CLASS choice can be undone by paying Withers 100 gold to respec. 'Irreversible' on a level row means 'locked until you pay for a respec' — think RO skill reset via Neuralizer, not a permanent mistake. The genuinely permanent things (one-time items, story locks, recruits) are flagged in the Checklist instead.",
+    "gearDisclaimer": "Gear locations are written from knowledge of a patched game and Larian moves vendors and loot between patches. Treat every location as 'verify in-game' rather than gospel. The ITEM EFFECTS are what the build depends on — if an item moved, the effect is still what you are shopping for.",
+    "provenance": {
+      "summary": "This wiki was written entirely from the author's recall of Baldur's Gate 3. NO SOURCE WAS CONSULTED while writing it — not bg3.wiki, not the game files, not a guide. There is no citation list. Treat it as an experienced player's notes written from memory, not as a reference work. The confidence tiers below tell you which parts are worth double-checking and in what order.",
+      "patchRisk": "Written against knowledge current to roughly May 2026. BG3 has patched repeatedly since launch, and Patch 8 in particular added around a dozen new subclasses — believed to include Swarmkeeper (Ranger), Arcane Archer (Fighter), Swashbuckler (Rogue), Oath of the Crown (Paladin) and Death Domain (Cleric). If you are on that patch, every 'alternatives I am rejecting' list in this wiki is INCOMPLETE. Swashbuckler in particular is a serious competitor for Astarion's Rogue slot and does not appear in his level 3 alternatives at all.",
+      "high": [
+        "Class feature levels: Extra Attack at Ranger 5, Volley at Hunter 11, Conjure Barrage at Ranger 9, Assassin at Rogue 3, Cunning Action at Rogue 2, Uncanny Dodge at 5, Evasion at 7, Action Surge at Fighter 2, Aura of Protection at Paladin 6.",
+        "Feats arrive at class levels 4, 8 and 12 — which is why the Rogue 9 / Fighter 3 split yields only two feats.",
+        "Sharpshooter is -5 to hit for +10 damage and is a toggle. Sneak Attack fires once per turn, not per hit. One Concentration spell at a time. Level cap is 12.",
+        "The BG3-specific deviations from tabletop: Cleric subclass locks at LEVEL 1, and Paladin Oath is chosen at LEVEL 1. Both differ from 5e, where they are picked at level 3.",
+        "Point-buy budget of 27 with 14 costing 7 and 15 costing 9, and the racial bonus spreads used in the stat tables.",
+        "Major world locations: Withers in the Dank Crypt under the Overgrown Ruins, Lae'zel caged and guarded by two tieflings north of the beach, Gale at Roadside Cliffs, the Adamantine Forge in Grymforge, the House of Hope reached via Helsik's ritual."
+      ],
+      "medium": [
+        "Exact number of spells known at each Ranger level.",
+        "The precise domain spell pairings granted at each Life Domain and Oath of the Ancients tier.",
+        "How Divine Intervention's choice actually presents itself at Cleric 10.",
+        "Whether Heroes' Feast consumes a material component in the current build."
+      ],
+      "low": [
+        "FAVOURED ENEMY AND NATURAL EXPLORER option names and effects. This was the weakest recall in the whole document — the text hedges toward 'low stakes, pick anything' partly because the exact menu could not be recalled cleanly. Verify this at character level 1.",
+        "EVERY VENDOR NAME AND ITEM LOCATION in the Gear section. Gloves of Archery on Arron, the seller of Whispering Promise, the Amulet of Misty Step, Callous Glow Ring, Boots of Stormy Clamour, The Dead Shot and Killer's Sweetheart are all best-effort.",
+        "Gontr Mael's location specifically — flagged in the gear notes as moving between patches.",
+        "All gold prices are rough estimates."
+      ],
+      "verifyOrder": [
+        "1. The four irreversible subclass locks: Life Domain at Cleric 1, Ancients at Paladin 1, Assassin at Rogue 3, Champion at Fighter 3. Each costs 100g to undo.",
+        "2. The Hag's Hair to DEX chain, because the level 8 Ability Improvement depends on DEX landing on 18 rather than 17.",
+        "3. The Favoured Enemy and Natural Explorer menus at level 1 — the weakest section here.",
+        "4. Gear locations lazily, act by act, as you reach them. Do not pre-verify all 37 items.",
+        "GOLDEN RULE: whatever the level-up screen or the vendor's inventory actually shows you overrides this wiki. If the game disagrees, the game is right."
+      ]
+    },
+    "progressionPrimer": [
+      "NO STAT POINTS ON LEVEL UP. This is the biggest break from RO. Your six ability scores are set at character creation and never rise from levelling. They change only at class levels 4, 8 and 12 (where a feat can be traded for +2), and from two one-time items — Auntie Ethel's Hag's Hair (+1, Act 1) and the Mirror of Loss (+2, Act 3). There is no 'I will fix my DEX later'.",
+      "NO SKILL POINTS AND NO SKILL TREE. You do not spend anything. The game hands you specific features at specific levels. Most level-ups present NO choice at all — you read what you gained and click Next.",
+      "ONLY ABOUT HALF YOUR LEVELS ARE ACTUAL DECISIONS. The rest are automatic. Knowing which is which is most of what 'planning a build' means in BG3.",
+      "RESPEC IS 100 GOLD AND UNLIMITED. Withers at camp rebuilds any character from scratch, as many times as you like. In RO a skill reset is a big deal; here it is pocket change. No CLASS choice in this wiki is ever truly permanent — subclass locks just mean 'costs 100g to change'.",
+      "WHAT IS ACTUALLY PERMANENT: one-time items (Hag's Hair, Mirror of Loss, your limited Adamantine forgings), story forks, and companion recruitment. Guard those. Relax about everything else.",
+      "THE CAP IS 12, reached around the middle of Act 3. There is no grind to 99, no rebirth. You stop levelling with a good chunk of game left, and GEAR is the entire back half of your power curve — which is why the gear list matters more than it would in RO.",
+      "SPELLS: Clerics and Paladins PREPARE spells and can re-pick the whole list for free any time outside combat, so those choices are never commitments. Rangers KNOW spells and can only swap them on level-up — so Ranger spell picks are semi-permanent, and they are the only spell choices in this party worth pausing over.",
+      "MULTICLASSING IS THE JOB-CHANGE MOMENT, and it is a misclick risk. On the levels where Astarion or the Paladin dips into Fighter, the level-up screen defaults to continuing their current class. You must actively pick the other class — and then actively pick the ORIGINAL class again when the dip is done."
+    ],
+    "analogyTopLevel": [
+      "The single biggest break from RO: BG3 has no cast time, no ASPD, no delay. Everything is 1 Action + 1 Bonus Action + 1 Movement per turn. Your DPS ceiling is 'how many attack rolls can I buy per turn', not 'how fast can I spam'.",
+      "There is no SP pool. Spell slots are per-rest charges, closer to RO consumables than to SP. Running dry means resting, not sitting.",
+      "There is no EXP penalty for party size and no leech — everyone in the party of 4 gets full XP. Bench swapping costs nothing.",
+      "Levels stop at 12. There is no 99/70 grind, no rebirth. Gear, not levels, is your progression curve for most of the game."
+    ]
+  },
+  "characters": [
+    {
+      "id": "main",
+      "name": "Sniper",
+      "roClass": "Sniper",
+      "bg3Build": "Hunter Ranger 12",
+      "role": "AoE DPS / Ranged Carry",
+      "badge": "sniper",
+      "summary": "A pure single-class Ranger. Falcon-less, but Beast Tamer gives you a familiar that plays the Falcon's support role. Your whole game is: stand far away on high ground, toggle Sharpshooter, and convert one Action into as many attack rolls as the party can buy you.",
+      "stats": { "str": 8, "dex": 17, "con": 14, "int": 8, "wis": 15, "cha": 12 },
+      "statNotes": {
+        "str": "Dumped. Only cost is carry weight and Athletics (shoving). Let the Paladin shove things.",
+        "dex": "Primary. Attack rolls, damage, AC, initiative, and Stealth all key off this. Target 20 by level 8.",
+        "con": "14 is the floor. Concentration saves for Hunter's Mark and Ensnaring Strike live here, plus HP.",
+        "int": "Dumped. Only Arcana checks. Nothing in the build touches it.",
+        "wis": "15 sets your spell save DC for Ensnaring Strike and Conjure Barrage, and drives Perception (trap and ambush detection).",
+        "cha": "12 is deliberate — the main character does almost all the dialogue in BG3. +1 Persuasion is worth more here than a 16th point of CON."
+      },
+      "statPlan": [
+        "Point-buy base (27 points): STR 8, DEX 15, CON 14, INT 8, WIS 14, CHA 12.",
+        "Wood Elf racial: +2 DEX, +1 WIS. Result: STR 8, DEX 17, CON 14, INT 8, WIS 15, CHA 12.",
+        "Auntie Ethel's Hag's Hair (Act 1, one per playthrough) into DEX: 17 to 18.",
+        "Level 8 Ability Improvement +2 DEX: 18 to 20. This is why the hair MUST go to DEX and not to anyone else."
+      ],
+      "roMapping": [
+        { "roSkill": "Double Strafe", "bg3": "Your basic 2 attacks after Extra Attack (level 5)", "breaks": "No SP cost, no cast delay — but you only get ONE Action, so it is 2 shots per turn and that is the cap until Volley." },
+        { "roSkill": "Arrow Shower", "bg3": "Conjure Barrage (Ranger 9)", "breaks": "Fires from YOU in a cone, not placed on a target cell. It is a spell slot, not spammable, and enemies get a DEX save for half." },
+        { "roSkill": "Sharp Shooting", "bg3": "Volley (Hunter 11)", "breaks": "Volley is the real AoE workhorse — it hits every enemy in a radius with a SEPARATE attack roll each, so Sharpshooter and all your damage riders apply to every hit. Nothing in RO is this good." },
+        { "roSkill": "Blitz Beat", "bg3": "Horde Breaker (Hunter's Prey, level 3)", "breaks": "No falcon, no proc chance, no AGI scaling. It is a guaranteed free extra attack once per turn against a DIFFERENT enemy standing next to your target." },
+        { "roSkill": "Falcon", "bg3": "Beast Tamer familiar (Natural Explorer, level 1)", "breaks": "It does not auto-attack for you. Its job is the Help action to grant advantage, and body-blocking. It is a utility pet, not a damage pet." },
+        { "roSkill": "Trap line / Land Mine", "bg3": "Spike Growth + Ensnaring Strike", "breaks": "No trap items to farm, no placement charges. Spike Growth is a persistent damaging zone — the closest thing to a trap field you get." }
+      ],
+      "levels": [
+        {
+          "level": 1,
+          "menu": "Ranger — Favoured Enemy, then Natural Explorer",
+          "choice": "Favoured Enemy: Bounty Hunter | Natural Explorer: Beast Tamer",
+          "alternatives": ["Favoured Enemy: Ranger Knight", "Favoured Enemy: Keeper of the Veil", "Favoured Enemy: Mage Breaker", "Favoured Enemy: Sanctified Stalker", "Natural Explorer: Urban Tracker", "Natural Explorer: Wasteland Wanderer (Fire / Cold / Poison)"],
+          "reasoning": "Beast Tamer grants Find Familiar — a free pet that can Help an adjacent ally every single round, which is a permanent advantage engine for Astarion and for you.",
+          "details": [
+            "Favoured Enemy is genuinely low-stakes for an archer — none of the five options change your damage rotation. Bounty Hunter is picked here for the skill proficiency only.",
+            "Ranger Knight is the only one that changes your gear options (heavy armour proficiency). SKIP IT: at STR 8 heavy armour just slows your movement, and you want DEX-scaling medium armour anyway.",
+            "Wasteland Wanderer: Fire is the honourable-mention Natural Explorer — Act 1 is full of burning ground and the Underdark is full of fire. Take it at level 10 instead."
+          ],
+          "irreversible": true
+        },
+        {
+          "level": 2,
+          "menu": "Fighting Style, then Spells Known (pick 2)",
+          "choice": "Fighting Style: Archery | Spells: Hunter's Mark, Ensnaring Strike",
+          "alternatives": ["Fighting Style: Defence", "Fighting Style: Dueling", "Fighting Style: Two-Weapon Fighting", "Spells: Longstrider", "Spells: Cure Wounds", "Spells: Hail of Thorns", "Spells: Speak with Animals"],
+          "reasoning": "Archery is +2 to every ranged attack roll for the whole game and directly offsets Sharpshooter's -5; it is not optional for this build.",
+          "details": [
+            "Rangers KNOW spells, they do not prepare them. You cannot swap them daily — only on level-up. This is unlike Shadowheart, who re-picks every long rest.",
+            "Hunter's Mark: +1d6 per hit, costs a Bonus Action and Concentration. With Extra Attack + Horde Breaker that is +3d6 a turn. Move it to a new target for free when your mark dies.",
+            "Ensnaring Strike: your ranged Ankle Snare. Restrains a target (they cannot move, attacks against them get advantage). Concentration — so it competes with Hunter's Mark. Use it on the one dangerous melee enemy, not on trash.",
+            "Speak with Animals is a real loss to skip. Pick it up on a level-up swap later if you care about the dialogue content — it opens a surprising number of quests in Act 1."
+          ],
+          "irreversible": false
+        },
+        {
+          "level": 3,
+          "menu": "Ranger Subclass, then Hunter's Prey, then 1 new spell",
+          "choice": "Subclass: Hunter | Hunter's Prey: Horde Breaker | Spell: Longstrider",
+          "alternatives": ["Subclass: Beast Master", "Subclass: Gloom Stalker", "Hunter's Prey: Colossus Slayer", "Hunter's Prey: Giant Killer"],
+          "reasoning": "Horde Breaker is your Blitz Beat — one free extra attack per turn against a second enemy adjacent to your target, which turns every clumped pack into free damage.",
+          "details": [
+            "Colossus Slayer (+1d8 vs damaged targets, once per turn) is the higher single-target pick and is the honest competitor. You are building AoE, so Horde Breaker wins — but know that on boss-only fights Colossus Slayer would out-damage it.",
+            "Giant Killer is a trap. It only works against Large+ creatures and it is a reaction.",
+            "Gloom Stalker is the strongest Ranger subclass in the game (extra attack on round 1, +WIS initiative, invisible in darkness). You have committed to Hunter for the RO AoE fantasy and Volley — that is a legitimate choice, just be aware Gloom Stalker is the meta pick.",
+            "Longstrider is +3m movement, lasts until Long Rest, and can be cast on the whole party out of combat. Free repositioning forever."
+          ],
+          "irreversible": true
+        },
+        {
+          "level": 4,
+          "menu": "Feat",
+          "choice": "Sharpshooter",
+          "alternatives": ["Ability Improvement (+2 DEX)", "Alert", "Savage Attacker", "Lucky", "Dual Wielder"],
+          "reasoning": "-5 to hit for +10 damage per arrow, and it removes the high-ground disadvantage penalty entirely — with 2-3 attacks a turn that is +20 to +30 damage per round.",
+          "details": [
+            "Sharpshooter is a TOGGLE in BG3, not always-on. Turn it OFF against high-AC targets (heavily armoured knights, some bosses) and ON against everything else. Learn to check enemy AC by hovering them.",
+            "The Archery fighting style (+2) plus Bless from Shadowheart (+1d4) plus advantage from the familiar's Help largely cancels the -5. This is why the party is built the way it is.",
+            "Do NOT take the +2 DEX here. Sharpshooter's +10 flat damage dwarfs a +1 modifier, and you get DEX at level 8 anyway."
+          ],
+          "irreversible": false
+        },
+        {
+          "level": 5,
+          "menu": "No choice for the class feature; 1 new spell (2nd-level unlocked)",
+          "choice": "Extra Attack (automatic) | Spell: Spike Growth",
+          "alternatives": ["Spell: Pass Without Trace", "Spell: Silence", "Spell: Lesser Restoration", "Spell: Darkvision"],
+          "reasoning": "Extra Attack doubles your Action into 2 shots, which also doubles every per-hit rider you own — this is the single biggest power spike in the build.",
+          "details": [
+            "Extra Attack + Horde Breaker = 3 attack rolls per turn from level 5 onward. With Hunter's Mark that is 3d6 bonus damage; with Sharpshooter that is +30.",
+            "Spike Growth is your Land Mine field. It is difficult terrain that deals damage per metre moved — combine it with the Paladin shoving enemies into it, or with Ensnaring Strike to pin something inside it.",
+            "Pass Without Trace (+10 party Stealth) is the strong alternative and it is what enables Astarion's Assassinate opener from full party stealth. If you find yourself fumbling stealth openers, swap Longstrider for it."
+          ],
+          "irreversible": false
+        },
+        {
+          "level": 6,
+          "menu": "Favoured Enemy (second pick)",
+          "choice": "Mage Breaker",
+          "alternatives": ["Ranger Knight", "Keeper of the Veil", "Sanctified Stalker", "Bounty Hunter (if not already taken)"],
+          "reasoning": "Low-stakes menu again; Mage Breaker's Arcana proficiency is the most generally useful of what is left.",
+          "details": [
+            "Nothing on this menu changes your rotation. Do not agonise. If you already regret the level 1 pick, this is your chance to grab the other one you wanted."
+          ],
+          "irreversible": true
+        },
+        {
+          "level": 7,
+          "menu": "Hunter — Defensive Tactics, then 1 new spell",
+          "choice": "Defensive Tactics: Escape the Horde | Spell: Silence",
+          "alternatives": ["Defensive Tactics: Multiattack Defence", "Defensive Tactics: Steel Will", "Spell: Pass Without Trace", "Spell: Lesser Restoration"],
+          "reasoning": "Escape the Horde gives enemies disadvantage on opportunity attacks against you — an archer's job is leaving melee alive, and this is the only option that helps you do it.",
+          "details": [
+            "Multiattack Defence only helps if you are already being hit repeatedly, which means the plan has already failed. Steel Will (advantage vs Frightened) is too situational.",
+            "Silence is an underrated pick: it is an AoE zone where no spells can be cast. Drop it on an enemy caster group and they are disabled without a save. Concentration, so you give up Hunter's Mark that fight."
+          ],
+          "irreversible": true
+        },
+        {
+          "level": 8,
+          "menu": "Feat",
+          "choice": "Ability Improvement: +2 DEX (18 to 20)",
+          "alternatives": ["Alert", "Savage Attacker", "Lucky", "Resilient (Constitution)"],
+          "reasoning": "Takes you to the DEX cap of 20: +1 to every attack roll, +1 damage per arrow, +1 AC, +1 initiative, +1 Stealth — this is why Hag's Hair went into DEX.",
+          "details": [
+            "CRITICAL DEPENDENCY: this only reaches 20 if you gave Auntie Ethel's Hag's Hair to yourself and put it in DEX. If you gave the hair away or spent it elsewhere, you land on 19 — which is the SAME modifier as 18 and therefore a wasted feat. In that case take Alert here instead and pick up DEX at 12.",
+            "Ability scores hard-cap at 20 in BG3 except via specific items. Do not plan past 20."
+          ],
+          "irreversible": false
+        },
+        {
+          "level": 9,
+          "menu": "1 new spell (3rd-level unlocked)",
+          "choice": "Conjure Barrage",
+          "alternatives": ["Lightning Arrow", "Protection from Energy", "Plant Growth", "Daylight"],
+          "reasoning": "This is your Arrow Shower — a large cone of arrows from your position, one spell slot, DEX save for half.",
+          "details": [
+            "ANALOGY BREAK: Conjure Barrage does NOT scale with your Sharpshooter, your Hunter's Mark, or your bow's damage riders. It is a flat spell (roughly 3d8 in a cone). It is a slot-limited nuke for packed groups, not your main AoE.",
+            "Volley at level 11 is the AoE you actually want, because Volley makes real attack rolls that DO carry all your bonuses. Conjure Barrage is the stopgap for levels 9 and 10.",
+            "Lightning Arrow is the single-target-plus-splash competitor and is arguably better damage. Take Conjure Barrage for the fantasy and the wider cone; swap on a later level-up if the numbers disappoint you."
+          ],
+          "irreversible": false
+        },
+        {
+          "level": 10,
+          "menu": "Natural Explorer (second pick)",
+          "choice": "Wasteland Wanderer: Fire",
+          "alternatives": ["Urban Tracker", "Wasteland Wanderer: Cold", "Wasteland Wanderer: Poison", "Beast Tamer (if not already taken)"],
+          "reasoning": "Fire resistance is the most commonly relevant damage type across Acts 2 and 3, and halves a lot of surface damage you will inevitably stand in.",
+          "details": [
+            "Poison resistance is the Act 1 pick (spiders, Ethel, kuo-toa) — by level 10 you are past most of that.",
+            "If you skipped Beast Tamer at level 1 and now want the familiar, this is your one chance to grab it."
+          ],
+          "irreversible": true
+        },
+        {
+          "level": 11,
+          "menu": "Hunter — Multiattack, then 1 new spell",
+          "choice": "Multiattack: Volley | Spell: Protection from Energy",
+          "alternatives": ["Multiattack: Whirlwind Attack", "Spell: Lightning Arrow", "Spell: Daylight"],
+          "reasoning": "Volley is the payoff for the entire build — one Action, one separate attack roll against EVERY enemy in a radius, each carrying Sharpshooter, your bow bonuses, and your DEX.",
+          "details": [
+            "Whirlwind Attack is the melee version. It is strictly wrong for a longbow build — do not misclick this.",
+            "Volley against 4 enemies with Sharpshooter is roughly 4 x (1d8 + 5 + 10). This is the moment the build goes from good to absurd.",
+            "Volley does NOT trigger Hunter's Mark on every target (Hunter's Mark is single-target), and it does not proc Horde Breaker. It replaces your normal attack Action, so it is Volley OR 2-shots-plus-Horde-Breaker — use Volley at 3+ targets, normal attacks at 1-2."
+          ],
+          "irreversible": true
+        },
+        {
+          "level": 12,
+          "menu": "Feat",
+          "choice": "Alert",
+          "alternatives": ["Savage Attacker", "Lucky", "Resilient (Constitution)", "Ability Improvement (+2 WIS)"],
+          "reasoning": "+5 initiative means you Volley before the enemy pack has moved or spread out, which is worth more than any damage feat once your damage is already this high.",
+          "details": [
+            "Alert also makes you immune to being Surprised — which prevents the worst-case ambush opener where your whole party loses a round.",
+            "Lucky (3 rerolls per long rest) is the strongest defensive alternative and is excellent on Honour mode where a single failed save can end a run.",
+            "Savage Attacker rerolls weapon damage dice — but your damage is mostly FLAT (+10 Sharpshooter, +5 DEX), so it only rerolls the 1d8. It is the weakest option here despite sounding good.",
+            "Resilient (Constitution) is the pick if you keep losing Hunter's Mark concentration."
+          ],
+          "irreversible": false
+        }
+      ]
+    },
+    {
+      "id": "astarion",
+      "name": "Assassin Cross",
+      "roClass": "Assassin Cross",
+      "bg3Build": "Assassin Rogue 9 / Champion Fighter 3",
+      "role": "Single-target Burst / Opener",
+      "badge": "assassin",
+      "summary": "The Sonic Blow / Meteor Assault turn. Astarion's entire value is round one: win initiative, attack from stealth against enemies that have not acted, and delete the single most dangerous target before it ever takes a turn.",
+      "stats": { "str": 8, "dex": 17, "con": 15, "int": 9, "wis": 14, "cha": 10 },
+      "statNotes": {
+        "str": "Dumped. He fights with Finesse weapons (daggers), which use DEX for attack and damage.",
+        "dex": "Primary. Attack, damage, AC, initiative, Stealth, Sleight of Hand — every single thing he does.",
+        "con": "15 for HP and Concentration. He gets focused hard when he opens a fight in the enemy's face.",
+        "int": "Dumped (High Elf forces +1 here, which is unavoidable waste).",
+        "wis": "14 is deliberately high for a Rogue — WIS saves are the most common save-or-lose in the game (Hold Person, Fear, Command) and he has no proficiency in them.",
+        "cha": "10. He is your backup talker for Deception and Persuasion checks the main character fails."
+      },
+      "statPlan": [
+        "Point-buy base (27 points): STR 8, DEX 15, CON 15, INT 8, WIS 14, CHA 10.",
+        "High Elf racial: +2 DEX, +1 INT. Result: STR 8, DEX 17, CON 15, INT 9, WIS 14, CHA 10.",
+        "Rogue 8 Ability Improvement +2 DEX: 17 to 19. (17 and 18 are both +3/+4 — this jump is worth exactly +1 modifier.)",
+        "If you Ascend him in Act 3 he gains +2 to ALL abilities, which pushes DEX to 21 and breaks the normal cap. See the Checklist for the cost of that choice."
+      ],
+      "roMapping": [
+        { "roSkill": "Cloaking / Hiding", "bg3": "Cunning Action: Hide (Bonus Action, from level 2)", "breaks": "Hiding requires you to actually break line of sight or pass a Stealth check against enemy Perception — it is not a toggle. Enemies remember roughly where you went." },
+        { "roSkill": "Sonic Blow", "bg3": "Sneak Attack + Action Surge multi-hit turn", "breaks": "Sneak Attack fires ONCE PER TURN, not per hit. Extra attacks exist to give you more chances to land that one big die pool, not to stack it." },
+        { "roSkill": "Enchant Poison / Weapon Buff", "bg3": "Coatings (Basic/Malefic/Drow Poison, Oil of Sharpness)", "breaks": "Coatings are consumable items applied as a Bonus Action, last a few turns, and do not stack with each other. Buy them constantly — they are cheap and Astarion is the one who should always be wearing one." },
+        { "roSkill": "Critical / Katar build", "bg3": "Champion Improved Critical (crit on 19-20) + Assassinate auto-crit vs Surprised", "breaks": "There is no CRIT stat. Crit chance is fixed at 5% per attack (10% with Champion) unless a specific item or condition guarantees it." },
+        { "roSkill": "Grimtooth / Back Slide", "bg3": "Cunning Action: Dash / Disengage", "breaks": "No hidden-state movement skills. Disengage is the tool that lets him leave melee without eating an opportunity attack." }
+      ],
+      "levels": [
+        {
+          "level": 1,
+          "menu": "Rogue — Expertise (pick 2 skills)",
+          "choice": "Expertise: Stealth + Sleight of Hand",
+          "alternatives": ["Expertise: Perception", "Expertise: Persuasion", "Expertise: Acrobatics", "Expertise: Deception"],
+          "reasoning": "Stealth is the precondition for his entire opener, and Sleight of Hand is the party's lockpicking and disarming skill — nobody else has it.",
+          "details": [
+            "Astarion arrives pre-built as a Rogue. You only need Withers if you want to fix his ability spread — his default array is playable but not optimal.",
+            "Sneak Attack (1d6 now, 5d6 at Rogue 9) requires either advantage on the attack, or an ally within 1.5m of the target. Remember the second condition — it means he does NOT need to hide every single turn if the Paladin is already in melee.",
+            "Expertise doubles your proficiency bonus on that skill. Perception expertise on someone is genuinely valuable for trap detection — but give that to the main character, who has WIS 15."
+          ],
+          "irreversible": false
+        },
+        {
+          "level": 2,
+          "menu": "No choices",
+          "choice": "Cunning Action (automatic)",
+          "alternatives": [],
+          "reasoning": "Dash, Disengage, and Hide all become Bonus Actions — this is what makes a Rogue mobile enough to reposition into backstab range every round.",
+          "details": [
+            "Hide as a Bonus Action is the loop: attack with your Action, Hide with your Bonus Action, and next turn you are attacking with advantage again (which re-enables Sneak Attack).",
+            "This loop competes with his off-hand attack, which is also a Bonus Action. Hide when you need advantage; off-hand attack when you already have it."
+          ],
+          "irreversible": false
+        },
+        {
+          "level": 3,
+          "menu": "Roguish Archetype",
+          "choice": "Assassin",
+          "alternatives": ["Thief", "Arcane Trickster"],
+          "reasoning": "Assassinate grants advantage against any creature that has not yet taken a turn, and automatic critical hits against Surprised creatures — it is the burst opener you asked for.",
+          "details": [
+            "IRREVERSIBLE without a 100g respec. This is the pick your Alert feat exists to support.",
+            "HONEST COMPARISON: Thief gives a SECOND Bonus Action every turn, forever. That means off-hand attack AND hide, every round, in every fight. Across a whole playthrough Thief usually out-damages Assassin because Assassin's power is concentrated in round one only.",
+            "Assassin is the right pick IF you play to it — full party stealth approach, Alert for initiative, and killing something important before it acts. If you find yourself walking into fights and rolling initiative normally, respec to Thief and do not feel bad.",
+            "Arcane Trickster is a caster hybrid and is off-plan entirely."
+          ],
+          "irreversible": true
+        },
+        {
+          "level": 4,
+          "menu": "Feat",
+          "choice": "Alert",
+          "alternatives": ["Ability Improvement (+2 DEX)", "Savage Attacker", "Dual Wielder", "Mobile"],
+          "reasoning": "Assassinate only works against creatures that have not acted yet, so winning initiative is not a nice-to-have — it is the feature's activation condition.",
+          "details": [
+            "+5 initiative on a character who already has DEX 17 (+3) means he will win the roll against nearly everything in the game.",
+            "Alert also grants immunity to Surprise, so he never loses his own opening round to an ambush.",
+            "Do not delay this. Taking Alert at level 8 instead means four levels of a subclass that half-works."
+          ],
+          "irreversible": false
+        },
+        {
+          "level": 5,
+          "menu": "Fighter — Fighting Style (this is the multiclass dip; choose Fighter at the level-up screen)",
+          "choice": "Fighter 1 | Fighting Style: Two-Weapon Fighting",
+          "alternatives": ["Fighting Style: Archery", "Fighting Style: Defence", "Fighting Style: Dueling", "Stay pure Rogue"],
+          "reasoning": "Two-Weapon Fighting adds your DEX modifier to off-hand damage, which is otherwise flat — with two daggers that is roughly +4 damage per round for free.",
+          "details": [
+            "MULTICLASS WARNING: at the level-up screen you must click the multiclass option and select Fighter, not continue as Rogue. It is easy to autopilot past this.",
+            "Fighter 1 also grants Second Wind (Bonus Action self-heal) and heavy armour proficiency you will never use.",
+            "If you decide to run him with hand crossbows instead of daggers, take Archery here instead. Daggers are recommended because the Act 3 endgame items (Bhaalist Armour, Crimson Mischief, Bloodthirst) are all melee piercing and are the strongest package in the game."
+          ],
+          "irreversible": false
+        },
+        {
+          "level": 6,
+          "menu": "No choices",
+          "choice": "Fighter 2 | Action Surge (automatic)",
+          "alternatives": [],
+          "reasoning": "One extra full Action per short rest — this is the entire reason for the Fighter dip and it doubles his opening burst.",
+          "details": [
+            "Action Surge recharges on a SHORT rest, and you get two short rests per long rest. Use it every fight that matters; there is no reason to hoard it.",
+            "Round one with Assassinate: Attack (Sneak Attack applies) + Action Surge Attack + Bonus Action off-hand attack. Against a Surprised target, all of those are automatic critical hits."
+          ],
+          "irreversible": false
+        },
+        {
+          "level": 7,
+          "menu": "Martial Archetype",
+          "choice": "Fighter 3 | Champion",
+          "alternatives": ["Battle Master", "Eldritch Knight"],
+          "reasoning": "Improved Critical widens his crit range to 19-20, doubling his crit rate — and Sneak Attack dice are doubled on a crit, so his crits are enormous.",
+          "details": [
+            "IRREVERSIBLE without respec.",
+            "Battle Master is the alternative and gives 3 maneuvers plus superiority dice. It is more versatile. Champion is picked here because it is passive, always-on, and multiplies the one huge hit that defines this character. Your Paladin is already covering the Battle Master role.",
+            "Champion pairs with any 'guaranteed crit' item (Killer's Sweetheart in Act 3) to make one turn per fight a certainty rather than a gamble."
+          ],
+          "irreversible": true
+        },
+        {
+          "level": 8,
+          "menu": "No choices (back to Rogue — remember to select Rogue, not Fighter)",
+          "choice": "Rogue 5 | Uncanny Dodge (automatic)",
+          "alternatives": [],
+          "reasoning": "Halve the damage of one attack per round as a Reaction — the survivability patch for a character who opens fights standing in the enemy's face.",
+          "details": [
+            "Sneak Attack rises to 3d6 here.",
+            "From this level onward every level is Rogue. Do not accidentally take Fighter 4."
+          ],
+          "irreversible": false
+        },
+        {
+          "level": 9,
+          "menu": "Rogue — Expertise (pick 2 more skills)",
+          "choice": "Rogue 6 | Expertise: Perception + Persuasion",
+          "alternatives": ["Expertise: Acrobatics", "Expertise: Deception", "Expertise: Investigation"],
+          "reasoning": "Perception expertise makes him the party's trap-spotter on the character who walks in front, and Persuasion gives you a second dialogue option when the main character's roll is bad.",
+          "details": [
+            "Deception is the alternative if you are role-playing him as the liar — mechanically Persuasion appears in more checks."
+          ],
+          "irreversible": false
+        },
+        {
+          "level": 10,
+          "menu": "No choices",
+          "choice": "Rogue 7 | Evasion (automatic)",
+          "alternatives": [],
+          "reasoning": "Successful DEX saves take zero damage instead of half — this makes him nearly immune to fireballs and breath weapons, which are the main things that kill squishy melee.",
+          "details": [
+            "Sneak Attack rises to 4d6."
+          ],
+          "irreversible": false
+        },
+        {
+          "level": 11,
+          "menu": "Feat",
+          "choice": "Rogue 8 | Ability Improvement: +2 DEX (17 to 19)",
+          "alternatives": ["Savage Attacker", "Lucky", "Mobile", "Resilient (Wisdom)"],
+          "reasoning": "17 to 19 is +1 to attack, +1 damage on both weapons, +1 AC and +1 initiative — the broadest single upgrade available at this point.",
+          "details": [
+            "Savage Attacker is unusually good on THIS character specifically, because he rolls a huge pile of Sneak Attack dice and Savage Attacker rerolls them. If you have already found a way to raise his DEX with items, take Savage Attacker instead.",
+            "Note that 19 is not 20 — the Hag's Hair went to your main character. This is the intended trade."
+          ],
+          "irreversible": false
+        },
+        {
+          "level": 12,
+          "menu": "No choices",
+          "choice": "Rogue 9 | Infiltration Expertise (automatic)",
+          "alternatives": ["Take Fighter 4 instead for a third feat"],
+          "reasoning": "Sneak Attack rises to 5d6, which is the real payoff; the Assassin feature itself at this level is a disguise utility and is close to worthless in combat.",
+          "details": [
+            "FLAGGING A BETTER OPTION THAN YOUR LOCKED PLAN: Rogue 8 / Fighter 4 instead of Rogue 9 / Fighter 3 trades 1d6 of Sneak Attack for an entire extra FEAT (Savage Attacker or an ASI). That is a straightforwardly better level 12 for combat.",
+            "You specified Rogue 9 / Fighter 3, so that is what this table builds. I am flagging the alternative because it costs you nothing to know it and the swap is a single 100g respec.",
+            "If you take Fighter 4, the level order is identical except the last level is Fighter instead of Rogue."
+          ],
+          "irreversible": false
+        }
+      ]
+    },
+    {
+      "id": "shadowheart",
+      "name": "High Priest",
+      "roClass": "Full Support Priest",
+      "bg3Build": "Life Domain Cleric 12",
+      "role": "Healer / Buffer / Damage Sponge Proxy",
+      "badge": "priest",
+      "summary": "Your Full Support. Bless is Gloria, Warding Bond is Devotion, Spirit Guardians is Magnus Exorcismus that follows you around. She never dies because nothing wants to hit her, and the Paladin never dies because she is taking half his damage.",
+      "stats": { "str": 10, "dex": 14, "con": 16, "int": 8, "wis": 16, "cha": 10 },
+      "statNotes": {
+        "str": "10. Enough to carry things. NOT enough for heavy armour without a speed penalty — see the armour note below, this is a deliberate trade.",
+        "dex": "14. +2 AC in medium armour and decent initiative. This is why she wears medium armour, not plate.",
+        "con": "16. The most important defensive stat she has: HP, Concentration saves for Bless and Spirit Guardians, and she is soaking half the Paladin's damage through Warding Bond.",
+        "int": "Dumped entirely.",
+        "wis": "16 to start, 20 by level 12. Spell save DC, healing throughput via Disciple of Life, and Perception.",
+        "cha": "10, forced up by the Half-Elf +2. Wasted stat, unavoidable on her race."
+      },
+      "statPlan": [
+        "Point-buy base (27 points): STR 10, DEX 14, CON 15, INT 8, WIS 15, CHA 8.",
+        "Half-Elf racial: +2 CHA (forced), +1 CON, +1 WIS (your two free picks). Result: STR 10, DEX 14, CON 16, INT 8, WIS 16, CHA 10.",
+        "Level 8 Ability Improvement +2 WIS: 16 to 18. Level 12 Ability Improvement +2 WIS: 18 to 20.",
+        "ARMOUR TRADE-OFF: Life Domain grants heavy armour proficiency, but BG3 penalises your movement speed if you wear heavy armour below its STR requirement (13 or 15). At STR 10 you would be slowed. The build therefore puts her in MEDIUM armour with DEX 14 and gets similar AC without the penalty. If you would rather wear plate, rebuild with STR 15 and drop CON to 14 and WIS to 15 — it is a real option, just a worse one for a support who repositions."
+      ],
+      "roMapping": [
+        { "roSkill": "Devotion", "bg3": "Warding Bond (2nd-level spell, Cleric 3)", "breaks": "One target only, not five. She takes HALF the damage dealt to the bonded ally, and it lasts until Long Rest. Unlike Devotion it does not reduce the damage — it SPLITS it, so she needs the HP and the damage resistances to survive being the sponge." },
+        { "roSkill": "Gloria / Blessing", "bg3": "Bless (1st-level, always prepared via Life Domain)", "breaks": "+1d4 to attack rolls AND saving throws for 3 allies, but it requires Concentration — she can only hold ONE concentration spell at a time. Bless or Spirit Guardians, never both." },
+        { "roSkill": "Heal / Sanctuary", "bg3": "Cure Wounds, Healing Word, Preserve Life", "breaks": "Healing in BG3 is weak relative to enemy damage. Healing Word (Bonus Action, at range) to pick someone up off the floor is the correct use; standing and topping people off is a wasted turn. Prevention beats healing here far more than in RO." },
+        { "roSkill": "Magnus Exorcismus", "bg3": "Spirit Guardians (3rd-level, Cleric 5)", "breaks": "It is centred on HER and MOVES with her, not placed on the ground. It damages everything in radius at the start of their turn AND halves their movement. She has to physically walk into the enemy pack — which is why CON 16 and Warding Bond matter." },
+        { "roSkill": "Kyrie Eleison / Assumptio", "bg3": "Death Ward, Sanctuary, Beacon of Hope", "breaks": "Death Ward is the closest thing — it survives one lethal hit. Cast it before boss fights, it lasts until Long Rest." },
+        { "roSkill": "Resurrection", "bg3": "Revivify (3rd-level, needs 1 Diamond as a material component)", "breaks": "Costs a consumable Diamond every cast. Buy every Diamond you see from every vendor. Withers at camp also resurrects for 200g if she is out of diamonds or also dead." }
+      ],
+      "levels": [
+        {
+          "level": 1,
+          "menu": "Divine Domain, then Cantrips (pick 3), then Prepared Spells",
+          "choice": "Domain: Life | Cantrips: Guidance, Sacred Flame, Resistance | Prepared: Healing Word, Guiding Bolt, Command, Sanctuary (Bless is free from the domain)",
+          "alternatives": ["Domain: Trickery (her default)", "Domain: Light", "Domain: War", "Domain: Tempest", "Cantrips: Blade Ward, Thaumaturgy, Light, Produce Flame", "Prepared: Cure Wounds, Shield of Faith, Inflict Wounds, Protection from Evil and Good, Create or Destroy Water"],
+          "reasoning": "Life Domain is the Full Support: Disciple of Life adds bonus HP to every healing spell, Bless is permanently prepared for free, and it grants heavy armour proficiency.",
+          "details": [
+            "IRREVERSIBLE AND URGENT: Cleric subclass is chosen at LEVEL 1 in BG3, unlike most classes. Shadowheart is currently Trickery. You cannot change domain by levelling — she must be respecced by Withers for 100 gold. Do this before you spend any more levels.",
+            "Guidance is the single most-used cantrip in the game: +1d4 to any ability check out of combat. Cast it before every lockpick, every dialogue check, every jump.",
+            "Sacred Flame is her at-will damage. It is a DEX save (no attack roll), so it never misses due to AC — but it also does not benefit from advantage.",
+            "Resistance (+1d4 to a saving throw) is the third pick; Blade Ward is the defensive alternative if you prefer.",
+            "Prepared spells are re-pickable at any time outside combat, for free. Nothing on the prepared list is a commitment — only cantrips and the domain are locked.",
+            "Command is the sleeper pick: 'Drop' disarms an enemy, 'Approach' pulls them out of position. It is a WIS save against your DC."
+          ],
+          "irreversible": true
+        },
+        {
+          "level": 2,
+          "menu": "No choices (Channel Divinity granted automatically)",
+          "choice": "Channel Divinity: Preserve Life + Turn Undead",
+          "alternatives": [],
+          "reasoning": "Preserve Life is a free party-wide heal that costs no spell slot — one charge per short rest, and it is the emergency button that saves a wipe.",
+          "details": [
+            "Preserve Life distributes healing across the party up to half their maximum HP. It will not top up someone already above half — target it when several people are hurt.",
+            "Channel Divinity recharges on a SHORT rest. Two short rests per long rest means three uses per day. Do not hoard it.",
+            "Turn Undead makes undead flee. Act 2 is full of undead. This is more useful than it sounds."
+          ],
+          "irreversible": false
+        },
+        {
+          "level": 3,
+          "menu": "Prepared spells (2nd level unlocked)",
+          "choice": "Prepare: Warding Bond, Aid, Hold Person, Silence (Spiritual Weapon + Lesser Restoration are free domain spells)",
+          "alternatives": ["Prayer of Healing", "Blindness", "Enhance Ability", "Protection from Poison"],
+          "reasoning": "Warding Bond is your Devotion and the reason the Paladin is functionally unkillable; Spiritual Weapon is a free Bonus Action attack every turn for the rest of the game.",
+          "details": [
+            "WARDING BOND RULE: cast it on the Paladin at camp before you set out. It lasts until Long Rest and does not need Concentration. He takes half damage; she takes the other half. She MUST have good HP and ideally damage resistance items for this to be a win.",
+            "Spiritual Weapon is a floating mace that attacks as a BONUS ACTION. It costs a slot once and then it is free damage every round. It does not require Concentration. Cast it in nearly every fight.",
+            "Aid gives +5 maximum HP to the whole party until Long Rest and scales if cast with a higher slot. Cast it at camp every morning alongside Warding Bond.",
+            "Hold Person is a save-or-lose: a paralysed humanoid takes automatic critical hits from every melee attack. Hold Person into Astarion is a delete button."
+          ],
+          "irreversible": false
+        },
+        {
+          "level": 4,
+          "menu": "Feat, then a 4th cantrip",
+          "choice": "Feat: War Caster | Cantrip: Blade Ward",
+          "alternatives": ["Feat: Ability Improvement (+2 WIS)", "Feat: Resilient (Constitution)", "Feat: Tough", "Feat: Lucky", "Cantrip: Thaumaturgy, Light, Produce Flame"],
+          "reasoning": "War Caster gives advantage on Concentration saves, which protects Bless and later Spirit Guardians — the two spells that define her contribution.",
+          "details": [
+            "Losing Concentration on Spirit Guardians while standing inside a mob is the most common way this character fails. War Caster is the fix.",
+            "Resilient (Constitution) is the competing answer — it grants CON save proficiency AND +1 CON. War Caster's advantage is mathematically stronger at her CON 16, and War Caster also lets her cast spells as opportunity attacks.",
+            "Do NOT take +2 WIS here. Concentration reliability beats a +1 to save DC."
+          ],
+          "irreversible": false
+        },
+        {
+          "level": 5,
+          "menu": "Prepared spells (3rd level unlocked)",
+          "choice": "Prepare: Spirit Guardians, Mass Healing Word, Remove Curse (Revivify + Beacon of Hope are free domain spells)",
+          "alternatives": ["Bestow Curse", "Glyph of Warding", "Protection from Energy", "Speak with Dead"],
+          "reasoning": "Spirit Guardians is the biggest single upgrade she ever gets — persistent AoE damage plus movement-halving, centred on her, for one Concentration.",
+          "details": [
+            "Destroy Undead is also granted automatically at this level.",
+            "Spirit Guardians changes how you play her: she stops standing at the back and starts walking into the enemy formation. This is the RO Priest going Magnus and body-blocking, and it is correct.",
+            "Revivify becomes a domain spell here and is always prepared. KEEP DIAMONDS IN HER INVENTORY. Buy them from every trader.",
+            "Beacon of Hope makes all her healing maximise and gives advantage on WIS saves and death saves. Combine with Preserve Life for an absurd emergency heal."
+          ],
+          "irreversible": false
+        },
+        {
+          "level": 6,
+          "menu": "No choices",
+          "choice": "Blessed Healer + second Channel Divinity charge",
+          "alternatives": [],
+          "reasoning": "Blessed Healer means every heal she casts on someone else also heals her — which directly funds the HP she is losing to Warding Bond.",
+          "details": [
+            "Two Channel Divinity charges per short rest means up to six Preserve Life casts per long rest. Her emergency capacity roughly doubles here."
+          ],
+          "irreversible": false
+        },
+        {
+          "level": 7,
+          "menu": "Prepared spells (4th level unlocked)",
+          "choice": "Prepare: Freedom of Movement, Banishment (Death Ward + Guardian of Faith are free domain spells)",
+          "alternatives": ["Blight", "Divination", "Stoneskin (if available)"],
+          "reasoning": "Death Ward as a free domain spell is a pre-cast that survives one lethal hit until Long Rest — put it on the Paladin and on Astarion every morning.",
+          "details": [
+            "Freedom of Movement makes a target immune to being Restrained, Paralysed, and to difficult terrain — including YOUR OWN Spike Growth. Cast it on the Paladin so he can fight inside the main character's Spike Growth field.",
+            "Banishment removes one enemy from the fight entirely on a failed CHA save. It is the answer to any single enemy the party cannot handle yet.",
+            "Guardian of Faith is a free stationary damage turret that costs no Concentration. Drop it in a doorway next to the Paladin."
+          ],
+          "irreversible": false
+        },
+        {
+          "level": 8,
+          "menu": "Feat",
+          "choice": "Ability Improvement: +2 WIS (16 to 18)",
+          "alternatives": ["Resilient (Constitution)", "Tough", "Lucky", "Alert"],
+          "reasoning": "+1 to spell save DC on Hold Person, Command, and Sacred Flame, +1 to every heal via Disciple of Life, and one more prepared spell slot.",
+          "details": [
+            "Divine Strike is also granted automatically here: +1d8 radiant damage on her weapon attacks once per turn. She is not a weapon attacker, but it makes her mace swings non-embarrassing.",
+            "Tough (+2 HP per level, so +24 HP) is the alternative worth considering specifically because of Warding Bond. If she keeps dying from the bond, take Tough."
+          ],
+          "irreversible": false
+        },
+        {
+          "level": 9,
+          "menu": "Prepared spells (5th level unlocked)",
+          "choice": "Prepare: Insect Plague, Planar Ally (Mass Cure Wounds + Greater Restoration are free domain spells)",
+          "alternatives": ["Flame Strike", "Contagion", "Dispel Evil and Good"],
+          "reasoning": "Greater Restoration as a free domain spell removes the conditions nothing else in the party can fix, and Mass Cure Wounds is the full-party emergency heal.",
+          "details": [
+            "Flame Strike is the damage pick if you want a nuke; Insect Plague is chosen because it is a persistent zone that also blocks vision, which is better with a Sharpshooter who ignores cover.",
+            "Planar Ally summons a permanent-until-rest ally. It is a free extra body and free action economy."
+          ],
+          "irreversible": false
+        },
+        {
+          "level": 10,
+          "menu": "Divine Intervention (choose the effect), then a 5th cantrip",
+          "choice": "Divine Intervention: choose the healing/revival option | Cantrip: Thaumaturgy",
+          "alternatives": ["Divine Intervention: the damage option", "Divine Intervention: the utility/equipment option", "Cantrip: Light, Produce Flame"],
+          "reasoning": "Divine Intervention is effectively once per playthrough — the full-party revive-and-heal is the one that turns a lost fight into a won one.",
+          "details": [
+            "FLAG: the game asks you to pick ONE intervention and that choice sticks. It is a once-per-long-rest ability on paper but in practice you will use it once, in the fight that is going wrong.",
+            "The damage option is a large single nuke; the utility option grants gear. Neither saves a wipe."
+          ],
+          "irreversible": true
+        },
+        {
+          "level": 11,
+          "menu": "Prepared spells (6th level unlocked)",
+          "choice": "Prepare: Heroes' Feast, Blade Barrier",
+          "alternatives": ["Harm", "Planar Ally (greater)", "Word of Recall"],
+          "reasoning": "Heroes' Feast gives the entire party bonus maximum HP, immunity to Frightened, and immunity to poison until Long Rest — it is a permanent party-wide buff for one slot.",
+          "details": [
+            "Heroes' Feast requires a material component in some versions — check her inventory prompt. Cast it at camp every morning from Act 3 onward.",
+            "Blade Barrier is a wall of spinning blades — pure chokepoint control, and it pairs directly with the Paladin's job."
+          ],
+          "irreversible": false
+        },
+        {
+          "level": 12,
+          "menu": "Feat",
+          "choice": "Ability Improvement: +2 WIS (18 to 20)",
+          "alternatives": ["Resilient (Constitution)", "Tough", "Lucky", "Warcaster (if not taken)"],
+          "reasoning": "Caps her spell save DC and healing bonus, and gives a final extra prepared spell.",
+          "details": [
+            "If she has been dying to Warding Bond damage through Acts 2 and 3, take Tough here instead and accept a WIS of 18 — a dead cleric has a save DC of zero."
+          ],
+          "irreversible": false
+        }
+      ]
+    },
+    {
+      "id": "paladin",
+      "name": "Crusader",
+      "roClass": "Crusader",
+      "bg3Build": "Oath of the Ancients Paladin 9 / Battle Master Fighter 3",
+      "role": "Tank / Chokepoint Lockdown",
+      "badge": "crusader",
+      "summary": "The Crusader with a spear. He stands in a doorway, forces enemies to attack him, and physically prevents them from walking past. Sentinel plus Polearm Master is the closest BG3 gets to a hard taunt, and Warding Bond from Shadowheart means he takes half of everything anyway.",
+      "stats": { "str": 17, "dex": 10, "con": 14, "int": 9, "wis": 10, "cha": 14 },
+      "statNotes": {
+        "str": "Primary. Attack and damage with a glaive/halberd, plus Athletics for shoving enemies off cliffs and into Spike Growth.",
+        "dex": "10. He wears heavy armour, which ignores DEX for AC entirely. Dumped on purpose.",
+        "con": "14. HP and Concentration for Bless and Misty Step-adjacent buffs. Warding Bond means he needs less of this than you would expect.",
+        "int": "Dumped (Githyanki forces +1 here).",
+        "wis": "10. His weakest save — Aura of Protection at level 6 patches this for the whole party.",
+        "cha": "14. Not for talking: Aura of Protection adds his CHA modifier to the saving throws of every ally within range. +2 to all saves, party-wide, is the best defensive ability in the game."
+      },
+      "statPlan": [
+        "Point-buy base (27 points): STR 15, DEX 10, CON 14, INT 8, WIS 10, CHA 14.",
+        "Githyanki racial (if you respec Lae'zel): +2 STR, +1 INT. Result: STR 17, DEX 10, CON 14, INT 9, WIS 10, CHA 14.",
+        "If you use a different body (Karlach, a hireling, Minthara), apply whatever racial you get to STR first, then CHA.",
+        "GITHYANKI BONUS: Lae'zel keeps her racial spells through a respec, including a free Misty Step around level 5. That is separate from the Misty Step your Ancients oath grants, so the chokepoint tank gets two teleports per rest and only one of them costs a spell slot.",
+        "A respec at Withers changes MECHANICS ONLY. Lae'zel's dialogue, personal questline, and Githyanki story beats are completely unaffected by turning her into a Paladin.",
+        "STR stays at 17 all game. Both feats go to Sentinel and Polearm Master instead of an ASI. You fix STR with Elixirs of Hill Giant Strength (sets STR to 21), which are cheap and sold constantly. Drink one every morning.",
+        "ELIXIR NOTE: an Elixir SETS your STR to a value, it does not add. Once you are drinking Hill Giant Strength (21), your base 17 is irrelevant — this is what frees both feats."
+      ],
+      "roMapping": [
+        { "roSkill": "Provoke", "bg3": "Compelled Duel (Paladin 1 spell) + Goading Attack (Battle Master maneuver)", "breaks": "Neither is a hard taunt. Compelled Duel gives the target disadvantage on attacks against anyone else and stops it moving away — but it gets a WIS save. Goading Attack gives disadvantage on attacks against others. BG3 has no forced-target mechanic at all; you are manipulating odds, not compelling behaviour." },
+        { "roSkill": "Devotion (receiving end)", "bg3": "Warding Bond cast on him by Shadowheart", "breaks": "In RO the Crusader casts Devotion outward. Here he is the RECEIVER — Shadowheart is the one who takes the damage. The role is inverted." },
+        { "roSkill": "Grand Cross / Holy Cross", "bg3": "Divine Smite", "breaks": "Divine Smite is not an AoE. It is a spell slot burned to add radiant damage to a single melee hit, decided AFTER you see the roll. Save it for critical hits — a crit doubles the smite dice." },
+        { "roSkill": "Spear Quicken / Spear Boomerang", "bg3": "Polearm Master (bonus action butt-end attack, plus opportunity attacks at reach)", "breaks": "No ranged spear throw. Polearm Master's real value is the reach opportunity attack: enemies get hit when they ENTER your reach, before they can close." },
+        { "roSkill": "Shield Boomerang / Shield Chain", "bg3": "Not taken — this build is two-handed polearm", "breaks": "You can build a shield Paladin instead, but Sentinel plus Polearm Master lockdown is far stronger for chokepoint work than the +2 AC a shield gives." },
+        { "roSkill": "Auto Guard / Reflect Shield", "bg3": "Aura of Protection (level 6) + Aura of Warding (level 10)", "breaks": "These are party-wide passive auras with no activation. Aura of Warding (Ancients) gives everyone near him resistance to spell damage — that is half damage from every fireball in the game, for the whole party." }
+      ],
+      "levels": [
+        {
+          "level": 1,
+          "menu": "Sacred Oath (BG3 asks at level 1, not level 3)",
+          "choice": "Oath of the Ancients",
+          "alternatives": ["Oath of Devotion", "Oath of Vengeance", "Oathbreaker (not selectable at creation)"],
+          "reasoning": "Ancients gives Aura of Warding at level 10 — resistance to spell damage for the whole party — which is the single best defensive aura available to any class.",
+          "details": [
+            "IRREVERSIBLE-ISH AND STORY-RELEVANT: breaking your Oath turns you into an Oathbreaker and you lose all oath features. You can pay the Oathbreaker Knight at camp to restore it (cost scales, roughly 1000-2000g).",
+            "ANCIENTS OATH TENETS — the things that break it: showing cruelty, killing surrendered or helpless creatures, wanton destruction of nature, betraying an innocent. In practice: do not execute prisoners, do not side with obviously cruel factions, and be careful in the Act 1 Grove decision.",
+            "PARTY CONFLICT WARNING: if you are running Minthara as the Paladin body, the goblin-camp path that recruits her involves attacking the Grove — which is exactly the kind of act that breaks an Ancients oath. Minthara-as-Ancients is thematically and mechanically awkward. Use Lae'zel, Karlach, or a hireling instead.",
+            "Devotion is the alternative if you want Sacred Weapon (add CHA to attack rolls). It is a strong pick and arguably better offence. Ancients is better defence and better for the whole party."
+          ],
+          "irreversible": true
+        },
+        {
+          "level": 2,
+          "menu": "Fighting Style, then Prepared Spells",
+          "choice": "Fighting Style: Great Weapon Fighting | Prepare: Compelled Duel, Shield of Faith, Bless (Ensnaring Strike + Speak with Animals are free Ancients oath spells)",
+          "alternatives": ["Fighting Style: Defence", "Fighting Style: Protection", "Fighting Style: Dueling", "Prepare: Wrathful Smite, Searing Smite, Heroism, Divine Favour, Cure Wounds"],
+          "reasoning": "Great Weapon Fighting rerolls 1s and 2s on your glaive's damage dice, which meaningfully smooths out a two-handed weapon's swingy damage.",
+          "details": [
+            "Divine Smite unlocks here. It is not a prepared spell — it is a prompt that appears AFTER you hit. Answer 'yes' on critical hits, 'no' on ordinary hits against trash.",
+            "Compelled Duel is your Provoke: the target gets disadvantage attacking anyone but you, and cannot willingly move away from you. It is a WIS save each turn, so it is unreliable against high-WIS enemies — this is the biggest analogy break from RO Provoke.",
+            "Defence (+1 AC) is the safe alternative fighting style. You get it anyway at Fighter 1, which is why Great Weapon Fighting is taken here."
+          ],
+          "irreversible": false
+        },
+        {
+          "level": 3,
+          "menu": "No choices (Channel Oath granted automatically)",
+          "choice": "Channel Oath: Nature's Wrath + Turn the Faithless",
+          "alternatives": [],
+          "reasoning": "Nature's Wrath restrains enemies in an area — restrained enemies cannot move and are attacked with advantage, which is chokepoint control on a free charge.",
+          "details": [
+            "Ancients grants both channel options rather than making you choose. Nature's Wrath is the combat one; Turn the Faithless routs fiends and fey.",
+            "Channel Oath recharges on a SHORT rest."
+          ],
+          "irreversible": false
+        },
+        {
+          "level": 4,
+          "menu": "Feat",
+          "choice": "Sentinel",
+          "alternatives": ["Polearm Master", "Great Weapon Master", "Ability Improvement (+2 STR)", "Tough"],
+          "reasoning": "Sentinel is the closest thing to a real taunt in the game: when you hit a creature with an opportunity attack its speed drops to zero, and you get an opportunity attack even against enemies who Disengage.",
+          "details": [
+            "Sentinel's third clause is the sleeper: when an enemy attacks an ALLY within your reach, you get a free reaction attack against it. Standing next to Shadowheart means anything that swings at her gets hit by you.",
+            "Sentinel + a glaive's 3m reach means enemies are stopped a full square before they reach your squishies.",
+            "You specified Sentinel and it is correct. Polearm Master at level 8 completes the combo.",
+            "Great Weapon Master (-5 hit / +10 damage) is the damage alternative — you are building a tank, not a damage dealer, so lockdown wins."
+          ],
+          "irreversible": false
+        },
+        {
+          "level": 5,
+          "menu": "No choices for the feature; Prepared spells (2nd level unlocked)",
+          "choice": "Extra Attack (automatic) | Prepare: Aid, Magic Weapon (Misty Step + Moonbeam are free Ancients oath spells)",
+          "alternatives": ["Prepare: Branding Smite, Find Steed, Protection from Poison"],
+          "reasoning": "Extra Attack doubles his Action, and with Polearm Master later that becomes three attacks per turn.",
+          "details": [
+            "MISTY STEP as a free oath spell is a big deal on a tank — it lets him teleport to the chokepoint on turn one instead of walking for two rounds, or teleport out when he is being focused.",
+            "Moonbeam is a movable damage zone. Park it on the chokepoint he is holding."
+          ],
+          "irreversible": false
+        },
+        {
+          "level": 6,
+          "menu": "No choices",
+          "choice": "Aura of Protection (automatic)",
+          "alternatives": [],
+          "reasoning": "Every ally within range adds his CHA modifier (+2) to EVERY saving throw — this is why he has CHA 14 and it is the best party-wide defence in the game.",
+          "details": [
+            "Positioning changes here. He is no longer just a wall; he is a mobile buff radius. Keep the party clustered near him where the fight allows.",
+            "This stacks with Bless (+1d4 to saves) from Shadowheart. Your party's save success rate roughly doubles across levels 6-7."
+          ],
+          "irreversible": false
+        },
+        {
+          "level": 7,
+          "menu": "Fighter — Fighting Style (multiclass dip: select Fighter at the level-up screen)",
+          "choice": "Fighter 1 | Fighting Style: Defence",
+          "alternatives": ["Fighting Style: Protection", "Fighting Style: Great Weapon Fighting (if not taken)", "Stay pure Paladin"],
+          "reasoning": "+1 AC on the character who is being attacked deliberately, plus Second Wind as a free Bonus Action self-heal.",
+          "details": [
+            "MULTICLASS WARNING: click the multiclass option and choose Fighter. It is easy to autopilot into Paladin 7.",
+            "TIMING NOTE: taking the Fighter dip AFTER Paladin 6 is deliberate — Aura of Protection at Paladin 6 is too important to delay. If you would rather have Action Surge earlier, you can dip at Paladin 5 instead and push Aura to character level 8. Both are defensible; this table delays the dip.",
+            "Protection (impose disadvantage on an attack against an adjacent ally, as a reaction) requires a SHIELD, which this build does not use."
+          ],
+          "irreversible": false
+        },
+        {
+          "level": 8,
+          "menu": "No choices",
+          "choice": "Fighter 2 | Action Surge (automatic)",
+          "alternatives": [],
+          "reasoning": "An extra full Action per short rest — on a Paladin that means two extra attacks, or two extra chances to land a Divine Smite crit.",
+          "details": [
+            "On a tank, Action Surge is also an emergency: an extra Action can be used to Dash to a collapsing flank or to cast a spell in the same turn you attack."
+          ],
+          "irreversible": false
+        },
+        {
+          "level": 9,
+          "menu": "Martial Archetype, then Maneuvers (pick 3)",
+          "choice": "Fighter 3 | Battle Master | Maneuvers: Goading Attack, Trip Attack, Riposte",
+          "alternatives": ["Archetype: Champion", "Archetype: Eldritch Knight", "Maneuvers: Menacing Attack, Pushing Attack, Precision Attack, Disarming Attack, Sweeping Attack, Rally"],
+          "reasoning": "Goading Attack is your second Provoke, Trip Attack knocks enemies Prone (melee attacks against Prone targets have advantage), and Riposte is a free counterattack when something misses you.",
+          "details": [
+            "IRREVERSIBLE without respec.",
+            "Goading Attack: the target has disadvantage on attacks against anyone except you. Combined with Compelled Duel, you have two independent Provoke effects with different save types — cast Compelled Duel on the dangerous one, Goad the rest.",
+            "Trip Attack is arguably the strongest maneuver in the game. Prone enemies lose their turn standing up and are hit with advantage by everyone.",
+            "Riposte is pure value on a character who is deliberately being attacked all the time.",
+            "Pushing Attack is the honourable mention — shoving enemies into the main character's Spike Growth or off a ledge. Swap it in if your maps have cliffs.",
+            "You get 4 Superiority Dice, recharging on a short rest."
+          ],
+          "irreversible": true
+        },
+        {
+          "level": 10,
+          "menu": "No choices (back to Paladin — select Paladin, not Fighter)",
+          "choice": "Paladin 7 | Aura of Warding (automatic)",
+          "alternatives": [],
+          "reasoning": "Everyone in his aura takes HALF damage from spells — this is the Ancients payoff and it trivialises enemy casters for the entire party.",
+          "details": [
+            "Combined with Astarion's Evasion and the party clustering for Aura of Protection, enemy AoE spells stop being a threat around here.",
+            "This is the single best reason to have picked Ancients over Devotion or Vengeance."
+          ],
+          "irreversible": false
+        },
+        {
+          "level": 11,
+          "menu": "Feat",
+          "choice": "Paladin 8 | Polearm Master",
+          "alternatives": ["Ability Improvement (+2 STR)", "Great Weapon Master", "Tough", "Resilient (Wisdom)"],
+          "reasoning": "Completes the lockdown: you get an opportunity attack when an enemy ENTERS your reach (not just when it leaves), and Sentinel then sets its speed to zero — enemies literally cannot walk past you.",
+          "details": [
+            "Polearm Master also grants a Bonus Action butt-end attack (1d4 + STR) every turn. That is a third attack per round for free.",
+            "REQUIREMENT: you must be wielding a glaive, halberd, quarterstaff, or spear. If he is holding a greatsword this feat does nothing. Check his weapon before you take it.",
+            "THE COMBO IN FULL: enemy walks toward the party, enters your 3m reach, Polearm Master triggers an opportunity attack, the hit triggers Sentinel, its speed becomes 0, and it is now stuck in front of you at reach, unable to close. This is the chokepoint.",
+            "You are skipping the STR ASI here on purpose — Elixirs of Hill Giant Strength set STR to 21, which is better than 19."
+          ],
+          "irreversible": false
+        },
+        {
+          "level": 12,
+          "menu": "Prepared spells (3rd level unlocked)",
+          "choice": "Paladin 9 | Prepare: Elemental Weapon, Blinding Smite (Plant Growth + Protection from Energy are free Ancients oath spells)",
+          "alternatives": ["Prepare: Crusader's Mantle, Daylight, Remove Curse"],
+          "reasoning": "Third-level slots mostly exist to fuel bigger Divine Smites, but Elemental Weapon is a solid until-rest damage buff and Blinding Smite is a save-or-lose rider.",
+          "details": [
+            "Plant Growth as a free oath spell is a huge area of difficult terrain — it stacks conceptually with the main character's Spike Growth to make an entire approach lane unusable.",
+            "Crusader's Mantle (allies near you deal +1d4 radiant) is the alternative if your party is clustered anyway for the auras. Genuinely close call.",
+            "Reminder: your 3rd-level slots are usually better spent as Divine Smite fuel on critical hits than on casting these."
+          ],
+          "irreversible": false
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,383 @@
+{
+  "meta": {
+    "disclaimer": "Locations are written from knowledge of a patched game; Larian moves vendors and loot between patches. Verify in-game rather than trusting the location text. The EFFECT column is what the build actually depends on — if an item has moved or been renamed, the effect is still what you are shopping for.",
+    "vendorTip": "Vendors restock after every long rest and their attitude affects prices — send whoever has the highest Charisma to trade. You can also pickpocket vendors with Astarion (Sleight of Hand expertise) and then buy the rest legitimately.",
+    "actNote": "You can return to Act 1 zones during Act 2. You CANNOT return to Acts 1 or 2 once you travel to Act 3 (Rivington). Clear every Act 1 and Act 2 shopping list before that transition."
+  },
+  "act1": [
+    {
+      "item": "Titanstring Bow",
+      "slot": "Ranged Weapon",
+      "wearer": "main",
+      "location": "Zhentarim Hideout (under the Waukeen's Rest area) — Brem, vendor. Roughly 400-600g.",
+      "effect": "Adds your STRENGTH modifier to ranged damage, on top of DEX.",
+      "replaces": "Starting longbow",
+      "missable": false,
+      "note": "You have STR 8 (-1), so out of the box this is a DOWNGRADE. It becomes the best bow in Act 1 the moment you pair it with an Elixir of Hill Giant Strength (STR 21 = +5 damage per arrow) or the Club of Hill Giant Strength held in your off-hand slot. Buy the elixirs, drink one every morning. This is a real gold cost — budget for it."
+    },
+    {
+      "item": "Gloves of Archery",
+      "slot": "Gloves",
+      "wearer": "main",
+      "location": "Emerald Grove — Arron, the general trader (verify; may also appear on other Act 1 vendors).",
+      "effect": "+2 damage with ranged weapons and proficiency with longbows/shortbows.",
+      "replaces": "Empty glove slot",
+      "missable": false,
+      "note": "Flat +2 per arrow applies to every shot, so with 3 attacks a turn it is +6. Cheap and immediately good."
+    },
+    {
+      "item": "Elixir of Hill Giant Strength",
+      "slot": "Consumable",
+      "wearer": "paladin",
+      "location": "Sold by almost every Act 1 vendor (Arron in the Grove, Dammon, Zhentarim). Also craftable from Salts of Hill Giant Strength.",
+      "effect": "Sets Strength to 21 until Long Rest.",
+      "replaces": "Nothing",
+      "missable": false,
+      "note": "This is the item that lets the Paladin skip his STR ASI and take Polearm Master instead. Buy every one you see, all game. Also the enabler for the Titanstring Bow if you would rather drink them on the main character — you cannot easily supply both, so pick one. Recommendation: Paladin gets the elixirs, main character uses the Club of Hill Giant Strength trick or just skips Titanstring."
+    },
+    {
+      "item": "Club of Hill Giant Strength",
+      "slot": "Off-hand / carried",
+      "wearer": "main",
+      "location": "Act 1 — from the Githyanki patrol area / Ethel's teahouse region (verify).",
+      "effect": "Sets Strength to 19 while equipped.",
+      "replaces": "Nothing",
+      "missable": true,
+      "note": "The non-consumable way to power the Titanstring Bow. You cannot hold a club and a longbow at the same time, so this works via the weapon-swap slot: it is fiddly. If it annoys you, skip Titanstring entirely and use The Dead Shot in Act 2."
+    },
+    {
+      "item": "Hag's Hair (Auntie Ethel)",
+      "slot": "One-time permanent",
+      "wearer": "main",
+      "location": "Sussur Bog — Auntie Ethel. Obtained either by sparing her for it, or by looting it after you kill her (verify your route).",
+      "effect": "Permanent +1 to one ability score of your choice.",
+      "replaces": "Nothing",
+      "missable": true,
+      "note": "IRREVERSIBLE AND ONE PER PLAYTHROUGH. Put it in the main character's DEXTERITY, taking 17 to 18. This is the only way the level 8 ASI reaches DEX 20 instead of a wasted 19. Do not let a companion take it."
+    },
+    {
+      "item": "Strange Conduit Ring",
+      "slot": "Ring",
+      "wearer": "main",
+      "location": "Underdark — Myconid Colony, reward from Sovereign Spaw's quest line (kill Nere / the duergar).",
+      "effect": "+1d4 psychic damage on weapon attacks while you are Concentrating on a spell.",
+      "replaces": "Empty ring slot",
+      "missable": true,
+      "note": "You are Concentrating on Hunter's Mark essentially permanently, so this is +1d4 on every single arrow. With 3 attacks a turn that is a large, quiet damage increase. One of the best Act 1 items for this specific build."
+    },
+    {
+      "item": "Hellrider's Pride",
+      "slot": "Gloves",
+      "wearer": "shadowheart",
+      "location": "Emerald Grove — reward from Zevlor for resolving the tiefling/druid situation.",
+      "effect": "Creatures you heal gain Blade Ward (resistance to physical damage) until end of next turn.",
+      "replaces": "Empty glove slot",
+      "missable": true,
+      "note": "Turns every Healing Word into a defensive buff. Combined with Whispering Promise below, a single Bonus Action heal buffs and protects at the same time."
+    },
+    {
+      "item": "Whispering Promise",
+      "slot": "Ring",
+      "wearer": "shadowheart",
+      "location": "Act 1 vendor (commonly the goblin camp trader or Grove trader — verify).",
+      "effect": "Creatures you heal gain Bless (+1d4 to attack rolls and saves).",
+      "replaces": "Empty ring slot",
+      "missable": false,
+      "note": "This is the key to the Sharpshooter maths. Shadowheart heals the main character for 1 HP with a Bonus Action and the main character gets Bless without her spending Concentration on it — leaving her Concentration free for Spirit Guardians."
+    },
+    {
+      "item": "Adamantine Scale Mail",
+      "slot": "Chest (Medium armour)",
+      "wearer": "shadowheart",
+      "location": "Grymforge — Adamantine Forge. Requires Mithral Ore + the Scale Mail mould.",
+      "effect": "Solid AC, and critical hits against the wearer become normal hits.",
+      "replaces": "Starting scale mail / chain shirt",
+      "missable": true,
+      "note": "Medium armour, so no STR requirement and it uses her DEX 14. 'Cannot be critically hit' is enormous on the character carrying Warding Bond. ONE-TIME RESOURCE: you can only forge a limited number of items (usually 2) because Mithral Ore is scarce. Spend your moulds on this and the Adamantine Splint or Shield for the Paladin."
+    },
+    {
+      "item": "Adamantine Splint Armour",
+      "slot": "Chest (Heavy armour)",
+      "wearer": "paladin",
+      "location": "Grymforge — Adamantine Forge. Requires Mithral Ore + the Splint mould.",
+      "effect": "AC 18 flat, and critical hits against the wearer become normal hits.",
+      "replaces": "Starting chain mail / scale mail",
+      "missable": true,
+      "note": "Requires STR 15 to avoid a movement penalty — his base is 17, and he is drinking Hill Giant Strength elixirs anyway, so this is free for him. The anti-crit clause is the single best tanking property in Act 1. Competes with the Adamantine Shield for your limited Mithral Ore — take the armour, since this build is two-handed."
+    },
+    {
+      "item": "The Blood of Lathander",
+      "slot": "Weapon (Mace) — or give to Shadowheart as a stat stick",
+      "wearer": "shadowheart",
+      "location": "Rosymorn Monastery (Mountain Pass route) — solve the sunlight/mural puzzle in the Githyanki Creche area.",
+      "effect": "Legendary mace: +1d4 radiant damage, casts Sunbeam, and once per rest it revives the whole party at 1 HP when someone would die.",
+      "replaces": "Any starting mace",
+      "missable": true,
+      "note": "MISSABLE: only reachable if you take the Mountain Pass / Creche route in Act 1. If you go straight to Act 2 through the Underdark and never come back, you lose it permanently. The auto-revive clause has saved more runs than any other Act 1 item."
+    },
+    {
+      "item": "Boots of Striding",
+      "slot": "Boots",
+      "wearer": "paladin",
+      "location": "Act 1 vendors (Grove / Zhentarim).",
+      "effect": "Cannot be knocked Prone while Concentrating, and grants a movement bonus.",
+      "replaces": "Starting boots",
+      "missable": false,
+      "note": "A tank who gets knocked prone has failed at being a wall. Cheap fix."
+    },
+    {
+      "item": "Amulet of Misty Step",
+      "slot": "Amulet",
+      "wearer": "main",
+      "location": "Underdark (commonly around the Arcane Tower / Underdark vendors — verify).",
+      "effect": "Grants the Misty Step spell (Bonus Action teleport) once per Short Rest.",
+      "replaces": "Empty amulet slot",
+      "missable": true,
+      "note": "This is the archer's panic button and his high-ground button. Teleport to the top of a ledge on turn one, or teleport out when melee reaches you. The Paladin gets Misty Step for free from the Ancients oath, so it goes to the main character."
+    },
+    {
+      "item": "Caustic Band",
+      "slot": "Ring",
+      "wearer": "astarion",
+      "location": "Act 1 vendor (Zhentarim Hideout — verify).",
+      "effect": "+2 acid damage on weapon attacks.",
+      "replaces": "Empty ring slot",
+      "missable": false,
+      "note": "Flat damage per hit. Astarion makes 3 attacks in a burst turn, so this is +6 on his opener. Cheap filler until Act 3."
+    },
+    {
+      "item": "Basic / Malefic / Drow Poison (coatings)",
+      "slot": "Consumable",
+      "wearer": "astarion",
+      "location": "Every Act 1 vendor; Drow Poison from the Underdark.",
+      "effect": "Applied as a Bonus Action; adds damage or an unconsciousness save to your next several hits.",
+      "replaces": "Nothing",
+      "missable": false,
+      "note": "This is your Enchant Poison. Astarion should have a coating on his daggers in every real fight. Buy them constantly — they are cheap and you will always be short."
+    },
+    {
+      "item": "Diamonds",
+      "slot": "Consumable (spell component)",
+      "wearer": "shadowheart",
+      "location": "Every vendor with a gems tab, all acts.",
+      "effect": "Required material component for Revivify.",
+      "replaces": "Nothing",
+      "missable": false,
+      "note": "Buy every Diamond you ever see. Being out of Diamonds is the difference between a bad round and a reload. Keep at least 3 in Shadowheart's inventory at all times."
+    }
+  ],
+  "act2": [
+    {
+      "item": "The Dead Shot",
+      "slot": "Ranged Weapon",
+      "wearer": "main",
+      "location": "Act 2 — Last Light Inn quartermaster / Moonrise Towers vendor (verify).",
+      "effect": "Longbow with a bonus to attack rolls and improved critical range.",
+      "replaces": "Titanstring Bow",
+      "missable": false,
+      "note": "The upgrade path if you got tired of managing Hill Giant Strength for Titanstring. The bonus to hit directly offsets Sharpshooter's -5, which is worth more than raw damage on a Sharpshooter build."
+    },
+    {
+      "item": "Risky Ring",
+      "slot": "Ring",
+      "wearer": "main",
+      "location": "Moonrise Towers — Araj Oblodra. She will only trade it if Astarion (or another party member) drinks her blood.",
+      "effect": "Advantage on ALL attack rolls; disadvantage on saving throws.",
+      "replaces": "Caustic Band or an empty ring slot",
+      "missable": true,
+      "note": "PERMANENT ADVANTAGE is the best possible item for a Sharpshooter — advantage roughly cancels the -5 penalty on its own. The disadvantage on saves is mitigated by the Paladin's Aura of Protection (+2) and Bless (+1d4). CONDITIONAL: requires agreeing to Araj's request, which has a story/companion-approval cost with Astarion. Flag this before you commit."
+    },
+    {
+      "item": "Boots of Stormy Clamour",
+      "slot": "Boots",
+      "wearer": "shadowheart",
+      "location": "Act 2 (Moonrise Towers area — verify).",
+      "effect": "Enemies affected by your conditions gain Reverberation stacks; enough stacks knock them Prone.",
+      "replaces": "Starting boots",
+      "missable": true,
+      "note": "Pairs with Spirit Guardians, which applies a condition to everything around her every single turn. She becomes a walking crowd-control aura on top of the damage."
+    },
+    {
+      "item": "Callous Glow Ring",
+      "slot": "Ring",
+      "wearer": "main",
+      "location": "Act 2 (Moonrise / Last Light vendor — verify).",
+      "effect": "+2 radiant damage against creatures that are Illuminated.",
+      "replaces": "Empty ring slot",
+      "missable": true,
+      "note": "Act 2 is the Shadow-Cursed Lands and you will be carrying light sources constantly, so 'Illuminated' is easier to satisfy than it sounds. Flat +2 on every arrow."
+    },
+    {
+      "item": "Dark Justiciar Half-Plate / Mask",
+      "slot": "Chest / Head",
+      "wearer": "shadowheart",
+      "location": "Gauntlet of Shar — Dark Justiciar gear, and the Shar quest line rewards.",
+      "effect": "Strong medium armour with Shar-themed bonuses.",
+      "replaces": "Adamantine Scale Mail (compare AC — the Adamantine anti-crit clause is often still better)",
+      "missable": true,
+      "note": "Compare these directly against Adamantine Scale Mail. 'Cannot be critically hit' is usually worth more than 1 point of AC on the Warding Bond carrier. Keep whichever you prefer; the Gauntlet gear is thematically hers regardless."
+    },
+    {
+      "item": "Cloak of Protection",
+      "slot": "Cloak",
+      "wearer": "paladin",
+      "location": "Act 2 vendors (verify).",
+      "effect": "+1 AC and +1 to all saving throws.",
+      "replaces": "Starting cloak",
+      "missable": false,
+      "note": "Boring and excellent. Put it on whoever is being attacked most; if you find two, the second goes to Shadowheart."
+    },
+    {
+      "item": "Spellcrux Amulet",
+      "slot": "Amulet",
+      "wearer": "shadowheart",
+      "location": "Act 2 (verify).",
+      "effect": "Once per Long Rest, recover one expended spell slot.",
+      "replaces": "Empty amulet slot",
+      "missable": true,
+      "note": "One extra Spirit Guardians or Revivify per day. Good until the Amulet of Greater Health appears in Act 3."
+    },
+    {
+      "item": "Sentinel Shield",
+      "slot": "Shield",
+      "wearer": "paladin",
+      "location": "Act 2 (verify).",
+      "effect": "Advantage on Initiative and Perception.",
+      "replaces": "Nothing — he is two-handed",
+      "missable": true,
+      "note": "Listed only so you know to SKIP it. A two-handed Polearm Master build cannot use a shield. If you decide to run him sword-and-board instead, this is the shield you want."
+    }
+  ],
+  "act3": [
+    {
+      "item": "Bhaalist Armour",
+      "slot": "Chest",
+      "wearer": "astarion",
+      "location": "Temple of Bhaal, beneath the Undercity — found during the Orin / Murder Tribunal questline.",
+      "effect": "Emits an aura that makes nearby enemies VULNERABLE to piercing damage (they take double).",
+      "replaces": "Any light armour he is wearing",
+      "missable": true,
+      "note": "The single strongest item in the game for this party. Piercing vulnerability doubles his dagger damage AND doubles his Sneak Attack dice. The aura is small (about 2m), so it only helps allies standing next to him — your archer is far away and will not benefit. Astarion wears it for himself."
+    },
+    {
+      "item": "Crimson Mischief",
+      "slot": "Main-hand (Shortsword)",
+      "wearer": "astarion",
+      "location": "Dropped by Orin the Red (Act 3 Temple of Bhaal boss).",
+      "effect": "+1d4 piercing against targets with full HP, and an extra off-hand attack rider.",
+      "replaces": "Any dagger",
+      "missable": false,
+      "note": "Piercing damage, so it doubles inside the Bhaalist Armour aura. This plus Bloodthirst is the intended endgame pair."
+    },
+    {
+      "item": "Bloodthirst",
+      "slot": "Off-hand (Dagger)",
+      "wearer": "astarion",
+      "location": "Also from the Orin encounter / Bhaal temple area.",
+      "effect": "+2 to attack, and improved critical range.",
+      "replaces": "Any off-hand dagger",
+      "missable": false,
+      "note": "Stacks its crit range with Champion's Improved Critical, pushing his crit chance meaningfully higher — and a crit doubles all 5d6 of Sneak Attack."
+    },
+    {
+      "item": "Killer's Sweetheart",
+      "slot": "Ring",
+      "wearer": "astarion",
+      "location": "Act 3 — Devil's Fee (Helsik's shop) in Lower City (verify).",
+      "effect": "After you kill a creature, your next attack roll is an automatic critical hit.",
+      "replaces": "Caustic Band",
+      "missable": true,
+      "note": "Guaranteed crits on a 5d6 Sneak Attack character. Kill a minion, then delete the boss. This is the RO 'crit build without a crit stat' answer."
+    },
+    {
+      "item": "Helldusk Armour",
+      "slot": "Chest (Heavy)",
+      "wearer": "paladin",
+      "location": "Raphael's House of Hope (Act 3) — the vault, during the Orphic Hammer heist.",
+      "effect": "AC 21, resistance to fire, advantage on saves vs spells, and it cannot be removed by enemy effects.",
+      "replaces": "Adamantine Splint Armour",
+      "missable": true,
+      "note": "The best heavy armour in the game. MISSABLE: the House of Hope is only reachable via a specific questline (Helsik's ritual in the Devil's Fee, or accepting Raphael's deal path). If you skip the House of Hope you lose this, the Gloves of Soul Catching, and the Amulet of Greater Health all at once. Do not skip it."
+    },
+    {
+      "item": "Gloves of Soul Catching",
+      "slot": "Gloves",
+      "wearer": "paladin",
+      "location": "Raphael's House of Hope (Act 3).",
+      "effect": "+10 temporary HP or +1d10 psychic damage on unarmed/melee hits, plus healing on hit.",
+      "replaces": "Whatever gloves he is wearing",
+      "missable": true,
+      "note": "Self-sustain on the tank means Shadowheart spends fewer turns healing him and more turns on Spirit Guardians."
+    },
+    {
+      "item": "Amulet of Greater Health",
+      "slot": "Amulet",
+      "wearer": "shadowheart",
+      "location": "Raphael's House of Hope (Act 3) — vault.",
+      "effect": "Sets CONSTITUTION to 23 and grants advantage on Constitution saving throws.",
+      "replaces": "Spellcrux Amulet",
+      "missable": true,
+      "note": "GIVE THIS TO SHADOWHEART, not the Paladin. CON 23 means a massive HP pool (she is soaking half the Paladin's damage via Warding Bond) plus near-unbreakable Concentration on Spirit Guardians. This single item fixes both of her weaknesses at once."
+    },
+    {
+      "item": "Gontr Mael",
+      "slot": "Ranged Weapon (Legendary longbow)",
+      "wearer": "main",
+      "location": "Act 3 — Lorroakan / Ramazith's Tower questline area (verify; this one moves between patches).",
+      "effect": "Legendary longbow with bonus radiant damage and a free flight/utility effect.",
+      "replaces": "The Dead Shot",
+      "missable": true,
+      "note": "The endgame bow. If you cannot find it, The Dead Shot carries you to the credits perfectly well — bows matter less than your riders (Sharpshooter, Hunter's Mark, Strange Conduit, Callous Glow) on this build."
+    },
+    {
+      "item": "Mirror of Loss",
+      "slot": "One-time permanent",
+      "wearer": "main",
+      "location": "Act 3 — hidden Sharran sanctum beneath Sharess' Caress, Lower City.",
+      "effect": "Permanent +2 to one ability score of your choice, once per character.",
+      "replaces": "Nothing",
+      "missable": true,
+      "note": "IRREVERSIBLE, and each character can only use it once. STORY WARNING: using it has consequences for Shadowheart's personal questline depending on where she is in it — read the prompt carefully before you let her near it. Put the main character's +2 into DEX if you have not reached 20; otherwise into CON or WIS."
+    },
+    {
+      "item": "Armour of Agility",
+      "slot": "Chest (Medium)",
+      "wearer": "shadowheart",
+      "location": "Act 3 vendors, Lower City (verify).",
+      "effect": "Medium armour that allows your full DEX bonus to AC rather than capping at +2.",
+      "replaces": "Adamantine Scale Mail / Dark Justiciar Half-Plate",
+      "missable": false,
+      "note": "The clean answer to her STR 10 heavy-armour problem. Compare its AC against Adamantine's anti-crit clause and pick per fight if you are being thorough."
+    },
+    {
+      "item": "Band of the Mystic Scoundrel",
+      "slot": "Ring",
+      "wearer": "shadowheart",
+      "location": "Act 3 — Circus of the Last Days / Lower City vendor (verify).",
+      "effect": "After a weapon attack, you can cast Illusion or Enchantment spells as a Bonus Action.",
+      "replaces": "Whispering Promise (situationally)",
+      "missable": true,
+      "note": "Lets her attack and then Hold Person or Command in the same turn. Strong, but do not drop Whispering Promise for it unless you have a second Bless source."
+    },
+    {
+      "item": "Ring of Regeneration",
+      "slot": "Ring",
+      "wearer": "shadowheart",
+      "location": "Act 3 vendors (verify).",
+      "effect": "Regain HP at the start of each turn.",
+      "replaces": "Empty ring slot",
+      "missable": false,
+      "note": "Passive sustain for the Warding Bond sponge. Also ticks out of combat, saving camp supplies."
+    },
+    {
+      "item": "Helldusk Gloves / Boots",
+      "slot": "Gloves / Boots",
+      "wearer": "paladin",
+      "location": "Act 3 — House of Hope and related Hells content.",
+      "effect": "Fire damage riders and immunity to being knocked Prone / difficult terrain.",
+      "replaces": "Boots of Striding",
+      "missable": true,
+      "note": "The prone immunity is the relevant part — a chokepoint tank that can be knocked over is not a chokepoint."
+    }
+  ]
+}
