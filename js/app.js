@@ -8,7 +8,7 @@
 
   var STORE_KEY = 'bg3_ro_wiki_checklist_v1';
 
-  var DB = { characters: null, gear: null, rotations: null, checklist: null };
+  var DB = { characters: null, gear: null, rotations: null, checklist: null, locations: null };
   var doneSet = loadDone();
 
   var els = {
@@ -94,6 +94,7 @@
     });
     html += '<li class="nav-section">Reference</li>';
     html += '<li><a href="#/progression" data-route="/progression">Party Progression</a></li>';
+    html += '<li><a href="#/locations" data-route="/locations">Area Guides</a></li>';
     html += '<li><a href="#/gear" data-route="/gear">Gear by Act</a></li>';
     html += '<li><a href="#/rotations" data-route="/rotations">Rotations</a></li>';
     html += '<li><a href="#/checklist" data-route="/checklist">Checklist</a></li>';
@@ -429,6 +430,105 @@
     els.view.innerHTML = html;
   }
 
+  function confBadge(c) {
+    if (!c) return '';
+    var s = String(c).toLowerCase();
+    if (s.indexOf('high') === 0) return '<span class="badge sniper">Confident</span>';
+    if (s.indexOf('medium') === 0) return '<span class="warn-badge">Verify</span>';
+    return '<span class="miss-badge">Unsure</span>';
+  }
+
+  function viewLocations() {
+    var meta = (DB.locations && DB.locations.meta) || {};
+    var locs = (DB.locations && DB.locations.locations) || [];
+    var html = '';
+
+    if (meta.disclaimer) {
+      html += win('How To Read These Guides',
+        '<div class="break-strip"><span class="bl">Confidence warning</span><br>' + esc(meta.disclaimer) + '</div>' +
+        (meta.highlightTip ? '<div class="note-strip">' + esc(meta.highlightTip) + '</div>' : ''));
+    }
+
+    if (!locs.length) {
+      html += win('Area Guides', '<div class="empty">No area guides yet.</div>');
+    }
+
+    locs.forEach(function (L) {
+      var b = '';
+
+      b += '<div class="parch"><strong>Act ' + esc(L.act) + ' &mdash; ' + esc(L.region) + '</strong>' +
+           '<div style="margin-top:4px">Recommended level: <strong>' + esc(L.recommendedLevel) + '</strong></div>' +
+           (L.partyState ? '<div>' + esc(L.partyState) + '</div>' : '') + '</div>';
+
+      b += '<h3 class="ro-h3">Why you are here</h3>';
+      b += '<div class="note-strip"><strong>' + esc(L.why) + '</strong></div>';
+      if (L.blocks) b += '<div class="parch alt">Blocked until you do this:' + list(L.blocks, 'details-list') + '</div>';
+      if (L.sequencing) b += '<div class="break-strip"><span class="bl">Do it in this order</span><br>' + esc(L.sequencing) + '</div>';
+
+      if (L.prepare) {
+        b += '<h3 class="ro-h3">What to prepare</h3><div class="parch">' + list(L.prepare, 'details-list') + '</div>';
+      }
+
+      if (L.entrances) {
+        b += '<h3 class="ro-h3">Getting in</h3>';
+        L.entrances.forEach(function (e) {
+          b += '<div class="parch" style="margin-bottom:5px"><strong>' + esc(e.name) + '</strong> ' +
+               confBadge(e.confidence) + '<div style="margin-top:4px">' + esc(e.detail) + '</div></div>';
+        });
+      }
+
+      if (L.walkthrough) {
+        b += '<h3 class="ro-h3">Walkthrough</h3><div class="skilltree">';
+        L.walkthrough.forEach(function (w) {
+          b += '<div class="skillnode"><div class="skillbox">' +
+                 '<div class="skillbox-head"><span class="lvl-chip">' + esc(w.step) + '</span>' +
+                 '<span class="menu-label">' + esc(w.title) + '</span></div>' +
+                 '<div class="skillbox-body"><p class="reason">' + esc(w.what) + '</p>' +
+                 (w.watchFor ? '<div class="alts"><strong>Watch for:</strong> ' + esc(w.watchFor) + '</div>' : '') +
+                 '</div></div></div>';
+        });
+        b += '</div>';
+      }
+
+      if (L.encounters) {
+        b += '<h3 class="ro-h3">Fights</h3>';
+        L.encounters.forEach(function (e) {
+          b += '<div class="parch" style="margin-bottom:6px"><strong style="color:#24406b">' + esc(e.name) + '</strong>' +
+               '<div class="stat-note"><em>Threat: ' + esc(e.threat) + '</em></div>' +
+               '<div style="margin-top:5px">' + esc(e.how) + '</div>' +
+               (e.roNote ? '<div class="break-strip" style="margin:5px 0 0"><span class="bl">RO note</span><br>' + esc(e.roNote) + '</div>' : '') +
+               '</div>';
+        });
+      }
+
+      if (L.tactics) b += '<h3 class="ro-h3">Tactics</h3><div class="parch">' + list(L.tactics, 'details-list') + '</div>';
+
+      if (L.loot) {
+        b += '<h3 class="ro-h3">Loot</h3>';
+        L.loot.forEach(function (i) {
+          b += '<div class="parch" style="margin-bottom:5px"><strong>' + esc(i.item) + '</strong> ' + confBadge(i.confidence) +
+               '<div class="stat-note">Where: ' + esc(i.where) + ' &nbsp;|&nbsp; Confidence: ' + esc(i.confidence) + '</div>' +
+               '<div style="margin-top:4px">' + esc(i.note) + '</div></div>';
+        });
+      }
+
+      if (L.traps) b += '<h3 class="ro-h3">Traps</h3><div class="parch alt">' + list(L.traps, 'details-list') + '</div>';
+      if (L.missable) b += '<h3 class="ro-h3">Missable?</h3><div class="note-strip">' + list(L.missable, 'details-list') + '</div>';
+      if (L.afterwards) b += '<h3 class="ro-h3">What to do next</h3><div class="parch">' + list(L.afterwards, 'details-list') + '</div>';
+      if (L.roFraming) {
+        b += '<h3 class="ro-h3">In Ragnarok terms</h3>';
+        b += L.roFraming.map(function (t) {
+          return '<div class="break-strip"><span class="bl">RO framing</span><br>' + esc(t) + '</div>';
+        }).join('');
+      }
+
+      html += win(L.name, b);
+    });
+
+    els.viewTitle.textContent = 'Area Guides';
+    els.view.innerHTML = html;
+  }
+
   var gearFilter = { act: 'all', wearer: 'all' };
 
   function viewGear() {
@@ -609,6 +709,40 @@
       });
     });
 
+    ((DB.locations && DB.locations.locations) || []).forEach(function (L) {
+      idx.push({
+        kind: 'Area Guide — Act ' + L.act,
+        title: L.name,
+        text: [L.region, L.why, L.sequencing, (L.prepare || []).join(' '), (L.tactics || []).join(' '),
+               (L.roFraming || []).join(' '), (L.afterwards || []).join(' ')].join(' '),
+        route: '#/locations'
+      });
+      (L.walkthrough || []).forEach(function (w) {
+        idx.push({
+          kind: L.name + ' — Step ' + w.step,
+          title: w.title,
+          text: [w.what, w.watchFor].join(' '),
+          route: '#/locations'
+        });
+      });
+      (L.loot || []).forEach(function (i) {
+        idx.push({
+          kind: L.name + ' — Loot',
+          title: i.item,
+          text: [i.where, i.note, i.confidence].join(' '),
+          route: '#/locations'
+        });
+      });
+      (L.encounters || []).forEach(function (e) {
+        idx.push({
+          kind: L.name + ' — Fight',
+          title: e.name,
+          text: [e.threat, e.how, e.roNote].join(' '),
+          route: '#/locations'
+        });
+      });
+    });
+
     return idx;
   }
 
@@ -656,6 +790,7 @@
     if (hash === '/overview') return viewOverview();
     if (hash.indexOf('/character/') === 0) return viewCharacter(hash.split('/')[2]);
     if (hash === '/progression') return viewProgression();
+    if (hash === '/locations') return viewLocations();
     if (hash === '/gear') return viewGear();
     if (hash === '/rotations') return viewRotations();
     if (hash === '/checklist') return viewChecklist();
@@ -715,13 +850,15 @@
         window.__BG3_DATA__.characters,
         window.__BG3_DATA__.gear,
         window.__BG3_DATA__.rotations,
-        window.__BG3_DATA__.checklist
+        window.__BG3_DATA__.checklist,
+        window.__BG3_DATA__.locations
       ])
     : Promise.all([
         fetchJSON('data/characters.json'),
         fetchJSON('data/gear.json'),
         fetchJSON('data/rotations.json'),
-        fetchJSON('data/checklist.json')
+        fetchJSON('data/checklist.json'),
+        fetchJSON('data/locations.json')
       ]);
 
   source.then(function (res) {
@@ -729,6 +866,7 @@
     DB.gear = res[1];
     DB.rotations = res[2];
     DB.checklist = res[3];
+    DB.locations = res[4] || { locations: [] };
 
     var meta = DB.characters.meta || {};
     if (meta.title) document.title = meta.title;

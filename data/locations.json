@@ -1,0 +1,172 @@
+{
+  "meta": {
+    "disclaimer": "Location guides carry the same health warning as the rest of this wiki: written from recall, no source consulted. STRUCTURE and TACTICS are the reliable parts — what the area is for, what order to do it in, how the fights work. SPECIFIC ITEM NAMES AND ROOM CONTENTS are the unreliable parts, and each loot entry below is tagged with how much to trust it. When in doubt, hold ALT to highlight every interactable in the room and just loot everything; that beats any list I can write from memory.",
+    "highlightTip": "Hold ALT (default) to highlight every lootable container, body, door and interactable in view. In a dark, cluttered crypt this is worth more than any walkthrough — use it in every single room before you move on."
+  },
+  "locations": [
+    {
+      "id": "dank-crypt",
+      "name": "The Dank Crypt",
+      "act": 1,
+      "region": "Overgrown Ruins, uphill from the Ravaged Beach",
+      "recommendedLevel": "2 to 3 — this is designed as one of the first areas you clear",
+      "partyState": "Doable with just you, Astarion and Shadowheart. You do not need a fourth member.",
+      "why": "WITHERS IS IN HERE. He is the respec, resurrection and hireling vendor, and Checklist tasks 2 through 5 are all blocked until he is at your camp. Nothing else in this crypt matters remotely as much. Everything else is a bonus.",
+      "blocks": [
+        "Task 2 — respec Shadowheart to Life Domain (the time-sensitive one)",
+        "Task 3 — respec Astarion's ability array",
+        "Task 5 — respec your 4th slot to Oath of the Ancients Paladin",
+        "Hireling recruitment, if you decide to buy a custom Paladin body instead of using Lae'zel"
+      ],
+      "sequencing": "Do the crypt BEFORE you go north for Lae'zel. You cannot respec anyone until Withers is out of that sarcophagus, and every level Shadowheart gains as Trickery is a level you pay 100g to undo. Crypt, then respec, then travel.",
+      "prepare": [
+        "Long rest before you go in, so Shadowheart has a full set of spell slots.",
+        "Shadowheart's prepared list for this specific area: SACRED FLAME (radiant damage — the undead in here are the exact thing it is good against), GUIDING BOLT, HEALING WORD, BLESS. She is still Trickery at this point and that is fine; every Cleric gets these.",
+        "SHE ALREADY HAS TURN UNDEAD. Channel Divinity unlocks at Cleric level 2 for every domain, not just Life. This crypt is the single best place in Act 1 to use it and most players forget they have it.",
+        "Your Ranger: Hunter's Mark ready, longbow equipped. Ensnaring Strike is your doorway tool — read the tactics section, because indoors is your worst terrain.",
+        "Astarion: he leads. Ungroup him and move him separately in stealth. He has Sleight of Hand and Perception, which is the entire trap-and-lock answer for this area.",
+        "Carry whatever healing potions you picked up on the nautiloid. There is no vendor yet, so what you have is what you have.",
+        "Camp supplies are worth checking before you commit — you want to be able to long rest immediately afterwards, since the respecs happen at camp."
+      ],
+      "entrances": [
+        {
+          "name": "The sealed stone door (main entrance)",
+          "detail": "An ornate stone door in the Overgrown Ruins, up the path from the crash beach. It does not simply open — there is a concealed switch nearby. Pass a Perception check to spot it, then interact. If you did NOT free Shadowheart on the nautiloid, she is standing at this door and helping her open it is how you recruit her.",
+          "confidence": "high"
+        },
+        {
+          "name": "The rubble route (alternate entrance)",
+          "detail": "There is a second way in through broken ground near the ruins that drops you into the crypt from a different angle, letting you skip the front hall entirely. Useful if the entrance-hall conversation goes badly. Look for a gap you can jump to rather than a door.",
+          "confidence": "medium — I am confident an alternate route exists, less confident of exactly where it opens"
+        }
+      ],
+      "walkthrough": [
+        {
+          "step": 1,
+          "title": "Get in",
+          "what": "Find the concealed switch by the sealed door (Perception) and open it. If Shadowheart is still standing outside, talk to her first — that is her recruitment.",
+          "watchFor": "If nobody in your party spots the switch, walk each character up to the door and surrounding pillars individually. Passive Perception is rolled per character, so a second pair of eyes is a second roll."
+        },
+        {
+          "step": 2,
+          "title": "The entrance hall — a group of scavengers",
+          "what": "You meet a small band of adventurers/looters who have got there first. This is a CONVERSATION, not automatically a fight. You can talk them into leaving with a successful Intimidation, Persuasion or Deception check.",
+          "watchFor": "Talking your way past is the clean outcome at level 2 with a three-person party. If you fight, do it deliberately: position Astarion behind them in stealth BEFORE you start dialogue, so his first hit is a sneak attack. Send your highest-Charisma character to talk — that is probably you."
+        },
+        {
+          "step": 3,
+          "title": "Sweep for traps before you walk anywhere",
+          "what": "Move Astarion ahead alone, in stealth, one room at a time. The crypt is trapped. Hold ALT in every room to highlight interactables and trap markers.",
+          "watchFor": "This is the mistake most people make here: moving the whole party at once and eating a trap with everyone standing on it. Ungroup. Scout with one character. It costs you thirty seconds and saves a reload."
+        },
+        {
+          "step": 4,
+          "title": "The crypt chambers — the undead wake up",
+          "what": "Disturbing the tomb animates skeletons. Expect at least one fight against several undead in tight quarters.",
+          "watchFor": "Fight this in a DOORWAY, not in the open room. See the tactics section — the crypt is the best free lesson in chokepoint fighting you will get, and chokepoints are your future Paladin's entire job."
+        },
+        {
+          "step": 5,
+          "title": "Find the hidden room",
+          "what": "There is a concealed chamber holding the better loot. Walk each character slowly along the walls of the main chambers with ALT held, looking for a wall section, bookcase or lever that reads as interactable.",
+          "watchFor": "Do not leave without finding this. It is the only part of the crypt with loot worth caring about, and it is easy to walk past."
+        },
+        {
+          "step": 6,
+          "title": "Withers",
+          "what": "In his own chamber there is a sarcophagus. Open it. He rises, is NOT hostile, asks you a question, and then relocates himself to your camp permanently.",
+          "watchFor": "He is not a fight. Do not attack him — you cannot beat him and you would lose the respec vendor for the entire run. Just answer him and let him go."
+        },
+        {
+          "step": 7,
+          "title": "Full sweep, then leave",
+          "what": "ALT-highlight every room one more time on the way out. Loot everything, including bodies from the entrance-hall fight if you had one.",
+          "watchFor": "Nothing here is permanently missable — you can walk back in later. But you will not want to, so do it now."
+        },
+        {
+          "step": 8,
+          "title": "Camp immediately and respec",
+          "what": "Long rest. Withers is now standing at your camp. Talk to him and respec Shadowheart to LIFE DOMAIN (100g). Then respec Astarion's array if you have the gold spare.",
+          "watchFor": "This is Checklist tasks 2 and 3. Do them now while you are thinking about it, not five levels later."
+        }
+      ],
+      "encounters": [
+        {
+          "name": "The scavenger band (entrance hall)",
+          "threat": "Moderate at level 2 — several humanoids, and you may only have three party members",
+          "how": "AVOIDABLE. Pass a Charisma check and they leave. If you do fight: pre-position Astarion in stealth behind their line before dialogue starts, open with his sneak attack, use the doorway to stop them surrounding you. Shadowheart's Guiding Bolt gives the next attacker advantage — feed it to Astarion.",
+          "roNote": "Talking past a mob is not a thing RO ever offers you. Get used to checking whether a fight is optional — a surprising number of Act 1 encounters are."
+        },
+        {
+          "name": "Animated skeletons",
+          "threat": "Low to moderate, but they come in a group and the rooms are cramped",
+          "how": "Shadowheart's TURN UNDEAD (Channel Divinity) makes them flee — this is the single best use of it in Act 1. Sacred Flame deals radiant damage, which undead dislike. Fight in a doorway so only one or two can reach you at a time.",
+          "roNote": "Skeletons here are the Payon Cave / Byalan trash-mob experience: individually weak, dangerous in a pack, and hard-countered by holy damage. Turn Undead works almost exactly like the RO Priest skill of the same name — undead run away rather than die. The difference is that BG3's version is a limited charge, not a spammable skill."
+        }
+      ],
+      "tactics": [
+        "YOUR ARCHER IS AT HIS WORST IN HERE. The whole Sniper plan depends on distance and high ground, and a crypt has neither. Do not expect this area to feel like your build works — it starts working outdoors.",
+        "Ranger workaround: stand at the BACK of a corridor and use the party as a wall. Ensnaring Strike on the first enemy through a doorway effectively plugs the gap.",
+        "Fight in doorways. Undead in an open room surround you; undead in a corridor come one at a time. This is the exact geometry your Oath of the Ancients Paladin will exploit for the rest of the game — the crypt is a free tutorial for it.",
+        "Astarion at Rogue 2 has Cunning Action: he can Hide as a BONUS ACTION every turn. Attack, hide, attack, hide. Each re-hide restores advantage and therefore Sneak Attack.",
+        "Shadowheart is not a healer yet in any meaningful sense. Her value here is Turn Undead, Sacred Flame and Guiding Bolt. Use Healing Word to stand someone back up off the floor, not to top people off.",
+        "You have no fourth party member. That is fine. Do not rush recruiting someone just to fill the slot before this area."
+      ],
+      "loot": [
+        {
+          "item": "Withers himself",
+          "where": "Sarcophagus in his own chamber",
+          "confidence": "high",
+          "note": "THE ACTUAL REASON YOU ARE HERE. Respec, resurrection and hireling services for the entire playthrough. If you get nothing else out of this crypt, you have still won."
+        },
+        {
+          "item": "A concealed treasure room",
+          "where": "Behind a hidden wall/bookcase in the main crypt area",
+          "confidence": "high that it exists",
+          "note": "I am confident there is a hidden chamber with the area's best loot and that it is easy to miss. I am NOT confident enough in the exact item list to write one out. Search the walls with ALT held and take whatever is in there."
+        },
+        {
+          "item": "Amulet of Selune's Chosen",
+          "where": "Reported to be in the crypt, likely in the hidden room",
+          "confidence": "medium — verify",
+          "note": "A Selune-themed amulet granting a free spell cast per rest. If it is here, it goes to Shadowheart. Do not go hunting for it specifically; just loot thoroughly and see if it turns up."
+        },
+        {
+          "item": "The Necromancy of Thay",
+          "where": "Reported to be in the crypt's hidden chamber",
+          "confidence": "medium — verify, and read the warning",
+          "note": "WARNING IF YOU FIND IT: this is a cursed tome. Opening or reading it triggers a saving throw and can inflict a lasting negative effect on the reader. It is tied to later content and there is no need to read it now. PICK IT UP, DO NOT OPEN IT. Carry it and decide later once you have more information than this wiki can give you."
+        },
+        {
+          "item": "Gold, scrolls, potions, low-tier gear",
+          "where": "Scattered through sarcophagi, urns, crates and the scavengers' bodies",
+          "confidence": "high",
+          "note": "Ordinary early-game loot. The gold matters more than it looks: you need 100g per respec and you are about to buy three or four of them. This crypt is a meaningful chunk of your first respec budget."
+        }
+      ],
+      "traps": [
+        "The crypt is trapped. I am confident of that in general and not confident about exact placements, so treat every corridor as suspect.",
+        "Method: ungroup, move Astarion alone, hold ALT, advance one room at a time. He has the Perception and Sleight of Hand to spot and disarm.",
+        "If a trap does trigger, it is survivable at level 2 — this is an early area, not a punishment. Do not reload over one trap."
+      ],
+      "missable": [
+        "NOTHING HERE IS PERMANENTLY MISSABLE. The crypt stays accessible and you can return any time in Act 1. This is a low-stakes area.",
+        "The only real failure state is attacking Withers, which would cost you the respec vendor for the entire run. Do not do that.",
+        "The hidden room is not missable, but it is very forgettable. Find it on this visit."
+      ],
+      "afterwards": [
+        "Long rest, then talk to Withers at camp.",
+        "Respec Shadowheart to Life Domain — 100 gold. This is the urgent one.",
+        "Respec Astarion's ability array if you have another 100 gold. Not urgent, but cheaper to do now than after more levels.",
+        "Then head north-east for Lae'zel: past the Roadside Cliffs waypoint (grab Gale from the rune-covered rock on the way), continue along the road to her cage. See Checklist task 4.",
+        "You will likely hit level 3 around here, which is where the Hunter subclass and Assassin subclass lock in. Check the Party Progression page before you click."
+      ],
+      "roFraming": [
+        "Think of the Dank Crypt as your Payon Cave: the first proper indoor dungeon, low-level undead, tight corridors, and a difficulty curve aimed at a fresh party.",
+        "TURN UNDEAD MAPS ALMOST EXACTLY. RO Priests have Turn Undead; so does every BG3 Cleric from level 2. Same idea, same targets. The break: BG3's version is a limited Channel Divinity charge that recharges on a short rest, not a skill you can spam, and it makes undead FLEE rather than roll for instant death.",
+        "SACRED FLAME IS YOUR HOLY-PROPERTY ATTACK. Radiant damage is BG3's holy element and undead take it badly. The break: there is no card system, no elemental converter, and no property-endowing scrolls — damage type is baked into the spell or weapon you are using.",
+        "THE BIG BREAK: many fights here are optional. The entrance-hall group can be talked past entirely. RO has no equivalent — mobs are mobs. In BG3, always check whether a Charisma check will skip the encounter, especially while you are underlevelled and short a party member."
+      ]
+    }
+  ]
+}
