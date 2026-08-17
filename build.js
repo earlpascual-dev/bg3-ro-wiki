@@ -23,7 +23,9 @@ var fs = require('fs');
 var path = require('path');
 
 var root = __dirname;
-var DATA_FILES = ['characters', 'gear', 'rotations', 'checklist'];
+/* Must stay in sync with the fetch list in js/app.js. Adding a data file to
+   one and not the other silently drops it from the single-file build. */
+var DATA_FILES = ['characters', 'gear', 'rotations', 'checklist', 'locations'];
 
 function read(rel) {
   return fs.readFileSync(path.join(root, rel), 'utf8');
@@ -63,6 +65,18 @@ function main() {
     console.error('  build.js needs these exact strings to substitute:');
     console.error('    ' + linkTag);
     console.error('    ' + scriptTag + '\n');
+    process.exit(1);
+  }
+
+  /* Guard against the two lists drifting apart again: every data/*.json on
+     disk must be in DATA_FILES, or it would be silently omitted. */
+  var onDisk = fs.readdirSync(path.join(root, 'data'))
+    .filter(function (f) { return /\.json$/.test(f); })
+    .map(function (f) { return f.replace(/\.json$/, ''); });
+  var missed = onDisk.filter(function (n) { return DATA_FILES.indexOf(n) === -1; });
+  if (missed.length) {
+    console.error('\n  data/' + missed.join('.json, data/') + '.json exists but is not in DATA_FILES.');
+    console.error('  Add it to build.js AND to the fetch list in js/app.js, then rebuild.\n');
     process.exit(1);
   }
 
