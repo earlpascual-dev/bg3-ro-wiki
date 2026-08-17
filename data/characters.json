@@ -42,6 +42,23 @@
         "GOLDEN RULE: whatever the level-up screen or the vendor's inventory actually shows you overrides this wiki. If the game disagrees, the game is right."
       ]
     },
+    "partySlots": {
+      "summary": "FIVE builds, FOUR seats. BG3 caps the active party at four. Gale was added as an AoE nuker on the reasoning that the Ranger and the Assassin overlap — and that is broadly right, though not for the reason it first appears.",
+      "theRealReason": "The Ranger and the Assassin are actually different jobs (sustained ranged AoE vs single-target melee burst). What they genuinely share is that both are DEX-based PHYSICAL attackers who need advantage and good positioning, so they struggle against the same enemies at the same time. The bigger issue is what the original four lacked entirely: an arcane caster, real crowd control, and any meaningful magical damage. Gale supplies all three.",
+      "recommendedFour": "Main (ranged physical AoE) + Gale (magical AoE and control) + Shadowheart (heal and buff) + Paladin (tank). That is a textbook balanced party and is better rounded than the original.",
+      "whatYouLose": [
+        "ASTARION'S SLEIGHT OF HAND AND STEALTH EXPERTISE. This is the real cost. He is the only lockpicker and trap-disarmer in the roster, and Act 1 is full of both. Nobody else comes close.",
+        "The round-one alpha strike. Gale does single-target damage (Scorching Ray, later Disintegrate) but never as spikily as an Assassin opener.",
+        "Astarion's personal questline progresses more slowly if he is benched, though it does not break."
+      ],
+      "mitigations": [
+        "TEACH GALE 'KNOCK' (2nd-level spell, available at Wizard 3). It opens locked containers and doors and covers most of what you lose.",
+        "SWAPPING IS FREE AND REVERSIBLE. You change the active party at camp any time, at no cost. Benched companions still gain XP and stay at your level, so nobody falls behind.",
+        "The practical pattern most players land on: run Gale for combat, swap Astarion in when you hit a locked or heavily trapped area, swap back. It costs one trip to camp.",
+        "Lockpicking without proficiency still works, just at worse odds. A high-DEX character with thieves' tools will open easy locks."
+      ],
+      "verdict": "Add Gale, bench Astarion by default, keep him levelled and swap him in for lock-heavy areas. Do NOT delete or dismiss anyone — there is no reason to, and the roster costs nothing to maintain."
+    },
     "progressionPrimer": [
       "NO STAT POINTS ON LEVEL UP. This is the biggest break from RO. Your six ability scores are set at character creation and never rise from levelling. They change only at class levels 4, 8 and 12 (where a feat can be traded for +2), and from two one-time items — Auntie Ethel's Hag's Hair (+1, Act 1) and the Mirror of Loss (+2, Act 3). There is no 'I will fix my DEX later'.",
       "NO SKILL POINTS AND NO SKILL TREE. You do not spend anything. The game hands you specific features at specific levels. Most level-ups present NO choice at all — you read what you gained and click Next.",
@@ -425,6 +442,200 @@
             "FLAGGING A BETTER OPTION THAN YOUR LOCKED PLAN: Rogue 8 / Fighter 4 instead of Rogue 9 / Fighter 3 trades 1d6 of Sneak Attack for an entire extra FEAT (Savage Attacker or an ASI). That is a straightforwardly better level 12 for combat.",
             "You specified Rogue 9 / Fighter 3, so that is what this table builds. I am flagging the alternative because it costs you nothing to know it and the swap is a single 100g respec.",
             "If you take Fighter 4, the level order is identical except the last level is Fighter instead of Rogue."
+          ],
+          "irreversible": false
+        }
+      ]
+    },
+    {
+      "id": "gale",
+      "name": "High Wizard",
+      "roClass": "High Wizard",
+      "bg3Build": "Evocation Wizard 12",
+      "role": "AoE Nuker / Control",
+      "badge": "wizard",
+      "summary": "The class this party was missing. Everything else you own deals physical damage and swings at one target; Gale deletes whole groups and disables the fights you cannot win straight. Evocation is picked specifically so your Fireballs stop killing your own tank.",
+      "stats": { "str": 9, "dex": 15, "con": 15, "int": 16, "wis": 11, "cha": 11 },
+      "statNotes": {
+        "str": "Dumped. Human's +1 to everything drags it to 9 whether you like it or not.",
+        "dex": "15 for AC (with Mage Armour) and initiative. A wizard who acts late is a wizard who dies before casting.",
+        "con": "15. The most important defensive stat he has — HP, and Concentration saves for Web, Haste and Hypnotic Pattern.",
+        "int": "PRIMARY. Spell save DC, spell attack rolls, and from level 10 it is added to every Evocation spell's damage. Target 20 by level 8.",
+        "wis": "11. His weakest save and the most commonly targeted one. The Paladin's Aura of Protection patches this.",
+        "cha": "11. Backup dialogue only."
+      },
+      "statPlan": [
+        "Point-buy base (27 points): STR 8, DEX 14, CON 14, INT 15, WIS 10, CHA 10.",
+        "Human racial: +1 to ALL six abilities. Result: STR 9, DEX 15, CON 15, INT 16, WIS 11, CHA 11.",
+        "Level 4 Ability Improvement +2 INT: 16 to 18. Level 8 Ability Improvement +2 INT: 18 to 20.",
+        "Gale arrives pre-built. A respec is OPTIONAL for him — unlike Shadowheart, nothing about his default is locked wrongly, since his subclass is not chosen until level 2. Respec only if you want the exact array above.",
+        "Act 3 Mirror of Loss can push INT past 20 if you have not spent his use elsewhere."
+      ],
+      "roMapping": [
+        { "roSkill": "SP bar and SP regen", "bg3": "Spell slots — a fixed number of charges per Long Rest", "breaks": "THE BIGGEST BREAK IN THE WHOLE WIKI. There is no SP pool, no SP regeneration, no Blue Potion economy. You get a small fixed number of casts per rest and that is all. A level 5 Gale has roughly two Fireballs in him per long rest, not twenty. Arcane Recovery returns a few slots once per short rest and that is your only refill." },
+        { "roSkill": "Auto-attack while out of SP", "bg3": "Cantrips (Fire Bolt, Ray of Frost)", "breaks": "Cantrips are unlimited and scale with your level, so they are what you cast when the slots run dry. They are weak but free — treat them as your wand-hitting, not as a rotation staple." },
+        { "roSkill": "Meteor Storm", "bg3": "Fireball (Wizard 5)", "breaks": "One burst, one slot, DEX save for half. It does not tick repeatedly over an area like Meteor Storm — it goes off once and it is done." },
+        { "roSkill": "Storm Gust", "bg3": "Ice Storm (Wizard 7), then Cone of Cold (Wizard 9)", "breaks": "No freeze-lock loop. Ice Storm leaves icy ground that can knock enemies Prone, which is the closest you get to Storm Gust's crowd-freezing, but there is no repeated hit-stun." },
+        { "roSkill": "Lord of Vermilion", "bg3": "Chain Lightning (Wizard 11)", "breaks": "Chains between a limited number of targets rather than blanketing a screen-sized area. Still your biggest multi-target nuke." },
+        { "roSkill": "Quagmire", "bg3": "Grease (Wizard 1), then Web (Wizard 3)", "breaks": "These are surfaces and zones, not debuffs on enemies. Grease is flammable — ignite it with Fire Bolt for a genuinely nasty combo. Web restrains outright rather than slowing." },
+        { "roSkill": "Stone Curse", "bg3": "Hold Person (Wizard 3) / Hold Monster (Wizard 9)", "breaks": "A held target takes AUTOMATIC CRITICAL HITS from melee. Feeding a Hold into your Paladin is a delete button. It is a save every turn though, not a fixed duration." },
+        { "roSkill": "Teleport", "bg3": "Misty Step (Wizard 3)", "breaks": "Short-range combat blink only, costs a Bonus Action and a spell slot. No map-wide warp, no save points." },
+        { "roSkill": "Energy Coat / Safety Wall", "bg3": "Mage Armour, Shield, Mirror Image, Blur", "breaks": "Mage Armour is a pre-cast that lasts until Long Rest — put it up every morning. Shield is a REACTION for +5 AC after you see an attack roll, which has no RO equivalent at all." },
+        { "roSkill": "No friendly fire in RO", "bg3": "BG3 AoE HITS YOUR OWN PARTY", "breaks": "This is the one that will kill your Paladin. A Fireball centred on a melee scrum damages Lae'zel exactly as much as the goblins. Evocation's Sculpt Spells at level 2 is the fix and it is the entire reason this build picks Evocation." },
+        { "roSkill": "Learning skills from the skill tree", "bg3": "Scribing spells from scrolls", "breaks": "Wizards are the only class that can permanently learn spells from found scrolls. Buy every Wizard scroll from every vendor and scribe it. His spellbook can end up far larger than his level-up picks alone would allow — there is nothing like this in RO." }
+      ],
+      "levels": [
+        {
+          "level": 1,
+          "menu": "Wizard — Cantrips (pick 3), then spells for the spellbook",
+          "choice": "Cantrips: Fire Bolt, Ray of Frost, Mage Hand | Spellbook: Mage Armour, Shield, Magic Missile, Grease, Sleep, Burning Hands",
+          "alternatives": ["Cantrips: Acid Splash, Light, Bone Chill, Minor Illusion, Shocking Grasp, Blade Ward", "Spells: Chromatic Orb, Thunderwave, Colour Spray, Witch Bolt, Feather Fall, Find Familiar, Longstrider"],
+          "reasoning": "Fire Bolt is your unlimited attack for when the slots run dry; Mage Armour and Shield are the only reasons a wizard with 15 DEX survives being looked at.",
+          "details": [
+            "Gale arrives pre-built with his own picks. You do NOT need to respec him — his subclass is not chosen until level 2, so nothing is locked wrongly yet.",
+            "MAGE ARMOUR IS A DAILY RITUAL. Cast it at camp every morning; it lasts until Long Rest and raises his AC to 13 + DEX. Forgetting it is the single most common way Gale dies.",
+            "Wizards PREPARE spells from their spellbook, like Clerics. The prepared list is free to rewrite outside combat, so only the SPELLBOOK contents are a real commitment — and you can always add more via scrolls.",
+            "Grease plus Fire Bolt is a real level 1 combo: cast the grease, ignite it, watch a corridor burn.",
+            "Arcane Recovery is granted automatically: once per Short Rest, recover some expended spell slots. Use it every short rest without exception."
+          ],
+          "irreversible": false
+        },
+        {
+          "level": 2,
+          "menu": "Arcane Tradition (Wizard subclass)",
+          "choice": "School of Evocation",
+          "alternatives": ["Divination", "Abjuration", "Necromancy", "Transmutation", "Enchantment", "Illusion", "Conjuration"],
+          "reasoning": "Sculpt Spells makes your allies automatically succeed their saves and take ZERO damage from your own evocation AoE — which is what lets you drop Fireball onto a melee scrum your own tank is standing in.",
+          "details": [
+            "LOCKS IN (100g at Withers to change). This is Gale's only genuinely irreversible choice.",
+            "Read Sculpt Spells carefully because it changes how you play: without it, every Fireball is a decision about how much of your own party you are willing to burn. With it, you just cast.",
+            "Divination is the strongest Wizard subclass in the game in raw power terms (Portent lets you replace enemy rolls with pre-rolled dice). It is a legitimate alternative and I am flagging it honestly — but it does nothing for the AoE-nuker role you actually want, and it will not stop you killing Lae'zel.",
+            "Abjuration is the tanky pick, Necromancy the summoner. Neither fits the brief."
+          ],
+          "irreversible": true
+        },
+        {
+          "level": 3,
+          "menu": "2 new spells for the spellbook (2nd level unlocked)",
+          "choice": "Scorching Ray + Web",
+          "alternatives": ["Misty Step", "Mirror Image", "Knock", "Shatter", "Invisibility", "Hold Person", "Blur", "Cloud of Daggers"],
+          "reasoning": "Scorching Ray is your best single-target damage for several levels, and Web is the control spell that wins fights you are underlevelled for.",
+          "details": [
+            "PICK UP KNOCK EARLY IF YOU ARE BENCHING ASTARION. Knock opens locked chests and doors, which is the main practical thing you lose without his Sleight of Hand. Buy the scroll or take it as a level-up pick.",
+            "Misty Step and Mirror Image are the two you will want soonest after these. Scrolls are the cheap way to get them without spending level-up picks.",
+            "Web requires Concentration. Restrained enemies cannot move and are attacked with advantage — feed a webbed group to your Volley."
+          ],
+          "irreversible": false
+        },
+        {
+          "level": 4,
+          "menu": "Feat, then a 4th cantrip, then 2 new spells",
+          "choice": "Feat: Ability Improvement +2 INT (16 to 18) | Cantrip: Light",
+          "alternatives": ["Feat: War Caster", "Feat: Alert", "Feat: Resilient (Constitution)", "Feat: Lucky", "Cantrip: Acid Splash, Bone Chill, Minor Illusion"],
+          "reasoning": "INT is spell save DC, spell attack rolls, and later flat damage on every evocation — nothing else on this menu comes close for a nuker.",
+          "details": [
+            "Save DC is what decides whether your Fireball does full or half damage, and whether Hold Person lands at all. Raise it before anything else.",
+            "War Caster is the strong alternative if you find yourself losing Concentration on Web and Haste constantly. Take it at 12 instead.",
+            "Light matters more than it sounds — Act 2 is the Shadow-Cursed Lands and you will want a light source on demand."
+          ],
+          "irreversible": false
+        },
+        {
+          "level": 5,
+          "menu": "2 new spells (3rd level unlocked)",
+          "choice": "FIREBALL + Counterspell",
+          "alternatives": ["Haste", "Hypnotic Pattern", "Slow", "Lightning Bolt", "Sleet Storm", "Stinking Cloud", "Fly", "Animate Dead"],
+          "reasoning": "Fireball is the single biggest power spike any character in this party gets, and Sculpt Spells means you can drop it anywhere without checking who is standing there.",
+          "details": [
+            "THIS IS THE LEVEL GALE BECOMES THE STAR. A Fireball into a packed group at level 5 often just ends the encounter.",
+            "Counterspell is a REACTION that cancels an enemy spell as it is being cast. There is no RO equivalent and it is one of the most powerful abilities in the game — it turns enemy casters off entirely.",
+            "Hypnotic Pattern and Haste are the next two to acquire, ideally via scrolls. Hypnotic Pattern is arguably the best crowd control in the game; Haste on your Paladin or on yourself is an extra action every turn.",
+            "SLOT DISCIPLINE: at level 5 you have roughly two 3rd-level slots. That is two Fireballs per long rest. Open with cantrips on trash, save the slots for the fight that matters."
+          ],
+          "irreversible": false
+        },
+        {
+          "level": 6,
+          "menu": "No choice for the subclass feature; 2 new spells",
+          "choice": "Potent Cantrip (automatic) | Spells: Haste + Hypnotic Pattern",
+          "alternatives": ["Slow", "Fly", "Protection from Energy", "Glyph of Warding"],
+          "reasoning": "Potent Cantrip makes enemies take half damage from your cantrips even when they save, which meaningfully raises your out-of-slots damage floor.",
+          "details": [
+            "This is the level where running out of spell slots stops being a disaster. Your Fire Bolt now always does something.",
+            "Haste is a trap if you break Concentration — a hasted creature that loses the effect is Lethargic and loses its next turn. Cast it on someone who will not be taking hits, or accept the risk on your Paladin."
+          ],
+          "irreversible": false
+        },
+        {
+          "level": 7,
+          "menu": "2 new spells (4th level unlocked)",
+          "choice": "Ice Storm + Dimension Door",
+          "alternatives": ["Wall of Fire", "Greater Invisibility", "Polymorph", "Banishment", "Confusion", "Evard's Black Tentacles", "Stoneskin"],
+          "reasoning": "Ice Storm is your second AoE nuke and leaves icy ground that knocks enemies Prone; Dimension Door is the escape hatch for when something reaches you.",
+          "details": [
+            "Ice Storm is the closest thing you get to Storm Gust — area damage plus a lingering hazard surface.",
+            "Greater Invisibility on Gale is an extremely strong defensive option: enemies cannot target what they cannot see, and you attack with advantage.",
+            "Polymorph turns a dangerous enemy into a sheep. It is a full disable on a failed save."
+          ],
+          "irreversible": false
+        },
+        {
+          "level": 8,
+          "menu": "Feat, then 2 new spells",
+          "choice": "Ability Improvement +2 INT (18 to 20)",
+          "alternatives": ["War Caster", "Alert", "Resilient (Constitution)", "Elemental Adept", "Lucky"],
+          "reasoning": "Caps your spell save DC and spell attack bonus, and sets up Empowered Evocation at level 10 to add +5 damage to every evocation spell.",
+          "details": [
+            "INT 20 plus Empowered Evocation at 10 means every Fireball, Ice Storm and Cone of Cold gets +5 flat damage on top. This feat is the setup for that.",
+            "Do not take Elemental Adept unless you are committing hard to one damage type — it is narrower than it looks."
+          ],
+          "irreversible": false
+        },
+        {
+          "level": 9,
+          "menu": "2 new spells (5th level unlocked)",
+          "choice": "Cone of Cold + Hold Monster",
+          "alternatives": ["Wall of Stone", "Telekinesis", "Conjure Elemental", "Dominate Person", "Cloudkill", "Animate Objects"],
+          "reasoning": "Cone of Cold is your Storm Gust — a large cone of cold damage that Sculpt Spells lets you fire through your own front line.",
+          "details": [
+            "Hold Monster is Hold Person without the humanoid restriction, so it works on the big things. Paralysed target plus your Paladin's melee equals automatic critical hits.",
+            "Wall of Stone is the ultimate chokepoint tool and pairs directly with your Paladin's job — you can physically seal a corridor."
+          ],
+          "irreversible": false
+        },
+        {
+          "level": 10,
+          "menu": "No choice for the subclass feature; a 5th cantrip; 2 new spells",
+          "choice": "Empowered Evocation (automatic) | Cantrip: Acid Splash",
+          "alternatives": ["Cantrip: Bone Chill, Shocking Grasp, Minor Illusion"],
+          "reasoning": "Empowered Evocation adds your INT modifier (+5) to the damage of every evocation spell — a permanent, no-cost damage increase on everything you cast.",
+          "details": [
+            "With INT 20 this is +5 damage on Fire Bolt, Magic Missile, Fireball, Ice Storm and Cone of Cold. It is the payoff for the two INT feats.",
+            "Acid Splash is a small AoE cantrip with a save, so it benefits from Potent Cantrip — free chip damage on two targets when you are out of slots."
+          ],
+          "irreversible": false
+        },
+        {
+          "level": 11,
+          "menu": "2 new spells (6th level unlocked)",
+          "choice": "Chain Lightning + Globe of Invulnerability",
+          "alternatives": ["Disintegrate", "Circle of Death", "Otiluke's Freezing Sphere", "Flesh to Stone"],
+          "reasoning": "Chain Lightning is your Lord of Vermilion — big multi-target damage that arcs between enemies, boosted by Empowered Evocation.",
+          "details": [
+            "Globe of Invulnerability is a bubble that blocks incoming spells. Park it over your clustered party in a caster fight and they simply stop taking magic damage.",
+            "Disintegrate is the single-target alternative if you want a boss-deleter instead."
+          ],
+          "irreversible": false
+        },
+        {
+          "level": 12,
+          "menu": "Feat, then 2 new spells",
+          "choice": "War Caster",
+          "alternatives": ["Alert", "Resilient (Constitution)", "Lucky", "Ability Improvement (+2 CON)"],
+          "reasoning": "Advantage on Concentration saves protects Haste, Web and Hypnotic Pattern — by level 12 losing Concentration costs more than any remaining stat point would gain.",
+          "details": [
+            "Alert is the alternative: acting first as a wizard means Hypnotic Pattern or Fireball lands before the enemy has spread out.",
+            "Lucky is the survivability pick and is excellent on a character with low HP."
           ],
           "irreversible": false
         }

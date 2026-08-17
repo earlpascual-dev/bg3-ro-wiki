@@ -150,6 +150,20 @@
       })());
     }
 
+    if (meta.partySlots) {
+      var ps = meta.partySlots;
+      html += win('Five Builds, Four Seats — the party slot problem', (function () {
+        var s = '<div class="break-strip"><span class="bl">Roster exceeds party size</span><br>' + esc(ps.summary) + '</div>';
+        if (ps.theRealReason) s += '<div class="parch">' + esc(ps.theRealReason) + '</div>';
+        if (ps.recommendedFour) s += '<h3 class="ro-h3">Recommended active four</h3><div class="note-strip"><strong>' + esc(ps.recommendedFour) + '</strong></div>';
+        if (ps.whatYouLose) s += '<h3 class="ro-h3">What benching Astarion costs</h3>' +
+          '<div class="parch" style="border-left:4px solid var(--ro-red)">' + list(ps.whatYouLose, 'details-list') + '</div>';
+        if (ps.mitigations) s += '<h3 class="ro-h3">How to cover it</h3><div class="parch alt">' + list(ps.mitigations, 'details-list') + '</div>';
+        if (ps.verdict) s += '<div class="note-strip" style="margin-top:8px"><strong>Verdict:</strong> ' + esc(ps.verdict) + '</div>';
+        return s;
+      })());
+    }
+
     if (meta.provenance) {
       var p = meta.provenance;
       html += win('Sources & Confidence — read before trusting anything here', (function () {
@@ -312,6 +326,8 @@
     potion: '<path d="M6.5 1.5h3V5l2.5 5c.8 2-.5 4.5-2.5 4.5h-3C4.5 14.5 3.2 12 4 10l2.5-5z"/>' +
             '<rect x="5.6" y="0.8" width="4.8" height="1.4"/>',
     cloak: '<path d="M8 1.5c1.7 0 2.6.9 3.2 1.7l2.6 3.4-2 1.3.8 6.6H9.4l-.5-5h-1.8l-.5 5H3.4l.8-6.6-2-1.3 2.6-3.4C5.4 2.4 6.3 1.5 8 1.5z"/>',
+    scroll: '<path d="M4 2h8v12H4z"/><g fill="none" stroke="currentColor" stroke-width="1.3"><path d="M3.2 2.6a1.6 1.6 0 000 3.2M12.8 10.2a1.6 1.6 0 000 3.2"/></g>' +
+            '<g stroke="#000" stroke-width=".8" opacity=".45"><path d="M5.6 6h4.8M5.6 8h4.8M5.6 10h3"/></g>',
     gem: '<polygon points="8,1.5 13,6 8,14.5 3,6"/>',
     star: '<polygon points="8,0.8 9.7,5.9 15.1,5.9 10.7,9.1 12.4,14.2 8,11 3.6,14.2 5.3,9.1 0.9,5.9 6.3,5.9"/>',
     box: '<rect x="3" y="3.5" width="10" height="9"/>'
@@ -320,9 +336,11 @@
   var ICON_RULES = [
     [/one-time permanent/i, 'star'],
     [/spell component|gem|diamond/i, 'gem'],
+    [/scroll|scribe|spellbook/i, 'scroll'],
     [/consumable/i, 'potion'],
     [/bow|ranged/i, 'bow'],
     [/dagger/i, 'dagger'],
+    [/quarterstaff|staff/i, 'polearm'],
     [/shortsword|main-hand|sword/i, 'sword'],
     [/mace|carried|off-hand/i, 'mace'],
     [/polearm|glaive|halberd|spear/i, 'polearm'],

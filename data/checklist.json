@@ -50,6 +50,28 @@
       "done": false
     },
     {
+      "id": 31,
+      "order": 4.5,
+      "task": "Recruit Gale from the Roadside Cliffs",
+      "characterId": "gale",
+      "act": 1,
+      "cost": "Free",
+      "warning": "Easy to walk straight past. He is not a person standing in the open — he is a HAND sticking out of a rune-covered rock at the Roadside Cliffs waypoint, on the road between the beach and Lae'zel's cage. Interact with the hand.",
+      "detail": "You pass this on the way to Lae'zel, so grab him in the same trip. GALE'S MAINTENANCE COST: early on he needs to consume magical items periodically or his condition destabilises — when he asks, feed him a magic item you do not need. It resolves after a few instances in Act 1. Do not ignore the prompts. He does NOT need a respec: his subclass is not chosen until level 2, so nothing is locked wrongly yet.",
+      "done": false
+    },
+    {
+      "id": 32,
+      "order": 6.5,
+      "task": "Pick Evocation for Gale at level 2 and sort the party swap",
+      "characterId": "gale",
+      "act": 1,
+      "cost": "Free",
+      "warning": "Evocation is Gale's one irreversible pick (100g to change). Choosing anything else means your Fireballs will damage your own Paladin.",
+      "detail": "Sculpt Spells makes allies take ZERO damage from your evocation AoE — this is what lets you drop Fireball onto a melee scrum. PARTY SLOTS: you have five builds for four seats. Recommended active four is Main + Gale + Shadowheart + Paladin, with Astarion benched. Swapping at camp is free and benched companions still gain XP, so keep Astarion levelled and swap him in for lock-heavy or heavily trapped areas. Teach Gale KNOCK to cover most of what you lose.",
+      "done": false
+    },
+    {
       "id": 5,
       "order": 5,
       "task": "Respec your 4th slot to Oath of the Ancients Paladin",

@@ -83,6 +83,44 @@
       ]
     },
     {
+      "characterId": "gale",
+      "name": "High Wizard — Evocation Wizard 12",
+      "preCombat": [
+        "AT CAMP EVERY MORNING: cast MAGE ARMOUR on himself. It lasts until Long Rest and is most of his AC. Forgetting it is the number one cause of dead Gales.",
+        "Re-check his PREPARED spell list before a known big fight — preparing is free outside combat, so tune it: more control for bosses, more AoE for mobs.",
+        "Scribe any new Wizard scrolls you have bought. This is permanent spellbook growth and it is his single best form of progression.",
+        "Take a Short Rest before the fight if his slots are low — Arcane Recovery returns slots once per short rest and there is no reason to hoard it.",
+        "Position him LAST and FAR. He has the worst HP and AC in the party. He should be the furthest character from the enemy when the fight starts."
+      ],
+      "opener": [
+        "Count the enemies before you spend anything. Three or more clustered = AoE. One or two = save the slot and use Scorching Ray or a cantrip.",
+        "Turn 1 against a pack: FIREBALL (level 5+). Sculpt Spells means your own party takes zero damage from it, so aim at the middle of the scrum, not around it.",
+        "Turn 1 against a dangerous group you cannot burst: HYPNOTIC PATTERN instead. Incapacitating four enemies is worth more than damaging them.",
+        "Turn 1 before level 5: GREASE on the choke point, then ignite it with Fire Bolt. Cheap, and it does not need a big slot.",
+        "If an enemy caster is visible, hold your REACTION for Counterspell rather than spending it on anything else."
+      ],
+      "sustain": [
+        "Default turn: cantrip (Fire Bolt) if the fight is already won, Scorching Ray if one target matters, AoE if three or more are still clustered.",
+        "WEB or ICE STORM to re-group enemies that have spread out, then AoE them next turn.",
+        "Feed HOLD PERSON / HOLD MONSTER to your Paladin — a paralysed target takes automatic critical hits from melee.",
+        "Reaction: SHIELD (+5 AC) when an attack would otherwise hit him, or COUNTERSPELL on an enemy cast. You only get one reaction per round, so decide which threat is worse.",
+        "Watch your Concentration. Web, Haste and Hypnotic Pattern all need it and only one can be active."
+      ],
+      "panic": [
+        "Something reached him in melee: MISTY STEP (Bonus Action) out, or DIMENSION DOOR at level 7+. Do not try to walk away — you will eat an opportunity attack.",
+        "Being focused by ranged attacks: MIRROR IMAGE, or GREATER INVISIBILITY at level 7+. Enemies cannot target what they cannot see.",
+        "About to be hit by something big: SHIELD as a reaction for +5 AC — it is often enough to turn a hit into a miss after you have seen the roll.",
+        "Out of spell slots entirely: Arcane Recovery on a short rest. If you cannot rest, fall back to cantrips and stop trying to be the nuker that fight.",
+        "Party is losing: HYPNOTIC PATTERN to take half the enemies out of the fight, or GLOBE OF INVULNERABILITY at level 11+ over the clustered party."
+      ],
+      "notes": [
+        "ANALOGY BREAK — THERE IS NO SP BAR. This is the hardest adjustment coming from an RO Wizard. You have a small fixed number of casts per Long Rest, not a regenerating pool. A level 5 Gale has roughly two Fireballs in him for the entire day. You cannot spam Storm Gust. Plan around spending big slots on the fight that matters and cantripping through the trash.",
+        "ANALOGY BREAK — YOUR AoE HITS YOUR OWN PARTY. In RO your Storm Gust never hurt your Priest. In BG3 a Fireball centred on a melee scrum damages your Paladin identically to the enemies. Evocation's SCULPT SPELLS (level 2) removes this for your evocation spells specifically — it is the entire reason this build picks Evocation, and until you have it, you must aim around your own people.",
+        "SURFACES PERSIST. Fire leaves burning ground, cold leaves ice that knocks people Prone, and both affect your party too. Sculpt Spells does NOT protect against the surface a spell leaves behind, only the initial damage.",
+        "SCROLLS ARE PERMANENT PROGRESSION. Every Wizard scroll you find or buy can be scribed into his spellbook forever. Buy them all. Gale's real power curve is your shopping habits, not his level-ups."
+      ]
+    },
+    {
       "characterId": "shadowheart",
       "name": "High Priest — Life Domain Cleric 12",
       "preCombat": [

@@ -156,6 +156,26 @@
       "note": "This is your Enchant Poison. Astarion should have a coating on his daggers in every real fight. Buy them constantly — they are cheap and you will always be short."
     },
     {
+      "item": "Every Wizard scroll you can find or buy",
+      "slot": "Consumable (scribe into spellbook)",
+      "wearer": "gale",
+      "location": "Every vendor in every act, plus loot. Arron in the Grove, the Zhentarim, and any trader with a scrolls tab.",
+      "effect": "Scribing a Wizard scroll adds that spell to Gale's spellbook PERMANENTLY.",
+      "replaces": "Nothing",
+      "missable": false,
+      "note": "THIS IS GALE'S REAL PROGRESSION and it is more important than any single item on this list. Wizards are the only class that learns spells from scrolls. Priority buys: Misty Step, Mirror Image, Knock, Haste, Hypnotic Pattern, Counterspell. Knock especially if you are benching Astarion — it is your replacement lockpick."
+    },
+    {
+      "item": "Spellsparkler",
+      "slot": "Weapon (Quarterstaff)",
+      "wearer": "gale",
+      "location": "Act 1 — commonly associated with the Arcane Tower / Underdark area (verify).",
+      "effect": "Builds Lightning Charges when you cast, adding bonus lightning damage to your next hit.",
+      "replaces": "Starting quarterstaff",
+      "missable": true,
+      "note": "A caster staff that rewards casting frequently. Confidence on the exact location is low — treat it as 'a lightning-charge staff exists in Act 1', and take it if you see it."
+    },
+    {
       "item": "Diamonds",
       "slot": "Consumable (spell component)",
       "wearer": "shadowheart",
@@ -368,6 +388,36 @@
       "replaces": "Empty ring slot",
       "missable": false,
       "note": "Passive sustain for the Warding Bond sponge. Also ticks out of combat, saving camp supplies."
+    },
+    {
+      "item": "Markoheshkir",
+      "slot": "Weapon (Quarterstaff, Legendary)",
+      "wearer": "gale",
+      "location": "Act 3 — Ramazith's Tower / Lorroakan questline in the Lower City (verify).",
+      "effect": "Legendary staff: once per rest, empower one elemental damage type for the day, plus a large bonus to spellcasting.",
+      "replaces": "Spellsparkler",
+      "missable": true,
+      "note": "Widely considered the best wizard weapon in the game. Pair the elemental attunement with whichever school you are leaning on that day."
+    },
+    {
+      "item": "Robe of the Weave",
+      "slot": "Chest (Clothing)",
+      "wearer": "gale",
+      "location": "Act 3 — the same Ramazith's Tower / Lorroakan area (verify).",
+      "effect": "Bonus to spell save DC and spell attack rolls, plus damage resistances.",
+      "replaces": "Any robe he is wearing",
+      "missable": true,
+      "note": "Spell save DC is the stat that decides whether your Fireball does full damage and whether Hold Monster lands. Direct upgrade to everything he does."
+    },
+    {
+      "item": "Hat of Fire Acuity",
+      "slot": "Head",
+      "wearer": "gale",
+      "location": "Act 3 vendors (verify).",
+      "effect": "Dealing fire damage builds Arcane Acuity, which sharply raises your spell save DC for a few turns.",
+      "replaces": "Empty head slot",
+      "missable": true,
+      "note": "Fireball into the hat's acuity stacks means your NEXT control spell lands against a badly inflated DC. This is the strongest single combo available to a fire-focused Evocation wizard."
     },
     {
       "item": "Helldusk Gloves / Boots",
