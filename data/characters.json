@@ -469,7 +469,8 @@
           "alternatives": ["Domain: Trickery (her default)", "Domain: Light", "Domain: War", "Domain: Tempest", "Cantrips: Blade Ward, Thaumaturgy, Light, Produce Flame", "Prepared: Cure Wounds, Shield of Faith, Inflict Wounds, Protection from Evil and Good, Create or Destroy Water"],
           "reasoning": "Life Domain is the Full Support: Disciple of Life adds bonus HP to every healing spell, Bless is permanently prepared for free, and it grants heavy armour proficiency.",
           "details": [
-            "IRREVERSIBLE AND URGENT: Cleric subclass is chosen at LEVEL 1 in BG3, unlike most classes. Shadowheart is currently Trickery. You cannot change domain by levelling — she must be respecced by Withers for 100 gold. Do this before you spend any more levels.",
+            "SET AT LEVEL 1, AND SHE ARRIVES PRE-BUILT. Cleric subclass is chosen at level 1 in BG3, and Shadowheart's was set to Trickery before you recruited her — so no level-up screen will ever show you a domain menu for her. Withers is the only way to change it, he charges a flat 100 gold at any level, and he only trades at camp.",
+            "WAITING COSTS NOTHING PERMANENT. A respec rebuilds the character from level 1 and you re-level back up immediately, keeping all equipment and story progress. Do it early because Life Domain simply plays better, not because delay is expensive — and because rebuilding at level 2 is a minute's work while rebuilding at level 10 means re-picking ten levels of choices.",
             "Guidance is the single most-used cantrip in the game: +1d4 to any ability check out of combat. Cast it before every lockpick, every dialogue check, every jump.",
             "Sacred Flame is her at-will damage. It is a DEX save (no attack roll), so it never misses due to AC — but it also does not benefit from advantage.",
             "Resistance (+1d4 to a saving throw) is the third pick; Blade Ward is the defensive alternative if you prefer.",
